@@ -1,12 +1,7 @@
 # Python
-python/.venv/
-python/__pycache__/
-python/**/*.pyc
-
-# Integrations
-integrations/.venv/
-integrations/__pycache__/
-integrations/**/*.pyc
+.venv/
+__pycache__/
+*.pyc
 
 # Database
 data/*.db

@@ -8,7 +8,7 @@ This is a personal website running on a VPS with Nginx, PHP, and Python. The sys
 
 - **Nginx** — serves `frontend/` as static files, routes `/api/*` requests to PHP-FPM
 - **PHP (`api/`)** — lightweight HTTP request/response layer; reads/writes SQLite, returns JSON
-- **Python (`python/`)** — offline analytics and batch jobs only; never serves HTTP
+- **Python (`src/`)** — offline analytics/batch jobs plus external API clients that PHP shells out to; never serves HTTP itself
 
 Persistent data lives at `/var/data/site.db` (SQLite), outside the app directory. Python scripts may also write JSON outputs to `frontend/` for the browser to fetch directly.
 
@@ -24,18 +24,14 @@ curl localhost          # frontend
 curl localhost/api      # PHP API health check
 ```
 
-### Run a Python script
+### Python (single `uv` project at the repo root, Python 3.12)
+One `pyproject.toml` / `uv.lock` / `.venv` at the root cover all Python. Run from the repo root:
 ```bash
-cd python
-uv run python src/main.py
+uv run python src/electricity_gdp.py   # run a script
+uv add <package>                       # add dependency
+uv sync                                # install from lockfile
 ```
-
-### Python dependency management (uses `uv`, Python 3.12)
-```bash
-cd python
-uv add <package>        # add dependency
-uv sync                 # install from lockfile
-```
+PHP invokes the API clients directly via `/srv/personal_website/.venv/bin/python src/markets.py`, so keep that root `.venv` in sync.
 
 ### Reload Nginx (after config changes)
 ```bash
@@ -51,4 +47,4 @@ Keep PHP endpoints minimal — one endpoint per file or a simple router. Each en
 
 ## Python Analytics Pattern
 
-Scripts read/write `/var/data/site.db` or write JSON to `frontend/`. Entry point convention follows `python/src/main.py`.
+Scripts live in `src/`, read raw inputs from `data/`, and read/write `/var/data/site.db` or write outputs into `frontend/`. `src/electricity_gdp.py` is a representative offline job; `src/fred.py` + `src/markets.py` are the external API clients PHP calls.

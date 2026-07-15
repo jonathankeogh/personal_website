@@ -2,13 +2,13 @@
 """Build the "high-GDP, low-electricity country" project page.
 
 Offline analytics job (see CLAUDE.md "Python Analytics Pattern"): reads the
-saved raw datasets in ``python/data/``, characterises the joint distribution of
+saved raw datasets in ``data/``, characterises the joint distribution of
 GDP per capita and electricity use per capita across the full 2000-2023 panel,
 and writes a fully static page to ``frontend/``. No network access, no HTTP.
 
-    cd python && uv run python src/electricity_gdp.py
+    uv run python src/electricity_gdp.py
 
-Inputs  (python/data/):
+Inputs  (data/):
     owid-per-capita-electricity-demand.csv                 OWID (Ember; Energy
         Institute) electricity demand per capita, kWh/yr, all years.
     worldbank-gdp-per-capita-current-usd-2000-2023.json    World Bank
@@ -27,8 +27,8 @@ from pathlib import Path
 
 Y0YEAR, Y1YEAR = 2000, 2023
 
-REPO = Path(__file__).resolve().parents[2]
-RAW = REPO / "python" / "data"
+REPO = Path(__file__).resolve().parents[1]
+RAW = REPO / "data"
 FRONTEND = REPO / "frontend"
 
 ELEC_CSV = RAW / "owid-per-capita-electricity-demand.csv"

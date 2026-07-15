@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 import requests
 
-load_dotenv(os.path.join(os.path.dirname(__file__), "../../.env"))
+load_dotenv(os.path.join(os.path.dirname(__file__), "../.env"))
 
 BASE_URL = "https://api.stlouisfed.org/fred"
 API_KEY = os.environ["FRED_API_KEY"]

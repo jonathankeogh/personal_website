@@ -54,8 +54,8 @@ if (preg_match('#^/posts/(\d+)$#', $uri, $m) && $_SERVER['REQUEST_METHOD'] === '
 
 // GET /api/markets
 if ($uri === '/markets' && $_SERVER['REQUEST_METHOD'] === 'GET') {
-    $script = '/srv/personal_website/integrations/src/markets.py';
-    $python = '/srv/personal_website/integrations/.venv/bin/python';
+    $script = '/srv/personal_website/src/markets.py';
+    $python = '/srv/personal_website/.venv/bin/python';
     $output = shell_exec(escapeshellcmd("$python $script") . ' 2>&1');
     $data = json_decode($output, true);
     if ($data !== null) {
