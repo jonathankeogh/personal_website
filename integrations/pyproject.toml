@@ -1,0 +1,9 @@
+[project]
+name = "integrations"
+version = "0.1.0"
+description = "External API clients"
+requires-python = ">=3.12"
+dependencies = [
+    "requests>=2.34.2",
+    "python-dotenv>=1.0.0",
+]

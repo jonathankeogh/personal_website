@@ -3,8 +3,16 @@ python/.venv/
 python/__pycache__/
 python/**/*.pyc
 
+# Integrations
+integrations/.venv/
+integrations/__pycache__/
+integrations/**/*.pyc
+
 # Database
 data/*.db
+
+# Logs
+logs/
 
 # Environment files
 .env

@@ -1,0 +1,1973 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: "elzevier";
+    src: local('ET Bembo RomanLF'), local('ETBembo-RomanLF'),
+         url("https://cdn.jsdelivr.net/gh/edwardtufte/tufte-css@master/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "elzevier";
+    src: local('ET Bembo BoldLF'), local('ETBembo-BoldLF'),
+         url("https://cdn.jsdelivr.net/gh/edwardtufte/tufte-css@master/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff") format("woff");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+.elzevier {
+    font-family: "elzevier", serif;
+}
+
+/* Drop cap: auto-applied to the first paragraph of each post's first section */
+article.post > section:first-of-type > p:first-of-type::first-letter {
+    font-family: "elzevier", serif;
+    float: left;
+    font-size: 4em;
+    line-height: 0.8;
+    padding: 0 0.1em 0.1em 0;
+}
+
+@font-face {
+    font-family: "et-bembo";
+    src: local('ET Bembo RomanLF'), local('ETBembo-RomanLF'),
+    url("https://cdn.jsdelivr.net/gh/edwardtufte/tufte-css@master/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "et-bembo";
+    src: local("ET Bembo DisplayItalic"), local('ETBembo-DisplayItalic'),
+    url("https://cdn.jsdelivr.net/gh/edwardtufte/tufte-css@master/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff") format("woff");
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "et-bembo";
+    src: local("ET Bembo BoldLF"), local('ETBembo-BoldLF'),
+    url("https://cdn.jsdelivr.net/gh/edwardtufte/tufte-css@master/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff") format("woff");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+em {
+    font-style: italic;
+}
+
+strong {
+    font-weight: bold;
+}
+
+body {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+ul {
+    list-style: outside circle;
+}
+
+ol {
+    list-style: outside decimal;
+}
+
+ol ol {
+    list-style: lower-roman;
+}
+
+ul.vault {
+    list-style-type: circle
+}
+p.list {
+    margin-bottom: 3rem;
+}
+
+article > footer {
+    text-align: right;
+}
+
+.de-emphasize {
+    color: rgba(17, 17, 17, 0.5);
+}
+
+.copyright {
+    padding-bottom: 2rem;
+    font-size: 1rem;
+}
+
+/* Code block container width - matches Tufte paragraph column */
+div.highlight, article footer {
+    width: 60%;
+}
+
+/* Override older line number link color */
+.linenos a {
+    color: #4a5568;
+}
+
+sub, sup {
+    position: relative;
+    font-size: 75%;
+    line-height: 0;
+    vertical-align: baseline;
+}
+
+sup {
+    top: -0.5em;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+article pre, .page pre {
+    padding: .8em;
+    line-height: 1.1em;
+    overflow: auto;
+}
+
+header .header_box {
+    padding-top: 4.5em;
+}
+
+footer.paginator {
+    margin-top: 4rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+}
+
+footer.paginator > span.hide {
+    visibility: hidden;
+}
+
+code {
+    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 1.0rem;
+}
+/* inline code styles - now defined in "Scholarly Light" theme section below */
+pre {
+    font-family: Consolas, Monaco, Menlo, "Courier New", monospace;
+}
+
+footer p {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+main {
+    padding: 0 4rem 0 6rem;
+    max-width: 1000px;
+    width: 70%;
+}
+
+/* Full-width layout for Gym pages */
+body.gym-layout {
+    display: block;
+}
+
+body.gym-layout #asidebar {
+    display: none;
+}
+
+body.gym-layout main {
+    width: 100%;
+    max-width: none;
+    padding: 2rem 4rem;
+    box-sizing: border-box;
+}
+
+article > header > p,
+.article-meta p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* aside + nav-bar = asidebar! */
+#asidebar {
+    padding: 8rem 0 0 4rem;
+}
+
+#asidebar #logo {
+    text-align: center;
+    margin-bottom: 2rem;
+    min-height: 123px;
+}
+
+#asidebar #logo a {
+    display: inline-block;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#asidebar #logo .logo-light {
+    display: block;
+    max-width: 281px;
+}
+
+#asidebar #logo .logo-dark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+}
+
+#asidebar .main-menu ul {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+#asidebar .main-menu ul li {
+    margin: 0 0 20px 0;
+    padding: 0;
+    list-style: none;
+}
+
+#asidebar .main-menu ul li a {
+    color: rgb(17, 17, 17);
+    text-decoration: none;
+    position: relative;
+    padding: 10px 10px;
+}
+
+#asidebar .main-menu ul li a:after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    bottom: 7px;
+    left: 10px;
+    right: 10px;
+    background-color: rgba(17, 17, 17, 0.7);
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#asidebar .main-menu ul li a:hover {
+    text-decoration: none;
+}
+
+#asidebar .main-menu ul li a:hover:after {
+    visibility: visible;
+    transform: scaleX(1);
+}
+
+#asidebar #social {
+    text-align: center;
+    padding: 0;
+    margin: 2rem 0 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#asidebar #social li {
+    margin: 0;
+    display: inline;
+    list-style: none;
+    flex: 1;
+}
+
+section.available {
+    padding-top: 0;
+    padding-bottom: 2rem;
+}
+
+section.available p {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-top: 1px dashed rgba(17,17,17,0.2);
+    border-bottom: 1px dashed rgba(17,17,17,0.2);
+}
+
+@media screen and (max-width: 1200px) {
+    main {
+        padding-right: 0;
+    }
+
+    #asidebar #logo {
+        min-height: initial;
+    }
+
+    #asidebar #logo img {
+        max-width: 100px;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    main {
+        padding-left: 4rem;
+    }
+
+    #asidebar {
+        padding-left: 2rem;
+    }
+}
+
+/* sidebar mobile-ish break that coincides with Tufte's sidenotes disappearing */
+@media screen and (max-width: 760px) {
+    body {
+        display: block;
+    }
+
+    main {
+        padding-right: 4rem;
+        overflow-x: hidden;
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    body > main > article:first-of-type {
+        padding-top: 0;
+    }
+
+    div.highlight, article footer {
+        width: 100%;
+    }
+
+    #asidebar {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 2rem 0 0 4rem;
+    }
+
+    #asidebar #logo img {
+        max-width: 90px;
+    }
+
+    #asidebar #logo {
+        margin-bottom: 0;
+    }
+
+    #asidebar .main-menu ul {
+        margin: 0 0 2em 0;
+    }
+
+    #asidebar nav {
+        padding-left: 2rem
+    }
+
+    #asidebar .main-menu ul {
+        text-align: left
+    }
+
+    #asidebar .main-menu ul li {
+        float: left;
+        margin: 0;
+        padding: 0 0.25rem;
+    }
+
+    #asidebar .main-menu ul li a:hover:after {
+        display: none;
+    }
+
+    #asidebar .main-menu ul li a {
+        padding: 0;
+        margin-left: 0.25rem;
+    }
+
+    #asidebar .main-menu ul li a:link {
+        text-decoration: underline;
+        text-decoration-skip-ink: auto;
+        text-underline-offset: 0.15em;
+        text-decoration-thickness: 1px;
+        text-decoration-color: #333;
+    }
+
+    #asidebar #social {
+        padding-left: 2rem;
+        display: block;
+        margin: 0;
+    }
+
+    #asidebar #social li {
+        padding-left: 0.25rem
+    }
+
+    article code {
+        white-space: pre-wrap;
+        word-break: break-word;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    main {
+        padding: 0 2rem;
+    }
+
+    #asidebar {
+        padding: 2rem 2rem 0 2rem
+    }
+}
+
+@media screen and (max-width: 420px) {
+    #asidebar #logo img {
+        max-width: 80px;
+    }
+
+    #asidebar .main-menu ul {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0;
+    }
+
+    #asidebar .main-menu ul li {
+        float: none;
+        margin-bottom: 8px;
+    }
+
+    #asidebar #social {
+        display: none;
+    }
+
+    #asidebar nav {
+        max-width: 170px;
+    }
+
+    main > footer {
+        padding-bottom: 0.5rem;
+    }
+}
+
+/* make <del>s accessible to screen readers. Thanks, MDN! */
+del::before,
+del::after {
+    clip-path: inset(100%);
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+del::before {
+    content: " [deletion start] ";
+}
+
+del::after {
+    content: " [deletion end] ";
+}
+
+@media print {
+    * {
+        background: #fff;
+    }
+
+    main > article {
+        padding-top: 0;
+    }
+
+    main {
+        width: 100%;
+        padding: 0;
+    }
+
+    #asidebar {
+        display: none;
+    }
+
+    img {
+        break-inside: avoid;
+    }
+
+    p, table, pre {
+        widows: 3;
+        orphans: 3;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        break-after: avoid;
+    }
+}
+
+/*
+    Tufte CSS styles. Originally from https://edwardtufte.github.io/tufte-css/
+    Modified for a 2-column display.
+*/
+html {
+    font-size: 15px;
+    background-color: #fffff8;
+}
+
+body {
+    font-family: et-bembo, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+    background-color: #fffff8;
+    color: #111;
+}
+
+h1 {
+    font-weight: 400;
+    margin-top: 4rem;
+    margin-bottom: 1.5rem;
+    font-size: 3.2rem;
+    line-height: 1;
+}
+
+h2 {
+    font-style: italic;
+    font-weight: 400;
+    margin-top: 2.1rem;
+    margin-bottom: 1.4rem;
+    font-size: 2.2rem;
+    line-height: 1;
+}
+
+h3 {
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.8rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.4rem;
+    line-height: 1;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    width: 60%;
+    border: 0;
+    border-top: 2px solid rgba(17, 17, 17, 0.1);
+    margin: 1em 0;
+    padding: 0;
+}
+hr.separator {
+    margin: 0;
+}
+hr.separator.extra {
+    margin: 4rem 0;
+}
+p.subtitle {
+    font-style: italic;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    display: block;
+    line-height: 1;
+}
+
+.numeral {
+    font-family: et-bembo-roman-old-style;
+}
+
+.danger {
+    color: red;
+}
+
+article {
+    counter-reset: sidenote-counter;
+    position: relative;
+}
+
+article:first-of-type {
+    padding: 4rem 0;
+}
+
+article.intro {
+    padding-bottom: 0;
+}
+
+article:last-of-type {
+    padding-bottom: 4rem;
+}
+
+section {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+p, ol, ul {
+    font-size: 1.4rem;
+    line-height: 2rem;
+}
+
+p {
+    margin-top: 1.4rem;
+    margin-bottom: 1.4rem;
+    padding-right: 0;
+    vertical-align: baseline;
+}
+
+/* Chapter Epigraphs */
+div.epigraph {
+    margin: 5em 0;
+}
+
+div.epigraph > blockquote {
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
+div.epigraph > blockquote, div.epigraph > blockquote > p {
+    font-style: italic;
+}
+
+div.epigraph > blockquote > footer {
+    font-style: normal;
+}
+
+blockquote > footer > cite {
+    font-style: italic;
+}
+
+/* end chapter epigraphs styles */
+
+blockquote {
+    margin: 1.4rem 40px;
+    font-size: 1.4rem;
+    padding-left: 1.4rem;
+    border-left: 2px solid rgba(17, 17, 17, 0.1);
+}
+
+blockquote p {
+    width: 59%;
+}
+
+blockquote footer {
+    width: 59%;
+    font-size: 1.1rem;
+    text-align: right;
+}
+
+section > p, section > footer, #table-container table, section > hr {
+    width: 60%;
+}
+
+/* 54 + 6 == 60, to be the same width as paragraph */
+section > ol, section > ul {
+    width: 54%;
+    -webkit-padding-start: 6%;
+    -moz-padding-start: 6%;
+}
+
+li:not(:first-child) {
+    margin-top: 0.25rem;
+}
+
+figure {
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    max-width: 60%;
+    margin: 0 0 3em 0;
+}
+
+figcaption {
+    float: right;
+    clear: right;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    vertical-align: baseline;
+    position: relative;
+    max-width: 40%;
+}
+
+figure.fullwidth figcaption {
+    margin-right: 24%;
+}
+
+/* Links: replicate underline that clears descenders */
+a:link, a:visited {
+    color: inherit;
+}
+
+article a:link {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+    text-underline-offset: 0.15em;
+    text-decoration-thickness: 1px;
+    text-decoration-color: #333;
+}
+
+::selection {
+    background: #e8dcc8;
+}
+
+::-moz-selection {
+    background: #e8dcc8;
+}
+
+article > header h1 a:link,
+article > header h1 a:visited {
+    text-decoration: none;
+}
+
+.sidenote, .marginnote {
+    float: right;
+    clear: right;
+    margin-right: -63%;
+    width: 52%;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1.1rem;
+    line-height: 1.3;
+    vertical-align: baseline;
+    position: relative;
+    /* Prevent sidenote boxes from blocking clicks on underlying content */
+    pointer-events: none;
+    /* Otherwise, highlighting a paragraph correctly grabs the sidenotes
+     TODO: figure out how to improve this later */
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Re-enable pointer events for sidenote content itself */
+.sidenote *, .marginnote * {
+    pointer-events: auto;
+}
+
+@media (max-width: 1230px) {
+    .sidenote, .marginnote {
+        margin-right: -60%;
+        width: 45%;
+    }
+}
+
+.sidenote-number {
+    counter-increment: sidenote-counter;
+}
+
+.sidenote-number:after, .sidenote:before {
+    font-family: et-bembo-roman-old-style;
+    position: relative;
+    vertical-align: baseline;
+}
+
+.sidenote-number:after {
+    content: counter(sidenote-counter);
+    font-size: 1rem;
+    top: -0.5rem;
+    left: 0.1rem;
+}
+
+.sidenote:before {
+    content: counter(sidenote-counter) " ";
+    font-size: 1rem;
+    top: -0.5rem;
+}
+
+blockquote .sidenote, blockquote .marginnote {
+    margin-right: -82%;
+    min-width: 59%;
+    text-align: left;
+}
+
+article img {
+    max-width: 100%;
+}
+
+article img.hero-reveal {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+article img.hero-reveal.loaded {
+    opacity: 1;
+}
+
+article img.lazy-reveal {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+article img.lazy-reveal.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+div.fullwidth, table.fullwidth {
+    width: 100%;
+}
+
+div.table-wrapper {
+    overflow-x: auto;
+    font-family: "Trebuchet MS", "Gill Sans", "Gill Sans MT", sans-serif;
+}
+
+.sans {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+    letter-spacing: .03em;
+}
+
+.sans > code {
+    font-size: 1.2rem;
+}
+
+h1 > code, h2 > code, h3 > code {
+    font-size: 0.80em;
+}
+
+.marginnote > code, .sidenote > code {
+    font-size: 1rem;
+}
+
+.fullwidth {
+    max-width: 90%;
+    clear: both;
+}
+
+span.newthought {
+    font-variant: small-caps;
+    font-size: 1.2em;
+}
+
+input.margin-toggle {
+    display: none;
+}
+
+label.sidenote-number {
+    display: inline;
+}
+
+label.margin-toggle:not(.sidenote-number) {
+    display: none;
+}
+
+.iframe-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    padding-top: 25px;
+    height: 0;
+}
+
+.iframe-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-width: 760px) {
+    hr, section > p, section > footer, #table-container table {
+        width: 100%;
+    }
+
+    pre.code {
+        width: 97%;
+    }
+
+    section > ol {
+        width: 90%;
+    }
+
+    section > ul {
+        width: 90%;
+    }
+
+    figure {
+        max-width: 90%;
+    }
+
+    figcaption, figure.fullwidth figcaption {
+        margin-right: 0;
+        max-width: none;
+    }
+
+    blockquote {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    blockquote p, blockquote footer {
+        width: 100%;
+    }
+
+    label.sidenote-number {
+        text-decoration: underline;
+        color: #6087dd;
+    }
+
+    label.margin-toggle:not(.sidenote-number) {
+        display: inline;
+        font-size: 1.2rem;
+        color: #6087dd;
+        vertical-align: super;
+        margin-left: -4px;
+        text-decoration: underline;
+    }
+
+    .sidenote, .marginnote {
+        float: left;
+        clear: both;
+        left: 1rem;
+        width: 95%;
+        position: relative;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        margin: 0 2.5%;
+        transition: max-height 0.3s ease-out, opacity 0.25s ease-out, margin 0.25s ease-out;
+    }
+
+    .margin-toggle:checked + .sidenote,
+    .margin-toggle:checked + .marginnote {
+        max-height: 20em;
+        opacity: 1;
+        margin: 1rem 2.5%;
+        -moz-user-select: text;
+        -ms-user-select: text;
+        -webkit-user-select: text;
+        user-select: text;
+    }
+
+    label {
+        cursor: pointer;
+    }
+
+    div.table-wrapper, table {
+        width: 85%;
+    }
+}
+
+/*
+ * =======================================================
+ *   CODE BLOCKS - "Scholarly Light" Theme
+ *   Elegant, warm syntax highlighting for Tufte CSS
+ *   Inspired by fine technical book typography
+ * =======================================================
+ */
+
+/* Base code block container - like a figure in an academic paper */
+div.highlight {
+    position: relative;
+    margin: 1.8rem 0;
+    border-radius: 3px;
+    overflow: hidden;
+    background: #faf8f5;
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    contain: layout paint;
+}
+
+/* The highlight wrapper */
+.highlight {
+    background: #faf8f5;
+    border-radius: 3px;
+}
+
+.highlight pre {
+    margin: 0;
+    padding: 1.2rem 1.4rem;
+    overflow-x: auto;
+    line-height: 1.65;
+    font-size: 0.9rem;
+    letter-spacing: -0.01em;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(17, 17, 17, 0.12) transparent;
+}
+
+/* Custom scrollbar for Webkit browsers */
+.highlight pre::-webkit-scrollbar {
+    height: 6px;
+}
+
+.highlight pre::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.highlight pre::-webkit-scrollbar-thumb {
+    background: rgba(17, 17, 17, 0.1);
+    border-radius: 3px;
+}
+
+.highlight pre::-webkit-scrollbar-thumb:hover {
+    background: rgba(17, 17, 17, 0.18);
+}
+
+/* Subtle left border accent - like a marginalia marker */
+div.highlight::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 3px;
+    background: rgba(17, 17, 17, 0.12);
+}
+
+/* Line numbers styling */
+td.linenos .normal { 
+    color: rgba(17, 17, 17, 0.3);
+    background-color: transparent; 
+    padding: 0 12px 0 8px;
+    user-select: none;
+    font-size: 0.8rem;
+}
+span.linenos { 
+    color: rgba(17, 17, 17, 0.3);
+    background-color: transparent; 
+    padding-right: 16px;
+    user-select: none;
+    font-size: 0.8rem;
+}
+td.linenos .special { 
+    color: #8b5a2b;
+    background-color: rgba(139, 90, 43, 0.06);
+    padding-left: 5px; 
+    padding-right: 5px; 
+}
+span.linenos.special { 
+    color: #8b5a2b;
+    background-color: rgba(139, 90, 43, 0.06);
+    padding-left: 5px; 
+    padding-right: 5px; 
+}
+
+.linenos {
+    border-radius: 3px 0 0 3px;
+    background: rgba(17, 17, 17, 0.02);
+    border-right: 1px solid rgba(17, 17, 17, 0.06);
+}
+
+/* Highlighted line */
+.highlight .hll { 
+    background: rgba(139, 90, 43, 0.08);
+    display: block;
+    margin: 0 -1.4rem;
+    padding: 0 1.4rem;
+    border-left: 2px solid #8b5a2b;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Syntax Colors - Warm, Scholarly Palette
+   Inspired by printed technical books
+   ═══════════════════════════════════════════════════════ */
+
+/* Base text color - rich black like good print */
+.highlight { color: #2d2d2d; }
+
+/* Comments - sepia gray, italic like marginalia */
+.highlight .c { color: #7a7267; font-style: italic } /* Comment */
+.highlight .ch { color: #7a7267; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #7a7267; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #8b5a2b; } /* Comment.Preproc */
+.highlight .cpf { color: #7a7267; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #7a7267; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #7a7267; font-style: italic } /* Comment.Special */
+
+/* Errors */
+.highlight .err { color: #a63d40; } /* Error */
+
+/* Keywords - deep burgundy, authoritative */
+.highlight .k { color: #8b2252; } /* Keyword */
+.highlight .kc { color: #8b2252; } /* Keyword.Constant */
+.highlight .kd { color: #8b2252; } /* Keyword.Declaration */
+.highlight .kn { color: #8b2252; } /* Keyword.Namespace (import, from) */
+.highlight .kp { color: #8b2252; } /* Keyword.Pseudo */
+.highlight .kr { color: #8b2252; } /* Keyword.Reserved */
+.highlight .kt { color: #8b5a2b; } /* Keyword.Type */
+
+/* Operators - muted */
+.highlight .o { color: #555; } /* Operator */
+.highlight .ow { color: #8b2252; } /* Operator.Word (and, or, not, in) */
+
+/* Punctuation */
+.highlight .p { color: #555; } /* Punctuation */
+
+/* Names */
+.highlight .n { color: #2d2d2d; } /* Name */
+.highlight .na { color: #445c3c; } /* Name.Attribute */
+.highlight .nb { color: #3d5a80; } /* Name.Builtin */
+.highlight .nc { color: #3d5a80; } /* Name.Class */
+.highlight .no { color: #8b5a2b; } /* Name.Constant */
+.highlight .nd { color: #7a5a28; } /* Name.Decorator */
+.highlight .ni { color: #555; } /* Name.Entity */
+.highlight .ne { color: #a63d40; } /* Name.Exception */
+.highlight .nf { color: #3d5a80; } /* Name.Function */
+.highlight .nl { color: #445c3c; } /* Name.Label */
+.highlight .nn { color: #3d5a80; } /* Name.Namespace */
+.highlight .nt { color: #8b2252; } /* Name.Tag */
+.highlight .nv { color: #2d2d2d; } /* Name.Variable */
+.highlight .bp { color: #7a5a28; } /* Name.Builtin.Pseudo (self, cls) */
+.highlight .fm { color: #3d5a80; } /* Name.Function.Magic */
+.highlight .vc { color: #2d2d2d; } /* Name.Variable.Class */
+.highlight .vg { color: #2d2d2d; } /* Name.Variable.Global */
+.highlight .vi { color: #2d2d2d; } /* Name.Variable.Instance */
+.highlight .vm { color: #3d5a80; } /* Name.Variable.Magic */
+
+/* Literals - Numbers - warm brown */
+.highlight .m { color: #8b5a2b; } /* Literal.Number */
+.highlight .mb { color: #8b5a2b; } /* Literal.Number.Bin */
+.highlight .mf { color: #8b5a2b; } /* Literal.Number.Float */
+.highlight .mh { color: #8b5a2b; } /* Literal.Number.Hex */
+.highlight .mi { color: #8b5a2b; } /* Literal.Number.Integer */
+.highlight .mo { color: #8b5a2b; } /* Literal.Number.Oct */
+.highlight .il { color: #8b5a2b; } /* Literal.Number.Integer.Long */
+
+/* Literals - Strings - forest green */
+.highlight .s { color: #445c3c; } /* Literal.String */
+.highlight .sa { color: #445c3c; } /* Literal.String.Affix */
+.highlight .sb { color: #445c3c; } /* Literal.String.Backtick */
+.highlight .sc { color: #445c3c; } /* Literal.String.Char */
+.highlight .dl { color: #445c3c; } /* Literal.String.Delimiter */
+.highlight .sd { color: #7a7267; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #445c3c; } /* Literal.String.Double */
+.highlight .se { color: #8b5a2b; } /* Literal.String.Escape */
+.highlight .sh { color: #445c3c; } /* Literal.String.Heredoc */
+.highlight .si { color: #8b5a2b; } /* Literal.String.Interpol */
+.highlight .sx { color: #445c3c; } /* Literal.String.Other */
+.highlight .sr { color: #8b2252; } /* Literal.String.Regex */
+.highlight .s1 { color: #445c3c; } /* Literal.String.Single */
+.highlight .ss { color: #445c3c; } /* Literal.String.Symbol */
+
+/* Generic */
+.highlight .gd { color: #a63d40; background: rgba(166, 61, 64, 0.06); } /* Generic.Deleted */
+.highlight .ge { font-style: italic; } /* Generic.Emph */
+.highlight .gr { color: #a63d40; } /* Generic.Error */
+.highlight .gh { color: #3d5a80; font-weight: bold; } /* Generic.Heading */
+.highlight .gi { color: #445c3c; background: rgba(68, 92, 60, 0.06); } /* Generic.Inserted */
+.highlight .go { color: #7a7267; } /* Generic.Output */
+.highlight .gp { color: #8b5a2b; font-weight: bold; } /* Generic.Prompt */
+.highlight .gs { font-weight: bold; } /* Generic.Strong */
+.highlight .gu { color: #7a7267; } /* Generic.Subheading */
+.highlight .gt { color: #a63d40; } /* Generic.Traceback */
+
+/* Whitespace */
+.highlight .w { color: #7a7267; } /* Text.Whitespace */
+
+/* ═══════════════════════════════════════════════════════
+   Code Typography - Refined Monospace
+   ═══════════════════════════════════════════════════════ */
+
+code {
+    font-family: 'JetBrains Mono', 'IBM Plex Mono', 'Source Code Pro',
+                 Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 1.0rem;
+    font-feature-settings: 'liga' on, 'calt' on;
+}
+
+pre {
+    font-family: 'JetBrains Mono', 'IBM Plex Mono', 'Source Code Pro',
+                 Consolas, Monaco, Menlo, "Courier New", monospace;
+    font-feature-settings: 'liga' on, 'calt' on;
+}
+
+/* Inline code - warm, subtle, scholarly */
+p > code, li > code, span.sidenote > code, span.marginnote > code {
+    background: rgba(17, 17, 17, 0.04);
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    border-radius: 3px;
+    box-sizing: border-box;
+    color: #8b2252;
+    padding: 1px 5px;
+    white-space: nowrap;
+    font-size: 0.88em;
+    font-family: 'JetBrains Mono', 'IBM Plex Mono', Consolas, monospace;
+}
+
+/* Selection color inside code blocks */
+.highlight ::selection {
+    background: rgba(139, 90, 43, 0.2);
+    color: inherit;
+}
+
+.highlight ::-moz-selection {
+    background: rgba(139, 90, 43, 0.2);
+    color: inherit;
+}
+
+/* Ensure code in sidenotes looks good */
+.sidenote code, .marginnote code {
+    background: rgba(17, 17, 17, 0.03);
+    border: 1px solid rgba(17, 17, 17, 0.06);
+    color: #8b2252;
+    font-size: 0.85rem;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Copy Button - Subtle, Scholarly
+   ═══════════════════════════════════════════════════════ */
+
+.code-copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 4px 10px;
+    font-family: et-bembo, Palatino, Georgia, serif;
+    font-size: 0.75rem;
+    font-style: italic;
+    color: rgba(17, 17, 17, 0.4);
+    background: transparent;
+    border: 1px solid rgba(17, 17, 17, 0.12);
+    border-radius: 3px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease, color 0.15s ease, border-color 0.15s ease;
+    z-index: 10;
+    user-select: none;
+}
+
+div.highlight:hover .code-copy-btn {
+    opacity: 1;
+}
+
+.code-copy-btn:hover {
+    color: rgba(17, 17, 17, 0.7);
+    border-color: rgba(17, 17, 17, 0.25);
+    background: rgba(17, 17, 17, 0.03);
+}
+
+.code-copy-btn:active {
+    transform: scale(0.96);
+}
+
+.code-copy-btn.copied {
+    color: #445c3c;
+    border-color: rgba(68, 92, 60, 0.3);
+}
+
+/* Responsive adjustments for code blocks */
+@media (max-width: 760px) {
+    div.highlight {
+        border-radius: 2px;
+    }
+    
+    div.highlight::before {
+        width: 2px;
+    }
+    
+    .highlight pre {
+        padding: 1rem 0.9rem;
+        font-size: 0.82rem;
+    }
+    
+    /* Always show copy button on mobile (no hover) */
+    .code-copy-btn {
+        opacity: 0.7;
+        font-size: 0.7rem;
+        padding: 3px 8px;
+    }
+}
+
+/* Gym: interactive progress + leaderboard */
+.gym-room-panel,
+.gym-leaderboard {
+    width: 60%;
+    margin: 2.5rem auto 3rem;
+    padding: 1.6rem 1.8rem;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(17, 17, 17, 0.04), rgba(17, 17, 17, 0.01));
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+}
+
+.gym-room-header h2,
+.gym-leaderboard h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.4rem;
+}
+
+.gym-room-subtitle,
+.gym-leaderboard-subtitle {
+    font-size: 1.2rem;
+    color: rgba(17, 17, 17, 0.7);
+}
+
+.gym-room-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.8rem;
+    margin-bottom: 1.2rem;
+}
+
+.gym-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    background-color: rgba(17, 17, 17, 0.06);
+}
+
+.gym-xp {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.gym-progress {
+    margin: 0.8rem 0 1.1rem;
+}
+
+.gym-progress-bar {
+    position: relative;
+    width: 100%;
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(17, 17, 17, 0.08);
+    overflow: hidden;
+}
+
+.gym-progress-bar-inner {
+    width: 15%;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #007bff, #00c4ff);
+    transition: width 0.4s ease-out;
+}
+
+.gym-progress-label {
+    margin-top: 0.4rem;
+    font-size: 1.1rem;
+    color: rgba(17, 17, 17, 0.8);
+}
+
+.gym-complete-button {
+    margin-top: 0.8rem;
+    padding: 0.55rem 1.2rem;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    background: linear-gradient(135deg, #111, #444);
+    color: #fffff8;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+    transition: transform 0.08s ease-out, box-shadow 0.08s ease-out, opacity 0.1s ease-out;
+}
+
+.gym-complete-button:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2);
+}
+
+.gym-complete-button:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.16);
+}
+
+.gym-complete-button.completed,
+.gym-complete-button:disabled {
+    opacity: 0.7;
+    cursor: default;
+}
+
+.gym-small-text {
+    margin-top: 0.8rem;
+    font-size: 1.1rem;
+    color: rgba(17, 17, 17, 0.6);
+}
+
+.gym-leaderboard-inner {
+    margin-top: 1.1rem;
+}
+
+.gym-leaderboard-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.gym-leaderboard-item {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 0.4rem 0;
+    border-bottom: 1px dashed rgba(17, 17, 17, 0.1);
+    font-size: 1.25rem;
+}
+
+.gym-leaderboard-item:last-child {
+    border-bottom: none;
+}
+
+.gym-leaderboard-rank {
+    width: 3rem;
+    font-weight: 600;
+}
+
+.gym-leaderboard-name {
+    flex: 1;
+}
+
+.gym-leaderboard-xp {
+    font-weight: 600;
+}
+
+.gym-leaderboard-self {
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+@media screen and (max-width: 760px) {
+    .gym-room-panel,
+    .gym-leaderboard {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+/* On Gym pages, let Gym UI span full content width even on large screens */
+body.gym-layout .gym-room-panel,
+body.gym-layout .gym-leaderboard {
+    width: 100%;
+}
+
+/*
+ * =======================================================
+ *   Math Rendering — MathJax + Tufte CSS
+ *
+ *   The render_math plugin emits:
+ *     display math → <div class="math">$$…$$</div>
+ *     inline math  → <span class="math">\(…\)</span>
+ *
+ *   Browser auto-closes the surrounding <p> when it hits
+ *   <div class="math">, so div.math ends up as a direct
+ *   child of <section>. Pseudo-elements on that div
+ *   provide the scroll arrow and fade overlay.
+ * =======================================================
+ */
+
+/* Fade-in: hide raw LaTeX while MathJax renders, reveal once ready */
+html.math-rendering div.math,
+html.math-rendering span.math {
+    opacity: 0;
+}
+
+div.math, span.math {
+    transition: opacity 0.4s ease;
+}
+
+/* Display math containers: match the 60% Tufte paragraph column */
+section > div.math {
+    width: 60%;
+    margin: 1.4rem 0;
+    text-align: center;
+    position: relative;
+}
+
+/* Font sizing */
+.math mjx-container[display="true"] {
+    font-size: 1.4rem !important;
+}
+
+.math mjx-container[display="false"],
+span.math mjx-container[display="false"],
+p span.math mjx-container[display="false"] {
+    font-size: 1.4rem;
+    line-height: 2rem;
+}
+
+/* Center display equations inside the column */
+section > div.math > mjx-container[display="true"] {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.4rem !important;
+}
+
+/* Scrollable display math: horizontal scroll, vertical padding prevents clipping.
+   Note: overflow-y is computed as 'auto' whenever overflow-x is not 'visible'
+   (CSS spec), so we add padding instead of relying on overflow-y: visible. */
+mjx-container[display="true"] {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+    scrollbar-width: none;
+    padding: 0.25em 0;
+}
+
+mjx-container[display="false"] {
+    max-width: 100%;
+}
+
+mjx-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Scroll indicator: right-edge fade gradient */
+section > div.math::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 36px;
+    background: linear-gradient(to right,
+        transparent 0%,
+        rgba(255, 255, 248, 0.5) 40%,
+        rgba(255, 255, 248, 0.95) 100%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+/* Scroll indicator: arrow */
+section > div.math::before {
+    content: '→';
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.15rem;
+    color: rgba(17, 17, 17, 0.35);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    z-index: 1;
+}
+
+/* Show indicators when content overflows */
+section > div.math.has-overflow::after,
+section > div.math.has-overflow::before {
+    opacity: 1;
+}
+
+/* Hide indicators once scrolled to end */
+section > div.math.scrolled-end::after,
+section > div.math.scrolled-end::before {
+    opacity: 0;
+}
+
+/* Bounce: JS adds/removes .nudge to replay the animation on demand */
+section > div.math.nudge::before {
+    animation: nudge-arrow 1.8s ease-in-out 0.35s infinite;
+}
+
+@keyframes nudge-arrow {
+    0%, 100% { transform: translateY(-50%) translateX(0); }
+    50%      { transform: translateY(-50%) translateX(4px); }
+}
+
+/* Mobile: full-width math */
+@media (max-width: 760px) {
+    section > div.math {
+        width: 100%;
+    }
+
+    .math mjx-container[display="true"] {
+        font-size: 1.25rem !important;
+    }
+}
+
+
+/* --- Tablets & landscape phones (≤ 760px) --- */
+@media screen and (max-width: 760px) {
+    .article-meta { display: block; }
+
+    #asidebar {
+        display: block;
+        padding: 1.25rem 2rem 1rem;
+    }
+
+    #asidebar #logo {
+        display: none;
+    }
+
+    #asidebar nav {
+        padding-left: 0;
+        max-width: none;
+    }
+
+    #asidebar .main-menu ul {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 0 1.5rem;
+        margin: 0;
+    }
+
+    #asidebar .main-menu ul li {
+        float: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #asidebar .main-menu ul li a {
+        padding: 0;
+        margin-left: 0;
+    }
+
+    #asidebar #social { display: none; }
+
+    h1 { font-size: 2.4rem; margin-top: 2rem; }
+    h2 { font-size: 1.8rem; }
+    h3 { font-size: 1.5rem; }
+
+    p > code, li > code,
+    span.sidenote > code, span.marginnote > code {
+        white-space: normal;
+        word-break: break-word;
+    }
+
+    article.post > section:first-of-type > p:first-of-type::first-letter {
+        font-size: 3.2em;
+    }
+
+    figure { max-width: 100%; }
+}
+
+/* --- Portrait phones (≤ 600px) --- */
+@media screen and (max-width: 600px) {
+    h1 { font-size: 2.1rem; margin-top: 1.5rem; }
+
+    #asidebar { padding: 1rem 1.5rem 0.75rem; }
+    main { padding: 0 1.5rem; }
+
+    }
+
+/* --- Small phones / iPhone SE (≤ 420px) --- */
+@media screen and (max-width: 420px) {
+    h1 { font-size: 1.9rem; margin-top: 1.25rem; margin-bottom: 1rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.3rem; }
+
+    article.post > section:first-of-type > p:first-of-type::first-letter {
+        font-size: 2.8em;
+    }
+
+    p { margin-top: 1rem; margin-bottom: 1rem; }
+
+    #asidebar { padding: 0.75rem 1.25rem 0.5rem; }
+    #asidebar #logo { margin-bottom: 0.5rem; }
+    #asidebar #logo img { max-width: 55px; }
+    #asidebar .main-menu ul { gap: 0 1rem; }
+    #asidebar nav { max-width: none; }
+
+    main { padding: 0 1.25rem; }
+
+    }
+
+/* ───────────────────────────────────────
+   Focus-visible — keyboard navigation
+   ─────────────────────────────────────── */
+:focus-visible {
+    outline: 2px solid rgba(17, 17, 17, 0.35);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* ───────────────────────────────────────
+   Page entrance fade
+   ─────────────────────────────────────── */
+main {
+    animation: page-enter 0.45s ease both;
+}
+
+@keyframes page-enter {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ───────────────────────────────────────
+   Click-to-zoom image overlay
+   ─────────────────────────────────────── */
+main img {
+    cursor: zoom-in;
+}
+
+.img-zoom-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    contain: layout style;
+}
+
+.img-zoom-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.img-zoom-overlay img {
+    max-width: 92vw;
+    max-height: 92vh;
+    object-fit: contain;
+    transform: scale(0.96);
+    transition: transform 0.2s ease;
+}
+
+.img-zoom-overlay.active img {
+    transform: scale(1);
+}
+
+@media print {
+    .img-zoom-overlay { display: none; }
+    main img { cursor: default; }
+}
+
+/* iPhone safe area: home indicator clearance */
+@supports (padding: env(safe-area-inset-bottom)) {
+    body {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}
+/* ───────────────────────────────────────
+   Text logo (in place of elonlit's image)
+   ─────────────────────────────────────── */
+#asidebar #logo {
+    min-height: initial;
+}
+
+#asidebar #logo a {
+    font-family: et-bembo, Palatino, Georgia, serif;
+    font-size: 2.4rem;
+    font-weight: bold;
+    line-height: 1.05;
+    color: #111;
+    text-decoration: none;
+    border-radius: 0;
+    overflow: visible;
+}
+
+@media screen and (max-width: 760px) {
+    #asidebar #logo {
+        display: block;
+    }
+    #asidebar #logo a {
+        font-size: 1.9rem;
+    }
+    #asidebar #logo a br {
+        display: none;
+    }
+}
+
+/* ───────────────────────────────────────
+   Blog index (post list)
+   ─────────────────────────────────────── */
+.post-index .month {
+    font-style: italic;
+    font-size: 1.5rem;
+    margin: 2rem 0 0.6rem;
+}
+
+.post-index ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 60%;
+}
+
+.post-index li {
+    margin: 0.5rem 0;
+    font-size: 1.4rem;
+}
+
+.post-index li .date {
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 1rem;
+    color: rgba(17, 17, 17, 0.5);
+    margin-left: 0.6rem;
+}
+
+/* ───────────────────────────────────────
+   Markets table
+   ─────────────────────────────────────── */
+#table-container table {
+    width: 60%;
+    border-collapse: collapse;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+#table-container table thead th {
+    text-align: left;
+    font-style: italic;
+    font-weight: 400;
+    color: rgba(17, 17, 17, 0.5);
+    border-bottom: 2px solid rgba(17, 17, 17, 0.1);
+    padding: 0.3rem 0.6rem 0.6rem;
+}
+
+#table-container table tbody td {
+    padding: 0.6rem;
+    border-bottom: 1px solid rgba(17, 17, 17, 0.1);
+}
+
+#table-container table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+td.ticker {
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 1rem;
+}
+
+td.value {
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+td.units {
+    color: rgba(17, 17, 17, 0.5);
+    text-align: right;
+}
+
+td.date {
+    color: rgba(17, 17, 17, 0.5);
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 1rem;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.loading, .error {
+    font-size: 1.3rem;
+    color: rgba(17, 17, 17, 0.5);
+    font-style: italic;
+}
+
+.error {
+    color: #a00;
+}
+
+
+/* ───────────────────────────────────────
+   Keep the sidebar a left-hand column at EVERY width
+   (overrides the earlier breakpoints that stacked it on top)
+   ─────────────────────────────────────── */
+
+/* No list bullets anywhere in the sidebar */
+#asidebar ul,
+#asidebar ol,
+#asidebar li {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+@media screen and (max-width: 760px) {
+    body {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    #asidebar {
+        display: block;
+        flex: 0 0 auto;
+        padding: 3rem 0 0 1.25rem;
+    }
+
+    #asidebar #logo {
+        display: block;
+        margin-bottom: 1.25rem;
+        text-align: center;
+    }
+
+    #asidebar #logo a {
+        font-size: 1.5rem;
+    }
+
+    #asidebar nav {
+        padding-left: 0;
+        max-width: none;
+    }
+
+    #asidebar .main-menu ul {
+        display: block;
+        text-align: center;
+        margin: 0;
+    }
+
+    #asidebar .main-menu ul li {
+        float: none;
+        display: block;
+        margin: 0 0 16px 0;
+        padding: 0;
+    }
+
+    #asidebar .main-menu ul li a {
+        padding: 6px;
+    }
+
+    #asidebar #social {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+        margin: 1.5rem 0 0;
+    }
+
+    main {
+        width: auto;
+        flex: 1 1 auto;
+        padding: 3rem 1.25rem;
+        overflow-x: hidden;
+        box-sizing: border-box;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #asidebar {
+        padding: 1.5rem 0 0 0.6rem;
+    }
+    #asidebar #logo a {
+        font-size: 1.2rem;
+    }
+    #asidebar .main-menu ul li a {
+        font-size: 0.95rem;
+        padding: 4px;
+    }
+    main {
+        padding: 1.5rem 0.9rem;
+    }
+}
