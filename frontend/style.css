@@ -1971,3 +1971,64 @@ td.date {
         padding: 1.5rem 0.9rem;
     }
 }
+
+/* ───────────────────────────────────────
+   Electricity vs GDP project page
+   ─────────────────────────────────────── */
+
+/* Full-bleed chart figure: caption sits below, not floated */
+figure.fullwidth:has(svg.scatter) {
+    max-width: 100%;
+    width: 90%;
+    margin: 2rem 0 2.5rem;
+}
+
+svg.scatter {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #fffdf6;
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    border-radius: 4px;
+}
+
+figure.fullwidth:has(svg.scatter) figcaption {
+    float: none;
+    max-width: 88%;
+    margin: 0.9rem 0 0;
+    font-style: italic;
+    line-height: 1.5;
+}
+
+/* Two summary tables side by side */
+.table-duo {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1.5rem 3rem;
+    width: 90%;
+}
+
+.table-duo > div {
+    flex: 1 1 260px;
+}
+
+.table-duo #table-container table {
+    width: 100%;
+    margin-top: 0.4rem;
+}
+
+/* Inline red marker to echo the Guyana dot on the chart */
+.lbl-guy-inline {
+    color: #a63d40;
+    font-style: italic;
+}
+
+@media screen and (max-width: 760px) {
+    figure.fullwidth:has(svg.scatter),
+    .table-duo {
+        width: 100%;
+    }
+    figure.fullwidth:has(svg.scatter) figcaption {
+        max-width: 100%;
+    }
+}
