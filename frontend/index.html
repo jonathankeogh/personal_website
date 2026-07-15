@@ -1,1 +1,224 @@
-<h1>Hello from frontend</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <title>Jonathan Keogh | On the Stability of Iterative Methods</title>
+    <link rel="stylesheet" href="style.css" type="text/css" fetchpriority="high" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <meta name="author" content="Jonathan Keogh" />
+    <meta name="description" content="Jonathan Keogh's notes." />
+
+    <script>document.documentElement.classList.add('math-rendering');</script>
+    <script>
+      MathJax = {
+        loader: { load: ['[tex]/ams', '[tex]/noerrors', '[tex]/noundefined'] },
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true,
+          processEnvironments: true,
+          packages: { '[+]' : ['ams', 'noerrors', 'noundefined'] },
+          tags: 'ams',
+          tagSide: 'right',
+          tagIndent: '0.8em'
+        },
+        chtml: {
+          scale: 1,
+          matchFontHeight: false,
+          mtextInheritFont: true,
+          displayAlign: 'center',
+          displayIndent: '0em'
+        },
+        options: {
+          skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+          ignoreHtmlClass: 'tex2jax_ignore',
+          processHtmlClass: 'tex2jax_process'
+        },
+        startup: {
+          pageReady: () => {
+            return MathJax.startup.defaultPageReady().then(() => {
+              document.documentElement.classList.remove('math-rendering');
+              requestAnimationFrame(function() {
+                requestAnimationFrame(initMathScrollIndicators);
+              });
+            });
+          }
+        }
+      };
+    </script>
+    <script id="MathJax-script" async crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>setTimeout(() => document.documentElement.classList.remove('math-rendering'), 8000);</script>
+</head>
+<body class="">
+    <aside id="asidebar">
+        <div id="logo">
+            <a href="/">Jonathan<br>Keogh</a>
+        </div>
+        <nav class="main-menu">
+<ul>
+    <li><a href="writing.html">Blog</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="links.html">Interesting Links</a></li>
+</ul>        </nav>
+
+<ul id="social">
+    <li><a href="https://github.com/jonathankeogh/" title="GitHub" target=_blank rel="me noopener"><img alt="GitHub" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23000' aria-label='GitHub'><path d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/></svg>"></a></li>
+    <li><a href="https://www.linkedin.com/in/jonathan-keogh-287235101/" title="LinkedIn" target=_blank rel="me noopener"><img alt="LinkedIn" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23000' aria-label='LinkedIn'><path d='M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z'/></svg>"></a></li>
+</ul>    </aside>
+    <main>            <article class="post">
+                <header>
+                    <h1>
+<a href="/" rel="bookmark" title="Permanent link to &quot;On the Stability of Iterative Methods&quot;">On the Stability of Iterative Methods</a>                    </h1>
+
+                    <p><span class="newthought">Jonathan Keogh</span></p>
+                    <div class="article-meta">
+                        <p><span class="newthought">June 01, 2026</span></p>
+                            <p><span class="newthought">Filed under &ldquo;<a href="writing.html" rel="tag">Notes</a>&rdquo;</span></p>
+                    </div>
+                </header>
+
+<section>
+<p>This is an example post. A short opening paragraph states the question&mdash;here, when does a simple iteration converge, and how fast? One or two sentences is usually enough to set the stage before any formalism appears.<label for="sn-opening" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-opening" class="margin-toggle"><span class="sidenote">Sidenotes live in the margin, in the manner of Edward Tufte. On narrow screens they collapse and can be toggled inline.</span></p>
+</section>
+<section>
+<h2>Setup</h2>
+<p>Let <span class="math">\(X\)</span> be a complete metric space and suppose <span class="math">\(f : X \to X\)</span> is a contraction, so that <span class="math">\(d(f(x), f(y)) \le q\, d(x, y)\)</span> for some <span class="math">\(q \in [0, 1)\)</span>. We are interested in the behaviour of the sequence <span class="math">\(x_{n+1} = f(x_n)\)</span>.</p>
+<p>
+<div class="math">$$ d(x_n, x_\star) \;\le\; \frac{q^n}{1 - q}\, d(x_1, x_0) $$</div>
+</p>
+<p>The bound says the error contracts geometrically: each step shrinks the distance to the fixed point <span class="math">\(x_\star\)</span> by at least a factor of <span class="math">\(q\)</span>. This is the substance of the Banach fixed-point theorem, and it is surprisingly general.<label for="sn-banach" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-banach" class="margin-toggle"><span class="sidenote">Stefan Banach, &ldquo;Sur les op&eacute;rations dans les ensembles abstraits et leur application aux &eacute;quations int&eacute;grales,&rdquo; <em>Fundamenta Mathematicae</em> 3 (1922).</span></p>
+<blockquote>
+<p>A good fixed-point argument hides all of its analysis inside a single inequality.</p>
+</blockquote>
+</section>
+<section>
+<h2>Why it matters</h2>
+<p>Replace this with the real argument when there is one. The point of the template is to show how prose, section headings, displayed mathematics, and the occasional quotation sit together on the page.</p>
+<p>A closing remark, or an open question, makes a natural place to stop. <span class="math">\(\blacksquare\)</span></p>
+</section>
+
+
+                <footer class="de-emphasize">
+                    <p>Tagged with
+                    <a href="writing.html" class="tags">Numerical analysis</a>.</p>
+                </footer>
+            </article>
+
+    <article>
+        <footer class="paginator">                <span class="hide">Retreat into the past&nbsp;&rarr;</span>
+
+
+   <a href="writing.html">Retreat into the past&nbsp;&rarr;</a>
+        </footer>
+    </article>
+
+        <footer>
+<p class="de-emphasize copyright">&copy;2026 Jonathan Keogh. All rights reserved.</p>        </footer>
+    </main>
+    <script>
+    function initMathScrollIndicators() {
+      document.querySelectorAll('mjx-container[display="true"]').forEach(function(container) {
+        var wrapper = container.closest('.math');
+        if (!wrapper) return;
+        function nudge() {
+          wrapper.classList.remove('nudge');
+          void wrapper.offsetWidth;
+          wrapper.classList.add('nudge');
+        }
+        function update() {
+          var overflows = container.scrollWidth > container.clientWidth + 1;
+          var atEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 5;
+          var wasEnd = wrapper.classList.contains('scrolled-end');
+          wrapper.classList.toggle('has-overflow', overflows);
+          wrapper.classList.toggle('scrolled-end', overflows && atEnd);
+          if (!overflows || atEnd) {
+            wrapper.classList.remove('nudge');
+          } else if (wasEnd) {
+            nudge();
+          }
+        }
+        update();
+        if (wrapper.classList.contains('has-overflow')) nudge();
+        if (!container._mathScrollBound) {
+          container.addEventListener('scroll', update, { passive: true });
+          container._mathScrollBound = true;
+        }
+      });
+    }
+    var _resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(_resizeTimer);
+      _resizeTimer = setTimeout(initMathScrollIndicators, 250);
+    });
+    </script>
+    <script>
+    (function() {
+      var imgs = document.querySelectorAll('main img');
+      var first = true;
+      for (var i = 0; i < imgs.length; i++) {
+        var img = imgs[i];
+        img.setAttribute('decoding', 'async');
+        if (first) {
+          img.setAttribute('fetchpriority', 'high');
+          if (!img.complete) {
+            img.classList.add('hero-reveal');
+            img.addEventListener('load', function() { this.classList.add('loaded'); });
+            img.addEventListener('error', function() { this.classList.add('loaded'); });
+          }
+          first = false;
+        } else {
+          img.setAttribute('loading', 'lazy');
+          if (!img.complete) {
+            img.classList.add('lazy-reveal');
+            img.addEventListener('load', function() { this.classList.add('loaded'); });
+            img.addEventListener('error', function() { this.classList.add('loaded'); });
+          }
+        }
+      }
+    })();
+    </script>
+    <script>
+    (function() {
+      var overlay = document.createElement('div');
+      overlay.className = 'img-zoom-overlay';
+      overlay.setAttribute('role', 'dialog');
+      overlay.setAttribute('aria-label', 'Image zoom');
+      var zoomImg = document.createElement('img');
+      zoomImg.setAttribute('decoding', 'async');
+      overlay.appendChild(zoomImg);
+      document.body.appendChild(overlay);
+      function lockScroll() {
+        var scrollbarW = window.innerWidth - document.documentElement.clientWidth;
+        document.body.style.overflow = 'hidden';
+        if (scrollbarW > 0) document.body.style.paddingRight = scrollbarW + 'px';
+      }
+      function unlockScroll() {
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+      }
+      function close() {
+        overlay.classList.remove('active');
+        unlockScroll();
+      }
+      overlay.addEventListener('click', close);
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && overlay.classList.contains('active')) close();
+      });
+      document.querySelectorAll('main img').forEach(function(img) {
+        if (img.closest('a')) return;
+        img.addEventListener('click', function() {
+          zoomImg.src = this.src;
+          zoomImg.alt = this.alt || '';
+          zoomImg.className = this.classList.contains('invert-dark') ? 'invert-dark' : '';
+          overlay.classList.add('active');
+          lockScroll();
+        });
+      });
+    })();
+    </script>
+</body>
+</html>
