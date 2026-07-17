@@ -273,7 +273,10 @@ def build_density(panel, st):
     # a few labelled extreme points (2023 values)
     latest = {p[0]: p for p in panel if p[2] == Y1YEAR}
     marks = {'ISL': (-6, -7, 'end', 'Iceland'), 'QAT': (7, 4, 'start', 'Qatar'),
-             'COD': (8, 4, 'start', 'DR Congo'), 'GUY': (0, 20, 'middle', 'Guyana')}
+             'COD': (8, 4, 'start', 'DR Congo'), 'GUY': (0, 20, 'middle', 'Guyana'),
+             'SLE': (8, -8, 'start', 'Sierra Leone'),
+             'TJK': (8, 4, 'start', 'Tajikistan'), 'NOR': (0, -9, 'middle', 'Norway'),
+             'BTN': (0, -12, 'middle', 'Bhutan')}
     for iso, (dxp, dyp, anch, name) in marks.items():
         if iso not in latest:
             continue
@@ -282,6 +285,13 @@ def build_density(panel, st):
         cls = 'lbl-guy' if iso == 'GUY' else 'lbl'
         s.append(f'<circle class="pt" cx="{px:.1f}" cy="{py:.1f}" r="3.2"/>')
         s.append(f'<text class="{cls}" x="{px + dxp:.1f}" y="{py + dyp:.1f}" text-anchor="{anch}">{esc(name)}</text>')
+
+    # Equatorial Guinea pinned to its 2011 outlier year (discussed in the text)
+    gnq = {(p[0], p[2]): p for p in panel}.get(('GNQ', 2011))
+    if gnq is not None:
+        px, py = sx(math.log10(gnq[3])), sy(math.log10(gnq[4]))
+        s.append(f'<circle class="pt" cx="{px:.1f}" cy="{py:.1f}" r="3.2"/>')
+        s.append(f'<text class="lbl" x="{px - 8:.1f}" y="{py + 4:.1f}" text-anchor="end">Equatorial Guinea (2011)</text>')
 
     # frame + axis titles
     s.append(f'<rect class="frame" x="{PX0}" y="{PY0}" width="{PX1 - PX0}" height="{PY1 - PY0}"/>')
@@ -378,6 +388,11 @@ PAGE = '''<!DOCTYPE html>
 {density}
 <figcaption>Empirical joint density of all {n:,} country-years, {y0}&ndash;{y1}, on log&ndash;log axes. Cell shade is the (log-scaled) count. Burgundy: the OLS line above. Green dashed: the 5th-percentile lower envelope&mdash;the &ldquo;wall.&rdquo; The red box marks GDP $\\ge$ \\${thr30}k and $E < $ {thr2}&nbsp;kWh, which holds <strong>0 of {hi_n}</strong> qualifying country-years.</figcaption>
 </figure>
+</section>
+
+<section>
+<h2>The Equatorial Guinea excursion</h2>
+<p>The most conspicuous label is not a data glitch. In 2011 Equatorial Guinea reported GDP per capita of about \\$17,200 against just 242&nbsp;kWh of electricity&mdash;roughly <strong>19&times; below</strong> the fitted line ($\\approx 1.3$ dex, far outside the $\\hat\\sigma = {sigma:.2f}$ scatter). The cause is an oil enclave: from the mid-1990s a sliver of a population&mdash;under a million people&mdash;sat atop large offshore hydrocarbon rents, and such rents inflate <em>measured</em> output without building a grid, being capital-intensive, externally operated, and largely captured rather than spent at home. The point then returned to the diagonal from both directions at once. Electricity rose as the 120&nbsp;MW Djibloho hydroelectric dam came online in October 2012, lifting national capacity from roughly 50 to 385&nbsp;MW<label for="sn-eg" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-eg" class="margin-toggle"><span class="sidenote">Chinese-financed and inaugurated in 2012; per-capita consumption more than tripled within a few years.</span> and per-capita use climbed past 770&nbsp;kWh; simultaneously $G$ more than halved, to about \\$6,800, as hydrocarbon production peaked around 2011&ndash;12 and fell steadily thereafter. Both moves shrink the residual&mdash;by 2023 it is about 2.5&times;, inside the ordinary cloud. Equatorial Guinea was a transient rent spike sitting over undeveloped infrastructure, not a standing counterexample: raise the electricity floor or let the rent recede, and it rejoins the band.</p>
 </section>
 
 <section>
