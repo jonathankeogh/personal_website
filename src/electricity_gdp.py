@@ -26,6 +26,7 @@ from collections import defaultdict
 from pathlib import Path
 
 Y0YEAR, Y1YEAR = 2000, 2023
+PUB_DATE = "17 July 2026"
 
 REPO = Path(__file__).resolve().parents[1]
 RAW = REPO / "data"
@@ -46,6 +47,20 @@ AGG = {"AFE", "AFW", "ARB", "CEB", "CSS", "EAP", "EAR", "EAS", "ECA", "ECS",
 
 def esc(s):
     return html.escape(str(s))
+
+
+def compact_years(years):
+    """[2001,2002,2003,2005] -> '2001-2003, 2005'"""
+    ys = sorted(years)
+    runs, start, prev = [], ys[0], ys[0]
+    for y in ys[1:]:
+        if y == prev + 1:
+            prev = y
+            continue
+        runs.append((start, prev))
+        start = prev = y
+    runs.append((start, prev))
+    return ", ".join(f"{a}-{b}" if a != b else f"{a}" for a, b in runs)
 
 
 # --------------------------------------------------------------- data & stats
@@ -174,12 +189,14 @@ def build_density(panel, st):
     def sy(le):   # le = log10(elec)
         return PY1 - (le - YMIN) / (YMAX - YMIN) * (PY1 - PY0)
 
-    # 2-D histogram
+    # 2-D histogram (track members per bin for hover tooltips)
     grid = defaultdict(int)
+    members = defaultdict(list)
     for i in range(len(X)):
         ix = min(NX - 1, int((X[i] - XMIN) / dx))
         iy = min(NY - 1, int((Y[i] - YMIN) / dy))
         grid[(ix, iy)] += 1
+        members[(ix, iy)].append((panel[i][1], panel[i][2]))  # (country, year)
     cmax = max(grid.values())
 
     def color(c):
@@ -212,7 +229,13 @@ def build_density(panel, st):
         y = sy(YMIN + (iy + 1) * dy)
         w = sx(XMIN + (ix + 1) * dx) - x
         h = sy(YMIN + iy * dy) - y
-        s.append(f'<rect class="cell" x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}" fill="{color(c)}"/>')
+        bycountry = defaultdict(list)
+        for cn, yr in members[(ix, iy)]:
+            bycountry[cn].append(yr)
+        tip = "\n".join(f"{cn}: {compact_years(yrs)}"
+                        for cn, yrs in sorted(bycountry.items()))
+        s.append(f'<rect class="cell" x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" '
+                 f'height="{h:.1f}" fill="{color(c)}" data-tip="{esc(tip)}"/>')
 
     # gridlines + ticks
     for g, lab in [(1000, '$1k'), (10000, '$10k'), (100000, '$100k')]:
@@ -274,8 +297,8 @@ def build_density(panel, st):
         s.append(f'<rect x="{lx}" y="{ly_top + (len(RAMP) - 1 - k) * seg:.1f}" width="{lw}" height="{seg:.1f}" fill="{col}"/>')
     s.append(f'<text class="leg" x="{lx + lw + 5}" y="{ly_top + 4}">{cmax}</text>')
     s.append(f'<text class="leg" x="{lx + lw + 5}" y="{ly_top + lh:.1f}">1</text>')
-    s.append(f'<text class="leg" x="{lx + lw / 2:.0f}" y="{ly_top - 12}" text-anchor="middle">country-</text>')
-    s.append(f'<text class="leg" x="{lx + lw / 2:.0f}" y="{ly_top - 12}" text-anchor="middle" dy="1.1em">years/cell</text>')
+    s.append(f'<text class="leg" x="{lx + lw / 2:.0f}" y="{ly_top - 22}" text-anchor="middle">country-</text>')
+    s.append(f'<text class="leg" x="{lx + lw / 2:.0f}" y="{ly_top - 22}" text-anchor="middle" dy="1.1em">years/cell</text>')
     s.append('</svg>')
     return '\n'.join(s)
 
@@ -334,7 +357,7 @@ PAGE = '''<!DOCTYPE html>
                     <h1>There does not exist a high-GDP, low-electricity country</h1>
                     <p><span class="newthought">Jonathan Keogh</span></p>
                     <div class="article-meta">
-                        <p><span class="newthought">Filed under &ldquo;<a href="projects.html" rel="tag">Projects</a>&rdquo;</span></p>
+                        <p><span class="newthought">Filed under &ldquo;<a href="writing.html" rel="tag">Blog</a>&rdquo; &middot; {y1_month}</span></p>
                     </div>
                 </header>
 <section>
@@ -394,9 +417,71 @@ PAGE = '''<!DOCTYPE html>
         <footer>
 <p class="de-emphasize copyright">&copy;2026 Jonathan Keogh. All rights reserved.</p>        </footer>
     </main>
+{tooltip_js}
 </body>
 </html>
 '''
+
+
+TIP_JS = r'''<script>
+(function () {
+  var svg = document.querySelector('svg.scatter');
+  if (!svg) return;
+  var tip = document.createElement('div');
+  tip.className = 'cell-tip';
+  tip.setAttribute('role', 'tooltip');
+  document.body.appendChild(tip);
+  var current = null;
+
+  function render(text) {
+    tip.textContent = '';
+    text.split('\n').forEach(function (line) {
+      var row = document.createElement('div');
+      row.className = 'ct-row';
+      var i = line.indexOf(': ');
+      if (i < 0) {
+        row.textContent = line;
+      } else {
+        var c = document.createElement('span');
+        c.className = 'ct-country';
+        c.textContent = line.slice(0, i);
+        row.appendChild(c);
+        row.appendChild(document.createTextNode(' ' + line.slice(i + 2)));
+      }
+      tip.appendChild(row);
+    });
+  }
+
+  function place(e) {
+    var pad = 16;
+    var w = tip.offsetWidth, h = tip.offsetHeight;
+    var x = e.clientX + pad, y = e.clientY + pad;
+    if (x + w > window.innerWidth - 8) x = e.clientX - w - pad;
+    if (y + h > window.innerHeight - 8) y = e.clientY - h - pad;
+    if (x < 8) x = 8;
+    if (y < 8) y = 8;
+    tip.style.left = x + 'px';
+    tip.style.top = y + 'px';
+  }
+
+  svg.addEventListener('mousemove', function (e) {
+    var cell = e.target.closest('.cell');
+    var data = cell && cell.getAttribute('data-tip');
+    if (data) {
+      if (cell !== current) { render(data); current = cell; }
+      tip.classList.add('is-on');
+      place(e);
+    } else {
+      tip.classList.remove('is-on');
+      current = null;
+    }
+  });
+  svg.addEventListener('mouseleave', function () {
+    tip.classList.remove('is-on');
+    current = null;
+  });
+})();
+</script>'''
 
 
 def main():
@@ -417,8 +502,9 @@ def main():
         sigma=st["sigma"], sigfac=10 ** st["sigma"],
         rb=st["rb"], rw=st["rw"], bw=st["bw"], ncountries=st["ncountries"],
         hi_n=st["hi_n"], hi_min_e=hm[4], hi_min_name=esc(hm[1]), hi_min_year=hm[2],
-        thr30=30, thr2=2000,
+        thr30=30, thr2=2000, y1_month=PUB_DATE,
         density=build_density(panel, st), floor=floor_rows(panel),
+        tooltip_js=TIP_JS,
     )
     OUT_HTML.write_text(page)
     print(f"wrote {OUT_HTML.relative_to(REPO)} ({len(page):,} bytes)")
