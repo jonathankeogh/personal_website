@@ -44,13 +44,12 @@
                     </div>
                 </header>
 <section>
-<p>Take every country that reports both figures, once per year from 1980 to 2023: a panel of <strong>8,090 country-year observations</strong> of real GDP per capita $G$&mdash;constant 2015 US\$, so nothing here is an inflation artefact&mdash;and primary energy use per capita $E$. Primary energy means <em>all</em> of it: the fuel behind the electricity, the diesel in the trucks, the gas under the steel mills&mdash;not just the fifth or so that arrives as electricity.</p>
-<p>The claim in the title is deliberately narrow, and the narrowness is the point. It is not the familiar assertion that growth <em>cannot</em> be separated from energy&mdash;a claim about the future, which data cannot settle. It is a claim about the record: in the joint distribution of income and energy, the corner marked <em>high income, low energy</em> is empty. Forty-four years, roughly two hundred countries, and no economy has yet been rich while consuming little energy. A trend can bend; a slope can be argued with. An empty region either has points in it or it does not. This one does not.</p>
+<p>Take every country that reports both figures, once per year from 1980 to 2023: a panel of <strong>8,090 economy-year observations</strong> of real GDP per capita against primary energy consumption per capita. Primary means all energy use: electricity, transportation, industrial production, everything. This is not the claim that growth cannot be separated from energy. It is a narrow empirical claim, in the joint distribution of income and energy, the corner marked high gdp, low energy, is empty. Over five decades and two hundred countries, no economy has yet been rich while consuming little energy. In the light of geopolitical events such as the Ukraine & Iran wars, and forward looking events such as the AI revolution, this should perturb any politician of a country, such as the United Kingdom, which has allowed its energy costs to skyrocket. Too often the recent spike in energy costs across Western economies is framed as a “Cost of Living Crisis”: this enormously underestimates the importance of the issue.</p>
 </section>
 
 <section>
-<h2>The empty corner</h2>
-<p>Both variables span three to four orders of magnitude, so the natural picture is log&ndash;log. Bin the entire panel and shade each cell by how many country-years land in it. The mass collapses onto a tight diagonal band&mdash;the correlation of $\log E$ with $\log G$ is 0.90, and a typical country sits within a factor of about two of the central line. But the band is not the argument. The corners are.</p>
+<h2>Fitting the data</h2>
+<p>Both variables span three to four orders of magnitude, so should use log&ndash;log scaling. Running standard OLS the mass collapses onto a tight diagonal band. The correlation of $\log E$ with $\log G$ is 0.90, and a typical country sits within a factor of about two of the central line.</p>
 <figure class="fullwidth">
 <svg viewBox="0 0 760 560" role="img" aria-label="Density of 8090 country-year observations in the log GDP per capita by log energy use per capita plane, 1980-2023" xmlns="http://www.w3.org/2000/svg" class="scatter tex2jax_ignore">
 <style>.scatter text{font-family:et-bembo,Palatino,Georgia,serif;fill:#111}.ax{font-size:15px;fill:rgba(17,17,17,.55)}.axtitle{font-size:16px;font-style:italic;fill:rgba(17,17,17,.75)}.cell{stroke:#fffdf6;stroke-width:.5}.pt{fill:#1d2b3a;fill-opacity:.9}.lbl{font-size:12.5px;fill:#2d2d2d}.lbl-guy{font-size:12.5px;fill:#a63d40;font-style:italic}.grid{stroke:rgba(17,17,17,.10);stroke-width:1}.ols{stroke:#8b2252;stroke-width:2;fill:none}.wall{stroke:#445c3c;stroke-width:2;fill:none;stroke-dasharray:6 3}.frame{stroke:rgba(17,17,17,.30);stroke-width:1;fill:none}.empty{fill:none;stroke:#a63d40;stroke-width:1.3;stroke-dasharray:5 4}.empty-lbl{font-size:13px;fill:#a63d40;font-style:italic}.leg{font-size:12px;fill:rgba(17,17,17,.6)}</style>
@@ -1858,8 +1857,8 @@ United Arab Emirates: 1980-1982"/>
 <polyline class="wall" points="122.4,413.6 142.7,448.8 162.9,455.3 183.2,428.6 203.5,423.4 223.7,423.8 244.0,404.1 264.3,379.5 284.5,376.7 304.8,346.0 325.1,339.2 345.3,323.3 365.6,319.7 385.9,292.4 406.1,281.9 426.4,264.5 446.7,256.7 466.9,249.1 487.2,237.3 507.5,218.9 527.7,221.0 548.0,206.7 568.3,198.3 588.5,182.4 608.8,184.7 629.1,184.7 649.3,185.4 669.6,182.3"/>
 <line class="ols" x1="92.0" y1="422.9" x2="700.0" y2="79.0"/>
 <rect class="empty" x="558.3" y="241.6" width="141.7" height="254.4"/>
-<text class="empty-lbl" x="629.1" y="363.8" text-anchor="middle">no mass:</text>
-<text class="empty-lbl" x="629.1" y="380.8" text-anchor="middle">0 of 1172 country-years</text>
+<text class="empty-lbl" x="629.1" y="363.8" text-anchor="middle">there are no rich,</text>
+<text class="empty-lbl" x="629.1" y="380.8" text-anchor="middle">low-energy countries</text>
 <circle class="pt" cx="625.9" cy="95.9" r="3.2"/>
 <text class="lbl" x="619.9" y="88.9" text-anchor="end">Qatar</text>
 <circle class="pt" cx="647.2" cy="131.1" r="3.2"/>
@@ -1888,50 +1887,32 @@ United Arab Emirates: 1980-1982"/>
 <text class="leg" x="723" y="98" text-anchor="middle">country-</text>
 <text class="leg" x="723" y="98" text-anchor="middle" dy="1.1em">years/cell</text>
 </svg>
-<figcaption>Empirical joint density of all 8,090 country-years, 1980&ndash;2023, on log&ndash;log axes; cell shade is the (log-scaled) count. Burgundy: the pooled OLS line. Green dashed: the 5th-percentile lower envelope&mdash;the &ldquo;wall.&rdquo; The red box marks real GDP $\ge$ \$30k and $E < $ 10,000&nbsp;kWh, which holds <strong>0 of 1,172</strong> qualifying country-years.</figcaption>
+<figcaption>Empirical joint density of all 8,090 economy-years, 1980&ndash;2023, on log&ndash;log axes; cell shade is the (log-scaled) count. Burgundy: the pooled OLS line. Green dashed: the 5th-percentile lower envelope. The red box marks real GDP $\ge$ \$30k and $E < $ 10,000&nbsp;kWh, which holds <strong>0 of 1,172</strong> qualifying economy-years.</figcaption>
 </figure>
-<p>The lower-right corner&mdash;rich but frugal&mdash;is blank. To make that precise, take at each income level the 5th percentile of energy use: the least energy that any country of that wealth has ever run on. This lower envelope is a <em>wall</em>, and it climbs monotonically: raise the income floor and the energy floor rises with it, with no exceptions across the entire range.</p>
-<div id="table-container">
-<table>
-<thead><tr><th>Real GDP/capita $\ge$</th><th style="text-align:right"># countries</th><th style="text-align:right">min $E$ ever recorded</th><th>attained by</th></tr></thead>
-<tbody>
-<tr><td class="value">\$1,000</td><td class="value">184</td><td class="value">258&nbsp;kWh</td><td>Comoros (1986)</td></tr>
-<tr><td class="value">\$5,000</td><td class="value">115</td><td class="value">2,432&nbsp;kWh</td><td>Equatorial Guinea (2001)</td></tr>
-<tr><td class="value">\$10,000</td><td class="value">83</td><td class="value">5,422&nbsp;kWh</td><td>St. Kitts and Nevis (1990)</td></tr>
-<tr><td class="value">\$20,000</td><td class="value">58</td><td class="value">5,808&nbsp;kWh</td><td>French Polynesia (1980)</td></tr>
-<tr><td class="value">\$30,000</td><td class="value">44</td><td class="value">12,160&nbsp;kWh</td><td>Macao SAR, China (1991)</td></tr>
-<tr><td class="value">\$50,000</td><td class="value">21</td><td class="value">18,332&nbsp;kWh</td><td>Macao SAR, China (2008)</td></tr>
-</tbody>
-</table>
-</div>
-<p>Sharpen to the corner itself. Among the <strong>1,172 country-years</strong> with income at or above \$30{,}000&mdash;roughly the level of Spain&mdash;not one runs on less than 10,000&nbsp;kWh of primary energy per person per year:</p>
-<div class="math">$$\widehat{\Pr}\!\left(E < 10{,}000\ \text{kWh} \;\middle|\; G \ge \$30\text{k}\right) \;=\; \frac{0}{1172} \;=\; 0.$$</div>
-<p>Ten thousand kilowatt-hours a year is a continuous draw of about 1.1&nbsp;kW&mdash;eleven old incandescent bulbs burning around the clock, for every man, woman, and child, before anyone switches anything on. That is not the average for a rich country; it is the <em>floor</em>. No rich society, anywhere, in four and a half decades, has run on less.</p>
-<p>And the nearest miss tells you the floor is load-bearing. The most energy-frugal rich economy on record is <strong>Macao</strong>&mdash;a casino-and-services city-state with essentially no industry, no agriculture, and no hinterland, which imports every joule-intensive thing it touches. The places that press hardest against the wall are exactly the ones theory predicts: financial and tourist enclaves that have outsourced their steel, cement, and freight to someone else&rsquo;s territory. Even they only <em>lean</em> on the floor. None has gone through it. And a planet cannot become Macao, because somewhere, someone still has to pour the concrete.</p>
+<p>The lower-right corner is empty. To make that precise, take at each income level the 5th percentile of energy use: the least energy that any country of that wealth has ever run on. This lower envelope is a essentially a lower bound on requisite energy consumption for your GDP, and it climbs strictly monotonically: raise the income floor and the energy floor rises with it, with no exceptions across the entire range.</p>
+
+<p>The most energy-frugal rich economy in the data is Macao—a casino-and-services city-state with essentially no industry, no agriculture, and no hinterland, which imports every joule-intensive thing it touches. The places that press hardest against the wall are exactly the ones typical economic theory predicts: financial and tourist enclaves that have outsourced their steel, cement, and freight to somewhere else. Even they only touch the floor. None has gone through it.</p>
 </section>
 
 <section>
-<h2>Not just a comparison of countries</h2>
-<p>A pooled correlation mixes two questions, and it is worth separating them, because they have different force. The cross-sectional question&mdash;are richer countries hungrier for energy than poorer ones?&mdash;is the easy one. The temporal question is the one that matters for anyone projecting a country&rsquo;s future: when a single country&rsquo;s own income rises, does its own energy use follow?</p>
+<h2>Change within countries over time</h2>
+<p>The pooled correlation combines two questions. The fact that richer countries hungrier for energy than poorer ones is obvious.The temporal question is the one that matters for anyone projecting a country's future: when a single country's own income rises, does its own energy use follow?</p>
 <p>Split each series into a country&rsquo;s long-run mean and its deviations from that mean, and read the answers off separately:</p>
 <ul>
 <li><strong>Between countries</strong> (long-run means): $r_B = 0.91$. Richer nations use more. No surprise.</li>
 <li><strong>Within a country over time</strong> (deviations from its own mean): $r_W = 0.68$, slope $\beta_W = 0.80$. When a country grows, its energy use grows with it&mdash;sub-proportionally, because efficiency improves and output tilts toward services, but it grows. A 1% rise in real income has historically come with roughly 0.8% more energy.</li>
 </ul>
-<p>Both cuts of the data agree. The empty corner is not an artefact of comparing frozen snapshots of two hundred different societies; it holds along each society&rsquo;s own path through time. Countries have become steadily more efficient&mdash;and every one of them has still climbed the wall rather than tunnelled under it.</p>
+<p>Both axes of the data agree. The empty lower-right corner is not an artefact of comparing frozen snapshots of two hundred different societies; it holds along each society's own path through time, even as countries have become steadily more efficient.</p>
 </section>
 
 <section>
-<h2>The other corner: energy without wealth</h2>
-<p>The lower-right is empty. The upper-left is not, and its population disciplines the causal story. The conspicuous points far above the band are petrostates: Turkmenistan, at roughly \$7,900 per head yet some 59,500&nbsp;kWh of primary energy&mdash;about four times what the fit predicts&mdash;and Trinidad and Tobago in similar territory. Both sit on abundant domestic gas.<label for="sn-oc" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-oc" class="margin-toggle"><span class="sidenote">Their apparent consumption is further swollen by subsidised domestic prices, flaring, and energy-intensive export industry&mdash;LNG, ammonia, petrochemicals.</span> They enjoy exactly what the empty corner says wealth requires&mdash;cheap, secure, plentiful energy&mdash;and they remain middle-income.</p>
-<p>So the implication runs strictly one way. Abundant energy is <em>necessary</em> for prosperity and nowhere near <em>sufficient</em>. Energy that is merely extracted and burned, rather than converted into productive capital and diversified output, buys tonnes of oil-equivalent and not much GDP. Clearing the wall is the entry ticket, not the prize.</p>
+<h2>But does it only go the other way,  and what about through time?</h2>
+<p>The lower-right is empty, the upper-left is not, which means the implication runs strictly one way. Abundant energy is necessary for prosperity and but not sufficient.</p>
+<p>For the time variable, its obvious that economy-years are not independent draws. A single economy contributes up to 44 highly correlated points, so the effective sample is far smaller than 8,090. But the empty region that stays empty through the the fall of the Soviet Union, the rise of China, the internet explosion, and many wars, strongly suggests this is structural.</p>
 </section>
 
 <section>
-<h2>Two caveats, neither fatal</h2>
-<p><strong>Country-years are not independent draws.</strong> A single country contributes up to 44 highly correlated points, so the effective sample is far smaller than 8,090. The honest reading is <em>persistence across 44 consecutive annual cross-sections</em>&mdash;which, for a claim about where points have never appeared, is precisely the property you want. An empty region that stays empty through the oil glut, the fall of the Soviet Union, the rise of China, the shale revolution, and the renewables build-out is empty for structural reasons, not sampling luck.</p>
-<p><strong>The accounting is territorial, and correlation fixes no direction.</strong> Causality here runs both ways&mdash;cheap energy enables output, output funds energy, and common drivers like industrialisation and institutions push both; the literature has argued about this &ldquo;energy&ndash;growth nexus&rdquo; for decades.<label for="sn-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-1" class="margin-toggle"><span class="sidenote">The debate runs from Kraft &amp; Kraft (1978) to the survey by Ozturk (2010); the direction of causation genuinely varies by country.</span> Separately, territorial energy accounts flatter rich importers: part of their apparent thrift is embodied energy shipped in from trading partners. Note which way that cuts. Consumption-based accounting would move the frugal enclaves <em>up</em>, back toward the wall&mdash;not through it. The floor in this data is, if anything, an underestimate.</p>
-<p>Neither caveat touches the support statement, which is all the title asserts: no country has yet been rich without commanding a great deal of energy. Anyone who claims the future will be different is entitled to the claim&mdash;but they are claiming something with zero precedent in the modern record, and the burden of naming the mechanism is theirs. Until then, the conclusion the data will bear is this: cheap, secure, abundant energy is not a luxury that prosperity affords. It is a precondition for it.</p>
+<p>Causality can runs both ways, but it doesnt matter for the statement which is all the title asserts: no country has yet been rich without commanding a great deal of energy. Anyone who claims the future will be different is entitled to their claim, but they are claiming something with zero precedent in the modern record, and the burden of naming the mechanism is on them. Until then, the conclusion the data will bear is this: cheap, secure, abundant energy is not a luxury that prosperity affords. It is a precondition for it.</p>
 </section>
 
                 <footer class="de-emphasize">
