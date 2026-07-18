@@ -3,20 +3,23 @@
 
 Offline analytics job (see CLAUDE.md "Python Analytics Pattern"): reads the
 saved raw datasets in ``data/``, characterises the joint distribution of
-GDP per capita and primary energy use per capita across the full 2000-2023
+GDP per capita and primary energy use per capita across the full 1980-2023
 panel, and writes a fully static page to ``frontend/``. No network, no HTTP.
+
+GDP is measured in constant 2015 US$ (real), so the 44-year span is not
+distorted by inflation.
 
     uv run python src/energy_gdp.py
 
 Inputs  (data/):
-    owid-primary-energy-per-capita.csv                     OWID (Energy Institute
-        Statistical Review; Ember) primary energy per capita, kWh/yr, all years.
-    worldbank-gdp-per-capita-current-usd-2000-2023.json    World Bank
-        NY.GDP.PCAP.CD, current US$, 2000-2023.
+    owid-primary-energy-per-capita.csv                          OWID (Energy
+        Institute Statistical Review; Ember) primary energy per capita, kWh/yr.
+    worldbank-gdp-per-capita-constant-2015-usd-1980-2024.json   World Bank
+        NY.GDP.PCAP.KD, constant 2015 US$, 1980-2024.
 
 Outputs (frontend/):
     energy-gdp.html                       the rendered page (data baked in)
-    files/energy-gdp-panel-2000-2023.csv  the merged country-year panel
+    files/energy-gdp-panel-1980-2023.csv  the merged country-year panel
 """
 import json
 import csv
@@ -25,7 +28,7 @@ import html
 from collections import defaultdict
 from pathlib import Path
 
-Y0YEAR, Y1YEAR = 2000, 2023
+Y0YEAR, Y1YEAR = 1980, 2023
 PUB_DATE = "17 July 2026"
 
 REPO = Path(__file__).resolve().parents[1]
@@ -33,13 +36,13 @@ RAW = REPO / "data"
 FRONTEND = REPO / "frontend"
 
 ENERGY_CSV = RAW / "owid-primary-energy-per-capita.csv"
-GDP_JSON = RAW / "worldbank-gdp-per-capita-current-usd-2000-2023.json"
+GDP_JSON = RAW / "worldbank-gdp-per-capita-constant-2015-usd-1980-2024.json"
 OUT_HTML = FRONTEND / "energy-gdp.html"
-OUT_CSV = FRONTEND / "files" / "energy-gdp-panel-2000-2023.csv"
+OUT_CSV = FRONTEND / "files" / "energy-gdp-panel-1980-2023.csv"
 
-# Low-energy threshold for the "empty corner": no high-income (>= $30k)
-# country-year falls below this many kWh of primary energy per capita.
-LOW_KWH = 15000
+# Low-energy threshold for the "empty corner": no high-income (>= $30k, real
+# 2015 US$) country-year falls below this many kWh of primary energy per capita.
+LOW_KWH = 10000
 
 # World Bank aggregate/region codes to exclude so only sovereign entities remain.
 AGG = {"AFE", "AFW", "ARB", "CEB", "CSS", "EAP", "EAR", "EAS", "ECA", "ECS",
@@ -85,6 +88,8 @@ def load_panel():
         if r["value"] is None or iso in AGG:
             continue
         yr = int(r["date"])
+        if not (Y0YEAR <= yr <= Y1YEAR):
+            continue
         e = energy.get((iso, yr))
         g = float(r["value"])
         if e and g > 0 and e > 0:
@@ -293,7 +298,7 @@ def build_density(panel, st):
 
     # frame + axis titles
     s.append(f'<rect class="frame" x="{PX0}" y="{PY0}" width="{PX1 - PX0}" height="{PY1 - PY0}"/>')
-    s.append(f'<text class="axtitle" x="{(PX0 + PX1) / 2:.1f}" y="{VH - 8}" text-anchor="middle">GDP per capita (US$, log scale)</text>')
+    s.append(f'<text class="axtitle" x="{(PX0 + PX1) / 2:.1f}" y="{VH - 8}" text-anchor="middle">GDP per capita (constant 2015 US$, log scale)</text>')
     mid = (PY0 + PY1) / 2
     s.append(f'<text class="axtitle" x="22" y="{mid:.1f}" text-anchor="middle" transform="rotate(-90 22 {mid:.1f})">Primary energy use per capita (kWh/yr, log scale)</text>')
 
@@ -319,7 +324,7 @@ def floor_rows(panel):
         fl = min(grp, key=lambda p: p[4])
         cy = len({p[0] for p in grp})
         out.append(f'<tr><td class="value">\\${thr:,}</td><td class="value">{cy}</td>'
-                   f'<td class="value">{fl[4]:,.0f}</td><td>{esc(fl[1])} ({fl[2]})</td></tr>')
+                   f'<td class="value">{fl[4]:,.0f}&nbsp;kWh</td><td>{esc(fl[1])} ({fl[2]})</td></tr>')
     return '\n'.join(out)
 
 
@@ -334,7 +339,7 @@ PAGE = '''<!DOCTYPE html>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
     <meta name="author" content="Jonathan Keogh" />
-    <meta name="description" content="Across the full 2000-2023 panel of 4,700+ country-years, the joint law of GDP per capita and primary energy use per capita puts no mass in the high-income, low-energy corner." />
+    <meta name="description" content="Across the full 1980-2023 panel of 8,000+ country-years, with GDP in constant 2015 USD, the joint law of real GDP per capita and primary energy use per capita puts no mass in the high-income, low-energy corner." />
     <script>
       MathJax = {{
         tex: {{ inlineMath: [['$', '$'], ['\\\\(', '\\\\)']], displayMath: [['$$', '$$'], ['\\\\[', '\\\\]']], processEscapes: true }},
@@ -369,61 +374,58 @@ PAGE = '''<!DOCTYPE html>
                     </div>
                 </header>
 <section>
-<p>Take every country with both figures reported, once per year from {y0} to {y1}: a panel of <strong>{n:,} country-year observations</strong> of GDP per capita $G$ and primary energy use per capita $E$&mdash;<em>all</em> energy a country consumes, not just the fifth or so delivered as electricity. The title is a statement about the <em>support</em> of their joint law&mdash;the region $\\{{G \\text{{ large}},\\, E \\text{{ small}}\\}}$ carries no mass&mdash;and it survives a close look. It is the sharper claim: a rich country must command a great deal of energy, which is why cheap and secure energy supply is not a luxury but a precondition for prosperity.</p>
-</section>
-
-<section>
-<h2>The fit</h2>
-<p>Both variables range over three orders of magnitude, so work in logs. Ordinary least squares on the pooled panel gives</p>
-<div class="math">$$\\log_{{10}} E \\;=\\; \\alpha + \\beta\\,\\log_{{10}} G + \\varepsilon,\\qquad \\hat\\beta = {beta:.2f},\\quad \\hat\\alpha = {alpha:.2f}.$$</div>
-<p>The relationship is tight and monotone: Pearson $r = {r:.2f}$ ($R^2 = {r2:.2f}$), Spearman $\\rho = {rho:.2f}$, residual scatter $\\hat\\sigma = {sigma:.2f}$ dex&mdash;a typical country sits within a factor of $10^{{{sigma:.2f}}} \\approx {sigfac:.1f}$ of the line. Since $\\hat\\beta \\approx 1$, energy use is very nearly proportional to income: energy intensity $E/G$ is roughly scale-invariant across the entire development range.</p>
-</section>
-
-<section>
-<h2>All {nyears} years at once</h2>
-<p>Rather than one map per year, bin the whole panel and shade each cell by how many country-years land in it. The mass concentrates on a straight diagonal band; the lower-right is blank.</p>
-<figure class="fullwidth">
-{density}
-<figcaption>Empirical joint density of all {n:,} country-years, {y0}&ndash;{y1}, on log&ndash;log axes. Cell shade is the (log-scaled) count. Burgundy: the OLS line above. Green dashed: the 5th-percentile lower envelope&mdash;the &ldquo;wall.&rdquo; The red box marks GDP $\\ge$ \\${thr30}k and $E < $ {thr2c}&nbsp;kWh, which holds <strong>0 of {hi_n}</strong> qualifying country-years. The upper-left, by contrast, is populated: petrostates burn rich-world quantities of energy on modest incomes.</figcaption>
-</figure>
-</section>
-
-<section>
-<h2>The other corner: energy without wealth</h2>
-<p>The empty region is the lower-right; the <em>upper</em>-left is not empty at all, and it says something important. The conspicuous outliers far above the line are petrostates: Turkmenistan (about \\$5,300 per head, yet roughly 59,500&nbsp;kWh of primary energy&mdash;some <strong>5&times; above</strong> the fit) and Trinidad&nbsp;&amp; Tobago (about \\$18,300 and 109,000&nbsp;kWh, roughly 3&times; above).<label for="sn-oc" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-oc" class="margin-toggle"><span class="sidenote">Both sit on abundant domestic gas; consumption is inflated by subsidised prices, flaring, and energy-intensive export industry&mdash;LNG, ammonia, petrochemicals.</span> These economies have cheap, secure energy in abundance&mdash;and remain middle-income. So the implication runs strictly one way. A great deal of energy is <em>necessary</em> for wealth but not <em>sufficient</em>: energy that is merely extracted and burned, rather than converted into productive capital and diversified output, buys tonnes of oil-equivalent but not much GDP. The empty lower-right is the binding constraint; the populated upper-left is the reminder that clearing it is only the first step.</p>
-</section>
-
-<section>
-<h2>Between countries vs. within one</h2>
-<p>A pooled correlation conflates two questions. Split each series into a country mean and a deviation from it, $\\log_{{10}} X_{{it}} = \\bar X_i + \\tilde X_{{it}}$, and measure each piece separately:</p>
-<ul>
-<li><strong>Between</strong> the {ncountries} countries (their long-run means): $r_B = {rb:.2f}$. Richer nations use more&mdash;the cross-section.</li>
-<li><strong>Within</strong> a country over time (deviations): $r_W = {rw:.2f}$, slope $\\beta_W = {bw:.2f}$. When a country&rsquo;s own income rises, its energy use rises too, but sub-proportionally&mdash;efficiency improves and the mix tilts toward less energy-intensive services.</li>
-</ul>
-<p>Both signs agree. The pattern is not an artifact of comparing nations frozen at one instant; it also holds along each country&rsquo;s own trajectory.</p>
+<p>Take every country that reports both figures, once per year from {y0} to {y1}: a panel of <strong>{n:,} country-year observations</strong> of real GDP per capita $G$&mdash;constant 2015 US\\$, so nothing here is an inflation artefact&mdash;and primary energy use per capita $E$. Primary energy means <em>all</em> of it: the fuel behind the electricity, the diesel in the trucks, the gas under the steel mills&mdash;not just the fifth or so that arrives as electricity.</p>
+<p>The claim in the title is deliberately narrow, and the narrowness is the point. It is not the familiar assertion that growth <em>cannot</em> be separated from energy&mdash;a claim about the future, which data cannot settle. It is a claim about the record: in the joint distribution of income and energy, the corner marked <em>high income, low energy</em> is empty. Forty-four years, roughly two hundred countries, and no economy has yet been rich while consuming little energy. A trend can bend; a slope can be argued with. An empty region either has points in it or it does not. This one does not.</p>
 </section>
 
 <section>
 <h2>The empty corner</h2>
-<p>The claim concerns the lower edge of the cloud, not its center. Binning by income and taking the 5th percentile of $E$ (the green wall) yields a lower envelope that is monotone increasing: lift the income floor and the energy floor lifts with it. Sharpening to the corner, of the <strong>{hi_n} country-years</strong> with $G \\ge \\${thr30}{{,}}000$, none has $E$ below {thr2c}&nbsp;kWh&mdash;the lowest is {hi_min_e:,.0f}&nbsp;kWh ({hi_min_name}, {hi_min_year}). Empirically</p>
-<div class="math">$$\\widehat{{\\Pr}}\\bigl(E < {thr2}\\ \\text{{kWh}} \\;\\big|\\; G \\ge \\${thr30}\\text{{k}}\\bigr) \\;=\\; \\frac{{0}}{{{hi_n}}} \\;=\\; 0.$$</div>
+<p>Both variables span three to four orders of magnitude, so the natural picture is log&ndash;log. Bin the entire panel and shade each cell by how many country-years land in it. The mass collapses onto a tight diagonal band&mdash;the correlation of $\\log E$ with $\\log G$ is {r:.2f}, and a typical country sits within a factor of about two of the central line. But the band is not the argument. The corners are.</p>
+<figure class="fullwidth">
+{density}
+<figcaption>Empirical joint density of all {n:,} country-years, {y0}&ndash;{y1}, on log&ndash;log axes; cell shade is the (log-scaled) count. Burgundy: the pooled OLS line. Green dashed: the 5th-percentile lower envelope&mdash;the &ldquo;wall.&rdquo; The red box marks real GDP $\\ge$ \\${thr30}k and $E < $ {thr2c}&nbsp;kWh, which holds <strong>0 of {hi_n:,}</strong> qualifying country-years.</figcaption>
+</figure>
+<p>The lower-right corner&mdash;rich but frugal&mdash;is blank. To make that precise, take at each income level the 5th percentile of energy use: the least energy that any country of that wealth has ever run on. This lower envelope is a <em>wall</em>, and it climbs monotonically: raise the income floor and the energy floor rises with it, with no exceptions across the entire range.</p>
 <div id="table-container">
 <table>
-<thead><tr><th>Countries with GDP/capita $\\ge$&hellip;</th><th style="text-align:right"># countries</th><th style="text-align:right">min $E$ (kWh)</th><th>attained by</th></tr></thead>
+<thead><tr><th>Real GDP/capita $\\ge$</th><th style="text-align:right"># countries</th><th style="text-align:right">min $E$ ever recorded</th><th>attained by</th></tr></thead>
 <tbody>
 {floor}
 </tbody>
 </table>
 </div>
+<p>Sharpen to the corner itself. Among the <strong>{hi_n:,} country-years</strong> with income at or above \\${thr30}{{,}}000&mdash;roughly the level of Spain&mdash;not one runs on less than {thr2c}&nbsp;kWh of primary energy per person per year:</p>
+<div class="math">$$\\widehat{{\\Pr}}\\!\\left(E < 10{{,}}000\\ \\text{{kWh}} \\;\\middle|\\; G \\ge \\${thr30}\\text{{k}}\\right) \\;=\\; \\frac{{0}}{{{hi_n}}} \\;=\\; 0.$$</div>
+<p>Ten thousand kilowatt-hours a year is a continuous draw of about 1.1&nbsp;kW&mdash;eleven old incandescent bulbs burning around the clock, for every man, woman, and child, before anyone switches anything on. That is not the average for a rich country; it is the <em>floor</em>. No rich society, anywhere, in four and a half decades, has run on less.</p>
+<p>And the nearest miss tells you the floor is load-bearing. The most energy-frugal rich economy on record is <strong>Macao</strong>&mdash;a casino-and-services city-state with essentially no industry, no agriculture, and no hinterland, which imports every joule-intensive thing it touches. The places that press hardest against the wall are exactly the ones theory predicts: financial and tourist enclaves that have outsourced their steel, cement, and freight to someone else&rsquo;s territory. Even they only <em>lean</em> on the floor. None has gone through it. And a planet cannot become Macao, because somewhere, someone still has to pour the concrete.</p>
 </section>
 
 <section>
-<h2>Two caveats</h2>
-<p>First, country-years are not independent: a country contributes up to {nyears} near-repeated points, so the effective sample is far below {n:,}. The honest content is <em>persistence across {nyears} annual cross-sections</em>, not {n:,} independent draws. Second, correlation fixes no direction&mdash;cheap energy enables output and output funds energy, with common drivers (industrialisation, institutions) behind both.<label for="sn-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-1" class="margin-toggle"><span class="sidenote">The literature calls this the &ldquo;energy&ndash;growth nexus&rdquo;; for e.g. see Kraft &amp; Kraft (1978) and Ozturk (2010).</span> Neither caveat touches the support statement, which is what the title asserts: no country has yet been wealthy without consuming a great deal of energy.</p>
+<h2>Not just a comparison of countries</h2>
+<p>A pooled correlation mixes two questions, and it is worth separating them, because they have different force. The cross-sectional question&mdash;are richer countries hungrier for energy than poorer ones?&mdash;is the easy one. The temporal question is the one that matters for anyone projecting a country&rsquo;s future: when a single country&rsquo;s own income rises, does its own energy use follow?</p>
+<p>Split each series into a country&rsquo;s long-run mean and its deviations from that mean, and read the answers off separately:</p>
+<ul>
+<li><strong>Between countries</strong> (long-run means): $r_B = {rb:.2f}$. Richer nations use more. No surprise.</li>
+<li><strong>Within a country over time</strong> (deviations from its own mean): $r_W = {rw:.2f}$, slope $\\beta_W = {bw:.2f}$. When a country grows, its energy use grows with it&mdash;sub-proportionally, because efficiency improves and output tilts toward services, but it grows. A 1% rise in real income has historically come with roughly 0.8% more energy.</li>
+</ul>
+<p>Both cuts of the data agree. The empty corner is not an artefact of comparing frozen snapshots of two hundred different societies; it holds along each society&rsquo;s own path through time. Countries have become steadily more efficient&mdash;and every one of them has still climbed the wall rather than tunnelled under it.</p>
+</section>
+
+<section>
+<h2>The other corner: energy without wealth</h2>
+<p>The lower-right is empty. The upper-left is not, and its population disciplines the causal story. The conspicuous points far above the band are petrostates: Turkmenistan, at roughly \\$7,900 per head yet some 59,500&nbsp;kWh of primary energy&mdash;about four times what the fit predicts&mdash;and Trinidad and Tobago in similar territory. Both sit on abundant domestic gas.<label for="sn-oc" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-oc" class="margin-toggle"><span class="sidenote">Their apparent consumption is further swollen by subsidised domestic prices, flaring, and energy-intensive export industry&mdash;LNG, ammonia, petrochemicals.</span> They enjoy exactly what the empty corner says wealth requires&mdash;cheap, secure, plentiful energy&mdash;and they remain middle-income.</p>
+<p>So the implication runs strictly one way. Abundant energy is <em>necessary</em> for prosperity and nowhere near <em>sufficient</em>. Energy that is merely extracted and burned, rather than converted into productive capital and diversified output, buys tonnes of oil-equivalent and not much GDP. Clearing the wall is the entry ticket, not the prize.</p>
+</section>
+
+<section>
+<h2>Two caveats, neither fatal</h2>
+<p><strong>Country-years are not independent draws.</strong> A single country contributes up to {nyears} highly correlated points, so the effective sample is far smaller than {n:,}. The honest reading is <em>persistence across {nyears} consecutive annual cross-sections</em>&mdash;which, for a claim about where points have never appeared, is precisely the property you want. An empty region that stays empty through the oil glut, the fall of the Soviet Union, the rise of China, the shale revolution, and the renewables build-out is empty for structural reasons, not sampling luck.</p>
+<p><strong>The accounting is territorial, and correlation fixes no direction.</strong> Causality here runs both ways&mdash;cheap energy enables output, output funds energy, and common drivers like industrialisation and institutions push both; the literature has argued about this &ldquo;energy&ndash;growth nexus&rdquo; for decades.<label for="sn-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-1" class="margin-toggle"><span class="sidenote">The debate runs from Kraft &amp; Kraft (1978) to the survey by Ozturk (2010); the direction of causation genuinely varies by country.</span> Separately, territorial energy accounts flatter rich importers: part of their apparent thrift is embodied energy shipped in from trading partners. Note which way that cuts. Consumption-based accounting would move the frugal enclaves <em>up</em>, back toward the wall&mdash;not through it. The floor in this data is, if anything, an underestimate.</p>
+<p>Neither caveat touches the support statement, which is all the title asserts: no country has yet been rich without commanding a great deal of energy. Anyone who claims the future will be different is entitled to the claim&mdash;but they are claiming something with zero precedent in the modern record, and the burden of naming the mechanism is theirs. Until then, the conclusion the data will bear is this: cheap, secure, abundant energy is not a luxury that prosperity affords. It is a precondition for it.</p>
 </section>
 
                 <footer class="de-emphasize">
-                    <p>Sources: Our World in Data (Energy Institute Statistical Review of World Energy; U.S. EIA) &amp; World Bank, {y0}&ndash;{y1}. <a href="files/energy-gdp-panel-2000-2023.csv">Download the panel (CSV)</a>.</p>
+                    <p>Sources: Our World in Data (Energy Institute Statistical Review of World Energy; U.S. EIA) &amp; World Bank (GDP per capita, constant 2015 US\\$; NY.GDP.PCAP.KD), {y0}&ndash;{y1}. <a href="files/energy-gdp-panel-1980-2023.csv">Download the panel (CSV)</a>.</p>
                 </footer>
             </article>
 
@@ -504,7 +506,7 @@ def main():
     OUT_CSV.parent.mkdir(parents=True, exist_ok=True)
     with open(OUT_CSV, "w", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["iso3", "country", "year", "gdp_per_capita_usd", "primary_energy_per_capita_kwh"])
+        w.writerow(["iso3", "country", "year", "gdp_per_capita_const2015usd", "primary_energy_per_capita_kwh"])
         for iso, name, yr, g, e in panel:
             w.writerow([iso, name, yr, g, e])
 

@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
     <meta name="author" content="Jonathan Keogh" />
-    <meta name="description" content="Across the full 2000-2023 panel of 4,700+ country-years, the joint law of GDP per capita and primary energy use per capita puts no mass in the high-income, low-energy corner." />
+    <meta name="description" content="Across the full 1980-2023 panel of 8,000+ country-years, with GDP in constant 2015 USD, the joint law of real GDP per capita and primary energy use per capita puts no mass in the high-income, low-energy corner." />
     <script>
       MathJax = {
         tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true },
@@ -44,1808 +44,1838 @@
                     </div>
                 </header>
 <section>
-<p>Take every country with both figures reported, once per year from 2000 to 2023: a panel of <strong>4,728 country-year observations</strong> of GDP per capita $G$ and primary energy use per capita $E$&mdash;<em>all</em> energy a country consumes, not just the fifth or so delivered as electricity. The title is a statement about the <em>support</em> of their joint law&mdash;the region $\{G \text{ large},\, E \text{ small}\}$ carries no mass&mdash;and it survives a close look. It is the sharper claim: a rich country must command a great deal of energy, which is why cheap and secure energy supply is not a luxury but a precondition for prosperity.</p>
+<p>Take every country that reports both figures, once per year from 1980 to 2023: a panel of <strong>8,090 country-year observations</strong> of real GDP per capita $G$&mdash;constant 2015 US\$, so nothing here is an inflation artefact&mdash;and primary energy use per capita $E$. Primary energy means <em>all</em> of it: the fuel behind the electricity, the diesel in the trucks, the gas under the steel mills&mdash;not just the fifth or so that arrives as electricity.</p>
+<p>The claim in the title is deliberately narrow, and the narrowness is the point. It is not the familiar assertion that growth <em>cannot</em> be separated from energy&mdash;a claim about the future, which data cannot settle. It is a claim about the record: in the joint distribution of income and energy, the corner marked <em>high income, low energy</em> is empty. Forty-four years, roughly two hundred countries, and no economy has yet been rich while consuming little energy. A trend can bend; a slope can be argued with. An empty region either has points in it or it does not. This one does not.</p>
 </section>
 
 <section>
-<h2>The fit</h2>
-<p>Both variables range over three orders of magnitude, so work in logs. Ordinary least squares on the pooled panel gives</p>
-<div class="math">$$\log_{10} E \;=\; \alpha + \beta\,\log_{10} G + \varepsilon,\qquad \hat\beta = 0.93,\quad \hat\alpha = 0.56.$$</div>
-<p>The relationship is tight and monotone: Pearson $r = 0.89$ ($R^2 = 0.79$), Spearman $\rho = 0.90$, residual scatter $\hat\sigma = 0.33$ dex&mdash;a typical country sits within a factor of $10^{0.33} \approx 2.1$ of the line. Since $\hat\beta \approx 1$, energy use is very nearly proportional to income: energy intensity $E/G$ is roughly scale-invariant across the entire development range.</p>
-</section>
-
-<section>
-<h2>All 24 years at once</h2>
-<p>Rather than one map per year, bin the whole panel and shade each cell by how many country-years land in it. The mass concentrates on a straight diagonal band; the lower-right is blank.</p>
+<h2>The empty corner</h2>
+<p>Both variables span three to four orders of magnitude, so the natural picture is log&ndash;log. Bin the entire panel and shade each cell by how many country-years land in it. The mass collapses onto a tight diagonal band&mdash;the correlation of $\log E$ with $\log G$ is 0.90, and a typical country sits within a factor of about two of the central line. But the band is not the argument. The corners are.</p>
 <figure class="fullwidth">
-<svg viewBox="0 0 760 560" role="img" aria-label="Density of 4728 country-year observations in the log GDP per capita by log energy use per capita plane, 2000-2023" xmlns="http://www.w3.org/2000/svg" class="scatter tex2jax_ignore">
+<svg viewBox="0 0 760 560" role="img" aria-label="Density of 8090 country-year observations in the log GDP per capita by log energy use per capita plane, 1980-2023" xmlns="http://www.w3.org/2000/svg" class="scatter tex2jax_ignore">
 <style>.scatter text{font-family:et-bembo,Palatino,Georgia,serif;fill:#111}.ax{font-size:15px;fill:rgba(17,17,17,.55)}.axtitle{font-size:16px;font-style:italic;fill:rgba(17,17,17,.75)}.cell{stroke:#fffdf6;stroke-width:.5}.pt{fill:#1d2b3a;fill-opacity:.9}.lbl{font-size:12.5px;fill:#2d2d2d}.lbl-guy{font-size:12.5px;fill:#a63d40;font-style:italic}.grid{stroke:rgba(17,17,17,.10);stroke-width:1}.ols{stroke:#8b2252;stroke-width:2;fill:none}.wall{stroke:#445c3c;stroke-width:2;fill:none;stroke-dasharray:6 3}.frame{stroke:rgba(17,17,17,.30);stroke-width:1;fill:none}.empty{fill:none;stroke:#a63d40;stroke-width:1.3;stroke-dasharray:5 4}.empty-lbl{font-size:13px;fill:#a63d40;font-style:italic}.leg{font-size:12px;fill:rgba(17,17,17,.6)}</style>
-<rect class="cell" x="92.0" y="460.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Burundi: 2002-2003"/>
-<rect class="cell" x="92.0" y="424.3" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Ethiopia: 2001-2003"/>
-<rect class="cell" x="112.3" y="460.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Burundi: 2004-2005"/>
-<rect class="cell" x="112.3" y="442.2" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Afghanistan: 2001
-Burundi: 2000-2001
-Congo, Dem. Rep.: 2001"/>
-<rect class="cell" x="112.3" y="424.3" width="20.3" height="17.9" fill="#e7edf4" data-tip="Ethiopia: 2000, 2004"/>
-<rect class="cell" x="112.3" y="406.4" width="20.3" height="17.9" fill="#e7edf4" data-tip="Sierra Leone: 2000"/>
-<rect class="cell" x="112.3" y="370.5" width="20.3" height="17.9" fill="#e7edf4" data-tip="Myanmar: 2001"/>
-<rect class="cell" x="112.3" y="352.6" width="20.3" height="17.9" fill="#e7edf4" data-tip="Myanmar: 2002"/>
-<rect class="cell" x="112.3" y="280.9" width="20.3" height="17.9" fill="#e7edf4" data-tip="Tajikistan: 2000"/>
-<rect class="cell" x="132.5" y="478.1" width="20.3" height="17.9" fill="#e7edf4" data-tip="Chad: 2001"/>
-<rect class="cell" x="132.5" y="460.2" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Afghanistan: 2002
-Burundi: 2006, 2008-2009
-Chad: 2000"/>
-<rect class="cell" x="132.5" y="442.2" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Afghanistan: 2003
-Burundi: 2007
-Congo, Dem. Rep.: 2002-2004"/>
-<rect class="cell" x="132.5" y="424.3" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Afghanistan: 2000
-Ethiopia: 2005-2006
-Niger: 2000"/>
-<rect class="cell" x="132.5" y="352.6" width="20.3" height="17.9" fill="#e7edf4" data-tip="Myanmar: 2000"/>
-<rect class="cell" x="132.5" y="280.9" width="20.3" height="17.9" fill="#e7edf4" data-tip="Tajikistan: 2001-2002"/>
-<rect class="cell" x="152.8" y="478.1" width="20.3" height="17.9" fill="#e7edf4" data-tip="Chad: 2002"/>
-<rect class="cell" x="152.8" y="460.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Afghanistan: 2004"/>
-<rect class="cell" x="152.8" y="442.2" width="20.3" height="17.9" fill="#96afca" data-tip="Afghanistan: 2005
-Burundi: 2010-2017
-Congo, Dem. Rep.: 2005"/>
-<rect class="cell" x="152.8" y="424.3" width="20.3" height="17.9" fill="#688cb0" data-tip="Burundi: 2018-2020, 2023
-Central African Republic: 2000, 2002
-Congo, Dem. Rep.: 2006
-Niger: 2001-2002
-Rwanda: 2000-2003
-Somalia, Fed. Rep.: 2001, 2009-2011
-Uganda: 2001-2003"/>
-<rect class="cell" x="152.8" y="406.4" width="20.3" height="17.9" fill="#96afca" data-tip="Burkina Faso: 2000
-Central African Republic: 2001
-Ethiopia: 2007
-Malawi: 2000-2001
-Nepal: 2000
-Somalia, Fed. Rep.: 2002"/>
-<rect class="cell" x="152.8" y="388.5" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Nepal: 2001-2003"/>
-<rect class="cell" x="152.8" y="370.5" width="20.3" height="17.9" fill="#e7edf4" data-tip="Liberia: 2003"/>
-<rect class="cell" x="152.8" y="352.6" width="20.3" height="17.9" fill="#e7edf4" data-tip="Myanmar: 2003-2004"/>
-<rect class="cell" x="152.8" y="334.7" width="20.3" height="17.9" fill="#e7edf4" data-tip="Ghana: 2000
-Myanmar: 2005"/>
-<rect class="cell" x="152.8" y="280.9" width="20.3" height="17.9" fill="#e7edf4" data-tip="Tajikistan: 2003"/>
-<rect class="cell" x="173.1" y="478.1" width="20.3" height="17.9" fill="#e7edf4" data-tip="Chad: 2003"/>
-<rect class="cell" x="173.1" y="442.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Congo, Dem. Rep.: 2009"/>
-<rect class="cell" x="173.1" y="424.3" width="20.3" height="17.9" fill="#688cb0" data-tip="Afghanistan: 2006
-Burundi: 2021-2022
-Central African Republic: 2003-2005
-Congo, Dem. Rep.: 2007
-Niger: 2003-2005
-Rwanda: 2004-2005
-Somalia, Fed. Rep.: 2003
-Uganda: 2000, 2004"/>
-<rect class="cell" x="173.1" y="406.4" width="20.3" height="17.9" fill="#96afca" data-tip="Burkina Faso: 2001-2002
-Ethiopia: 2008
-Madagascar: 2002, 2005-2006
-Mali: 2000"/>
-<rect class="cell" x="173.1" y="388.5" width="20.3" height="17.9" fill="#96afca" data-tip="Liberia: 2000-2002
-Madagascar: 2000-2001, 2004
-Mozambique: 2000
-Nepal: 2004-2005"/>
-<rect class="cell" x="173.1" y="370.5" width="20.3" height="17.9" fill="#96afca" data-tip="Cambodia: 2000
-Gambia, The: 2003
-Guinea-Bissau: 2000-2001
-Lao PDR: 2000
-Liberia: 2004-2006
-Mozambique: 2001-2002"/>
-<rect class="cell" x="173.1" y="352.6" width="20.3" height="17.9" fill="#96afca" data-tip="Eritrea: 2000-2002
-Ghana: 2002
-Lao PDR: 2001-2002"/>
-<rect class="cell" x="173.1" y="334.7" width="20.3" height="17.9" fill="#e7edf4" data-tip="Ghana: 2001
-Myanmar: 2006"/>
-<rect class="cell" x="173.1" y="280.9" width="20.3" height="17.9" fill="#e7edf4" data-tip="Tajikistan: 2004"/>
-<rect class="cell" x="173.1" y="263.0" width="20.3" height="17.9" fill="#e7edf4" data-tip="Kyrgyz Republic: 2002"/>
-<rect class="cell" x="173.1" y="245.1" width="20.3" height="17.9" fill="#e7edf4" data-tip="Kyrgyz Republic: 2000-2001"/>
-<rect class="cell" x="193.3" y="460.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Central African Republic: 2013"/>
-<rect class="cell" x="193.3" y="442.2" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Central African Republic: 2014
-Congo, Dem. Rep.: 2000, 2008"/>
-<rect class="cell" x="193.3" y="424.3" width="20.3" height="17.9" fill="#688cb0" data-tip="Afghanistan: 2007
-Central African Republic: 2006-2007, 2015-2016
-Congo, Dem. Rep.: 2010-2012
-Mali: 2002
-Niger: 2006-2007
-Rwanda: 2006
-Somalia, Fed. Rep.: 2004, 2012-2013"/>
-<rect class="cell" x="193.3" y="406.4" width="20.3" height="17.9" fill="#688cb0" data-tip="Burkina Faso: 2003-2004
-Ethiopia: 2009-2011
-Madagascar: 2003
-Malawi: 2003-2005
-Mali: 2001
-Nepal: 2006-2007
-Sierra Leone: 2002-2004
-Somalia, Fed. Rep.: 2000
-Tanzania: 2000-2002
-Uganda: 2005-2007"/>
-<rect class="cell" x="193.3" y="388.5" width="20.3" height="17.9" fill="#e7edf4" data-tip="Afghanistan: 2008
-Sierra Leone: 2001"/>
-<rect class="cell" x="193.3" y="370.5" width="20.3" height="17.9" fill="#96afca" data-tip="Cambodia: 2001-2003
-Gambia, The: 2002
-Guinea-Bissau: 2002
-Lesotho: 2001
-Liberia: 2007
-Mozambique: 2003-2004"/>
-<rect class="cell" x="193.3" y="352.6" width="20.3" height="17.9" fill="#688cb0" data-tip="Afghanistan: 2021-2023
-Bangladesh: 2000-2002
-Eritrea: 2003, 2005
-Ghana: 2003
-Kenya: 2000-2002
-Lao PDR: 2003-2004
-Lesotho: 2002
-Sudan: 2000
-Zambia: 2000"/>
-<rect class="cell" x="193.3" y="334.7" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Ghana: 2004
-Zambia: 2001-2002"/>
-<rect class="cell" x="193.3" y="316.8" width="20.3" height="17.9" fill="#e7edf4" data-tip="Viet Nam: 2000
-Zimbabwe: 2008"/>
-<rect class="cell" x="193.3" y="298.8" width="20.3" height="17.9" fill="#e7edf4" data-tip="Zimbabwe: 2007"/>
-<rect class="cell" x="193.3" y="280.9" width="20.3" height="17.9" fill="#e7edf4" data-tip="Tajikistan: 2005-2006"/>
-<rect class="cell" x="193.3" y="263.0" width="20.3" height="17.9" fill="#e7edf4" data-tip="Kyrgyz Republic: 2003"/>
-<rect class="cell" x="193.3" y="209.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Uzbekistan: 2003"/>
-<rect class="cell" x="193.3" y="191.3" width="20.3" height="17.9" fill="#e7edf4" data-tip="Uzbekistan: 2002"/>
-<rect class="cell" x="213.6" y="478.1" width="20.3" height="17.9" fill="#e7edf4" data-tip="Chad: 2004"/>
-<rect class="cell" x="213.6" y="442.2" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Central African Republic: 2008-2011
-Congo, Dem. Rep.: 2016"/>
-<rect class="cell" x="213.6" y="424.3" width="20.3" height="17.9" fill="#688cb0" data-tip="Central African Republic: 2017-2020
-Congo, Dem. Rep.: 2013, 2015, 2017-2020
-Mali: 2003-2004
-Niger: 2008
-Rwanda: 2007-2008
-Somalia, Fed. Rep.: 2005-2008, 2014-2018"/>
-<rect class="cell" x="213.6" y="406.4" width="20.3" height="17.9" fill="#688cb0" data-tip="Burkina Faso: 2005-2006
-Central African Republic: 2021-2023
-Congo, Dem. Rep.: 2014
+<rect class="cell" x="92.0" y="388.5" width="20.3" height="17.9" fill="#e7edf4" data-tip="Mozambique: 1986"/>
+<rect class="cell" x="92.0" y="370.5" width="20.3" height="17.9" fill="#96afca" data-tip="Mozambique: 1984-1985
+Myanmar: 1980, 1988-1992"/>
+<rect class="cell" x="112.3" y="424.3" width="20.3" height="17.9" fill="#e7edf4" data-tip="Ethiopia: 1994"/>
+<rect class="cell" x="112.3" y="406.4" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Ethiopia: 1992-1993
+Somalia, Fed. Rep.: 1996-1999"/>
+<rect class="cell" x="112.3" y="388.5" width="20.3" height="17.9" fill="#96afca" data-tip="Mozambique: 1987, 1989-1996
+Rwanda: 1994
+Somalia, Fed. Rep.: 1994-1995"/>
+<rect class="cell" x="112.3" y="370.5" width="20.3" height="17.9" fill="#96afca" data-tip="Mozambique: 1988
+Myanmar: 1981-1987, 1993"/>
+<rect class="cell" x="112.3" y="352.6" width="20.3" height="17.9" fill="#96afca" data-tip="Liberia: 1994-1995
+Myanmar: 1994-1996
+Somalia, Fed. Rep.: 1983-1984, 1986"/>
+<rect class="cell" x="112.3" y="334.7" width="20.3" height="17.9" fill="#e7edf4" data-tip="Mozambique: 1983"/>
+<rect class="cell" x="132.5" y="442.2" width="20.3" height="17.9" fill="#96afca" data-tip="Burundi: 2003-2006, 2008-2009
+Ethiopia: 1996-1997"/>
+<rect class="cell" x="132.5" y="424.3" width="20.3" height="17.9" fill="#96afca" data-tip="Afghanistan: 2001
+Burundi: 2001-2002, 2007, 2010-2017
+Ethiopia: 1995, 1998"/>
+<rect class="cell" x="132.5" y="406.4" width="20.3" height="17.9" fill="#688cb0" data-tip="Burundi: 1996-2000, 2018-2023
+Ethiopia: 1984-1986, 1988-1991, 1999-2004
+Somalia, Fed. Rep.: 2004-2006"/>
+<rect class="cell" x="132.5" y="388.5" width="20.3" height="17.9" fill="#96afca" data-tip="Mozambique: 1997-1998
+Rwanda: 1997
+Somalia, Fed. Rep.: 1991-1993, 2000-2003"/>
+<rect class="cell" x="132.5" y="370.5" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Mozambique: 2000
+Somalia, Fed. Rep.: 1987-1990"/>
+<rect class="cell" x="132.5" y="352.6" width="20.3" height="17.9" fill="#96afca" data-tip="Liberia: 1996
+Mozambique: 1981-1982
+Myanmar: 1997-1999
+Somalia, Fed. Rep.: 1980-1982, 1985"/>
+<rect class="cell" x="132.5" y="316.8" width="20.3" height="17.9" fill="#e7edf4" data-tip="Mozambique: 1980"/>
+<rect class="cell" x="152.8" y="460.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Burundi: 1982"/>
+<rect class="cell" x="152.8" y="442.2" width="20.3" height="17.9" fill="#96afca" data-tip="Burundi: 1980-1981, 1983-1987
+Nepal: 1980-1982"/>
+<rect class="cell" x="152.8" y="424.3" width="20.3" height="17.9" fill="#96afca" data-tip="Afghanistan: 2002-2004
+Burkina Faso: 1985, 1989-1990
+Central African Republic: 2013-2014
+Congo, Dem. Rep.: 2000-2004
+Nepal: 1983
+Uganda: 1982, 1984-1987"/>
+<rect class="cell" x="152.8" y="406.4" width="20.3" height="17.9" fill="#688cb0" data-tip="Afghanistan: 2000
+Burkina Faso: 1980-1984, 1986-1988, 1991-1995
+Burundi: 1994-1995
+Congo, Dem. Rep.: 2005-2006
+Ethiopia: 1980-1983, 1987, 2005-2006
+Malawi: 1988
+Rwanda: 2001
+Somalia, Fed. Rep.: 2007-2011
+Uganda: 1988-1989"/>
+<rect class="cell" x="152.8" y="388.5" width="20.3" height="17.9" fill="#96afca" data-tip="Ethiopia: 2007
+Malawi: 1989-1990, 1992-1994
+Mozambique: 1999
+Rwanda: 1991-1993, 1996, 1998-2000"/>
+<rect class="cell" x="152.8" y="370.5" width="20.3" height="17.9" fill="#e7edf4" data-tip="Rwanda: 1995"/>
+<rect class="cell" x="152.8" y="352.6" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Liberia: 1993
+Mozambique: 2001-2003
+Myanmar: 2000-2001"/>
+<rect class="cell" x="152.8" y="334.7" width="20.3" height="17.9" fill="#e7edf4" data-tip="Equatorial Guinea: 1991"/>
+<rect class="cell" x="152.8" y="316.8" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Honduras: 1981-1987"/>
+<rect class="cell" x="152.8" y="298.8" width="20.3" height="17.9" fill="#e7edf4" data-tip="Honduras: 1980"/>
+<rect class="cell" x="173.1" y="478.1" width="20.3" height="17.9" fill="#e7edf4" data-tip="Bhutan: 1980"/>
+<rect class="cell" x="173.1" y="442.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Nepal: 1984-1985"/>
+<rect class="cell" x="173.1" y="424.3" width="20.3" height="17.9" fill="#96afca" data-tip="Afghanistan: 2005
+Burundi: 1988
+Central African Republic: 2008
+Congo, Dem. Rep.: 2009
+Nepal: 1986-1990
+Rwanda: 1980
+Uganda: 1983"/>
+<rect class="cell" x="173.1" y="406.4" width="20.3" height="17.9" fill="#436a92" data-tip="Afghanistan: 2006-2007
+Burkina Faso: 1996
+Burundi: 1989-1993
+Central African Republic: 2003-2007, 2015-2020
+Congo, Dem. Rep.: 2007-2008, 2010-2012
+Malawi: 1984, 1986-1987
+Nepal: 1991-1993
+Niger: 2000-2008
+Rwanda: 1981-1983, 2003-2005
+Somalia, Fed. Rep.: 2012-2015
+Uganda: 1990-1995"/>
+<rect class="cell" x="173.1" y="388.5" width="20.3" height="17.9" fill="#436a92" data-tip="Bangladesh: 1980-1984
+Burkina Faso: 1997-2002
+Central African Republic: 1992-1994, 1996-1998, 2000-2002, 2021-2023
+Congo, Dem. Rep.: 1996-1999
+Ethiopia: 2008-2011
+Guinea-Bissau: 1980
+Lesotho: 1981-1983
+Madagascar: 1995-1998, 2002-2003, 2005, 2009-2011, 2020
+Malawi: 1980-1983, 1985, 1991, 1995-2007
+Niger: 1984, 1991-1999, 2009-2011
+Rwanda: 1985-1990, 2002"/>
+<rect class="cell" x="173.1" y="370.5" width="20.3" height="17.9" fill="#96afca" data-tip="Afghanistan: 2008
+Bangladesh: 1985-1989
+Liberia: 1997
+Madagascar: 2004, 2012-2017, 2021-2023
+Rwanda: 1984"/>
+<rect class="cell" x="173.1" y="352.6" width="20.3" height="17.9" fill="#96afca" data-tip="Afghanistan: 2023
+Equatorial Guinea: 1980, 1982-1988, 1992
+Liberia: 1992
+Mozambique: 2004-2006"/>
+<rect class="cell" x="173.1" y="334.7" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Afghanistan: 2021-2022
+Equatorial Guinea: 1989-1990
+Mozambique: 2007
+Myanmar: 2002-2003"/>
+<rect class="cell" x="173.1" y="316.8" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Honduras: 1988
+India: 1980-1985"/>
+<rect class="cell" x="173.1" y="298.8" width="20.3" height="17.9" fill="#e7edf4" data-tip="Honduras: 1989-1990"/>
+<rect class="cell" x="173.1" y="263.0" width="20.3" height="17.9" fill="#c3d2e2" data-tip="China: 1980-1981
+Tajikistan: 1995-1998, 2000"/>
+<rect class="cell" x="173.1" y="245.1" width="20.3" height="17.9" fill="#e7edf4" data-tip="Tajikistan: 1999"/>
+<rect class="cell" x="193.3" y="460.2" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Chad: 1993, 1995-1999"/>
+<rect class="cell" x="193.3" y="442.2" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Chad: 1984, 2000-2001"/>
+<rect class="cell" x="193.3" y="424.3" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Cambodia: 1994
+Central African Republic: 2009-2010
+Chad: 1987
+Mali: 1987"/>
+<rect class="cell" x="193.3" y="406.4" width="20.3" height="17.9" fill="#688cb0" data-tip="Bhutan: 1981-1985
+Central African Republic: 1980, 2011-2012
+Chad: 1980-1983
+Congo, Dem. Rep.: 2015-2023
+Lao PDR: 1988
+Lesotho: 1988
+Mali: 1983-1984
+Nepal: 1994-1996
+Rwanda: 2006-2009
+Somalia, Fed. Rep.: 2016-2017
+Uganda: 1996-2003"/>
+<rect class="cell" x="193.3" y="388.5" width="20.3" height="17.9" fill="#436a92" data-tip="Bhutan: 1986
+Burkina Faso: 2003-2006, 2009
+Central African Republic: 1981-1985, 1987-1991, 1995, 1999
+Congo, Dem. Rep.: 1994-1995, 2013-2014
 Ethiopia: 2012-2013
-Madagascar: 2007-2011, 2018, 2020
-Malawi: 2002, 2006-2007, 2013-2014, 2016-2018
-Niger: 2009-2011, 2016-2017
-Sierra Leone: 2005
-Somalia, Fed. Rep.: 2020
-Tanzania: 2003
-Uganda: 2008"/>
-<rect class="cell" x="213.6" y="388.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Burkina Faso: 2007
-Eritrea: 2008
-Liberia: 2008-2009
-Madagascar: 2012-2017, 2019, 2021-2023
-Nepal: 2008-2009
-Niger: 2012, 2015
-Tanzania: 2004-2006"/>
-<rect class="cell" x="213.6" y="370.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Afghanistan: 2009, 2016
-Benin: 2000
-Cambodia: 2004-2005
-Eritrea: 2006-2007
-Gambia, The: 2001
-Guinea: 2000-2002, 2005-2006
-Guinea-Bissau: 2003-2007
-Lesotho: 2000
-Liberia: 2010
-Mozambique: 2005
-Timor-Leste: 2003-2006
-Togo: 2000-2002"/>
-<rect class="cell" x="213.6" y="352.6" width="20.3" height="17.9" fill="#688cb0" data-tip="Afghanistan: 2017-2020
-Bangladesh: 2003-2005
-Benin: 2001
-Eritrea: 2004
-Kenya: 2003-2005
-Lao PDR: 2005
-Mozambique: 2006-2007, 2010
-Sudan: 2001-2002"/>
-<rect class="cell" x="213.6" y="334.7" width="20.3" height="17.9" fill="#96afca" data-tip="Bangladesh: 2006
-Ghana: 2005
-Mozambique: 2018-2021
-Myanmar: 2007
-Sao Tome and Principe: 2000-2001
-Zambia: 2003"/>
-<rect class="cell" x="213.6" y="316.8" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Angola: 2001
-Mozambique: 2016-2017
-Papua New Guinea: 2002"/>
-<rect class="cell" x="213.6" y="298.8" width="20.3" height="17.9" fill="#96afca" data-tip="India: 2000-2002
-Viet Nam: 2001-2003
-Yemen, Rep.: 2000-2002
-Zimbabwe: 2002-2006"/>
-<rect class="cell" x="213.6" y="280.9" width="20.3" height="17.9" fill="#e7edf4" data-tip="Tajikistan: 2007"/>
-<rect class="cell" x="213.6" y="263.0" width="20.3" height="17.9" fill="#96afca" data-tip="Kyrgyz Republic: 2004-2005
-Moldova: 2000-2001
-Mongolia: 2000-2001"/>
-<rect class="cell" x="213.6" y="209.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Uzbekistan: 2004"/>
-<rect class="cell" x="213.6" y="191.3" width="20.3" height="17.9" fill="#e7edf4" data-tip="Uzbekistan: 2001"/>
-<rect class="cell" x="233.9" y="442.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Central African Republic: 2012"/>
-<rect class="cell" x="233.9" y="424.3" width="20.3" height="17.9" fill="#96afca" data-tip="Congo, Dem. Rep.: 2021, 2023
-Mali: 2005
-Rwanda: 2009-2011
-Somalia, Fed. Rep.: 2019"/>
-<rect class="cell" x="233.9" y="406.4" width="20.3" height="17.9" fill="#688cb0" data-tip="Burkina Faso: 2009
-Malawi: 2008-2010, 2012, 2015, 2019-2023
-Mali: 2006-2007
-Niger: 2018, 2021
-Sierra Leone: 2006-2007, 2009-2010
-Somalia, Fed. Rep.: 2021-2023"/>
-<rect class="cell" x="233.9" y="388.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Burkina Faso: 2008, 2010
-Ethiopia: 2014-2016
-Liberia: 2020-2021
-Nepal: 2010
-Niger: 2013-2014, 2019-2020, 2022-2023
-Tanzania: 2007-2008"/>
-<rect class="cell" x="233.9" y="370.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Afghanistan: 2014-2015
-Burkina Faso: 2015-2016
-Cambodia: 2006
-Comoros: 2000-2001
-Eritrea: 2009-2010
-Gambia, The: 2000, 2004-2006
-Guinea: 2003-2004, 2007, 2009
-Guinea-Bissau: 2008-2010, 2012-2016
-Haiti: 2003-2004
-Liberia: 2011-2012, 2019
-Timor-Leste: 2007-2008
-Togo: 2006"/>
-<rect class="cell" x="233.9" y="352.6" width="20.3" height="17.9" fill="#688cb0" data-tip="Afghanistan: 2010, 2012-2013
-Benin: 2002-2003
-Gambia, The: 2013-2017
-Guinea: 2010-2011
-Lesotho: 2003
-Mozambique: 2008-2009, 2011
-Myanmar: 2008
-Sudan: 2003
-Togo: 2003-2005, 2007"/>
-<rect class="cell" x="233.9" y="334.7" width="20.3" height="17.9" fill="#688cb0" data-tip="Afghanistan: 2011
-Angola: 2000
-Bangladesh: 2007-2009
-Lao PDR: 2006
-Mauritania: 2000-2001
-Mozambique: 2022-2023
-Nigeria: 2000-2001
-Sudan: 2020
-Yemen, Rep.: 2018
-Zambia: 2004"/>
-<rect class="cell" x="233.9" y="316.8" width="20.3" height="17.9" fill="#96afca" data-tip="Mauritania: 2002
-Mozambique: 2015
-Papua New Guinea: 2000-2001
-Sao Tome and Principe: 2002-2003
-Senegal: 2000-2002"/>
-<rect class="cell" x="233.9" y="298.8" width="20.3" height="17.9" fill="#96afca" data-tip="India: 2003-2004
-Pakistan: 2000-2003
-Papua New Guinea: 2003-2004
-Tajikistan: 2009
-Yemen, Rep.: 2003-2004"/>
-<rect class="cell" x="233.9" y="280.9" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Syrian Arab Republic: 2020
-Viet Nam: 2004
-Zimbabwe: 2000-2001"/>
-<rect class="cell" x="233.9" y="263.0" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Kyrgyz Republic: 2006
-Mongolia: 2002-2003
-Syrian Arab Republic: 2016"/>
-<rect class="cell" x="233.9" y="245.1" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Armenia: 2000-2001
-Moldova: 2002-2003"/>
-<rect class="cell" x="233.9" y="227.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Azerbaijan: 2000"/>
-<rect class="cell" x="233.9" y="209.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Uzbekistan: 2005-2006"/>
-<rect class="cell" x="233.9" y="191.3" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Turkmenistan: 2000
-Ukraine: 2000
-Uzbekistan: 2000"/>
-<rect class="cell" x="254.1" y="478.1" width="20.3" height="17.9" fill="#e7edf4" data-tip="Chad: 2005"/>
-<rect class="cell" x="254.1" y="424.3" width="20.3" height="17.9" fill="#e7edf4" data-tip="Chad: 2016
-Congo, Dem. Rep.: 2022"/>
-<rect class="cell" x="254.1" y="406.4" width="20.3" height="17.9" fill="#688cb0" data-tip="Chad: 2017, 2020
+Guinea-Bissau: 1981-1983
+Lesotho: 1980, 1984-1987, 1989
+Madagascar: 1982, 1986, 1989-1994, 1999, 2006-2008, 2018
+Malawi: 2008-2023
+Nepal: 1997-1998, 2000
+Niger: 1983, 1985-1987, 1989-1990, 2016-2018, 2021
+Somalia, Fed. Rep.: 2018-2023
+Tanzania: 1983, 1985, 1987, 1989, 1991-2001"/>
+<rect class="cell" x="193.3" y="370.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Bangladesh: 1990-1992
+Burkina Faso: 2007-2008, 2010
+Cambodia: 1995-1996
+Congo, Dem. Rep.: 1993
+Ethiopia: 2014
+Guinea: 1985, 1995-1996
+Guinea-Bissau: 1984-1986
+Lesotho: 1990-1991
+Liberia: 1998
+Madagascar: 1983-1985, 1987-1988, 2000-2001, 2019
+Nepal: 1999, 2001-2003
+Niger: 1988, 2012-2015, 2019-2020, 2022-2023
+Tanzania: 1980-1982, 1984, 1986, 1988, 1990"/>
+<rect class="cell" x="193.3" y="352.6" width="20.3" height="17.9" fill="#688cb0" data-tip="Afghanistan: 2009, 2014-2016
+Bangladesh: 1993-1997
+Cambodia: 1997-1999
+Equatorial Guinea: 1981, 1993-1994
+Guinea: 1980-1984, 1986-1994
+Guinea-Bissau: 1987-1989, 2000, 2004
+Liberia: 2003-2007"/>
+<rect class="cell" x="193.3" y="334.7" width="20.3" height="17.9" fill="#96afca" data-tip="Afghanistan: 2010-2012, 2017-2020
+Guinea-Bissau: 1990, 1992-1994, 1998-1999
+Mozambique: 2008-2011
+Myanmar: 2004"/>
+<rect class="cell" x="193.3" y="316.8" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Mozambique: 2012-2013
+Myanmar: 2005"/>
+<rect class="cell" x="193.3" y="298.8" width="20.3" height="17.9" fill="#96afca" data-tip="Honduras: 1991
+India: 1986-1993"/>
+<rect class="cell" x="193.3" y="263.0" width="20.3" height="17.9" fill="#c3d2e2" data-tip="China: 1982-1983
+Tajikistan: 2001-2003"/>
+<rect class="cell" x="193.3" y="245.1" width="20.3" height="17.9" fill="#e7edf4" data-tip="Tajikistan: 1994"/>
+<rect class="cell" x="213.6" y="460.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Chad: 2003"/>
+<rect class="cell" x="213.6" y="442.2" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Chad: 1985, 1988-1989, 1994, 2002
+Mali: 1988"/>
+<rect class="cell" x="213.6" y="424.3" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Chad: 1986, 1992
+Mali: 1986, 1995, 1999"/>
+<rect class="cell" x="213.6" y="406.4" width="20.3" height="17.9" fill="#688cb0" data-tip="Cambodia: 1980-1986
+Chad: 1990-1991
+Lao PDR: 1984-1987, 1989-1990
+Mali: 1980-1982, 1985, 1989-1994, 1996-1998
+Rwanda: 2010
+Uganda: 2004"/>
+<rect class="cell" x="213.6" y="388.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Benin: 1983, 1989
+Central African Republic: 1986
+Lao PDR: 1991-1994
+Lesotho: 1998
 Liberia: 2018
-Malawi: 2011
-Rwanda: 2012-2020
-Sierra Leone: 2008
-Uganda: 2009"/>
-<rect class="cell" x="254.1" y="388.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Burkina Faso: 2011-2012, 2014
-Ethiopia: 2017-2018, 2020
+Mali: 2000
+Nepal: 2006-2007
+Niger: 1980-1982
+Rwanda: 2011-2015
+Sierra Leone: 2000
+Tanzania: 2002
+Uganda: 2005-2008"/>
+<rect class="cell" x="213.6" y="370.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Bhutan: 1987
+Burkina Faso: 2011-2012, 2014
+Congo, Dem. Rep.: 1992
+Eritrea: 2008
+Ethiopia: 2015-2018
+Gambia, The: 1997, 1999
+Guinea: 1997-1999
 Guinea-Bissau: 2018-2019
-Liberia: 2022-2023
-Mali: 2008-2010, 2012
-Rwanda: 2021
-Sierra Leone: 2011, 2016-2020
-Tanzania: 2009
-Uganda: 2010-2013, 2015-2020"/>
-<rect class="cell" x="254.1" y="370.5" width="20.3" height="17.9" fill="#436a92" data-tip="Burkina Faso: 2013, 2017-2020
-Comoros: 2002
-Eritrea: 2011
-Ethiopia: 2019
-Gambia, The: 2007-2008, 2018-2022
-Guinea: 2008, 2013-2014
-Guinea-Bissau: 2011, 2017, 2020
-Haiti: 2000-2002, 2005
-Liberia: 2013
-Mali: 2015
-Nepal: 2011-2015
-Sierra Leone: 2022-2023
-Tanzania: 2010-2012
-Timor-Leste: 2009-2010
-Togo: 2015"/>
-<rect class="cell" x="254.1" y="352.6" width="20.3" height="17.9" fill="#688cb0" data-tip="Benin: 2004-2005
-Burkina Faso: 2022-2023
-Cambodia: 2007-2008
-Cameroon: 2000-2002
-Congo, Rep.: 2001
-Gambia, The: 2009-2012
-Guinea: 2012, 2015-2017
-Haiti: 2006
-Kenya: 2006-2007
-Kiribati: 2001
-Lesotho: 2004-2005
+Lesotho: 1992-1997, 1999
+Liberia: 1999, 2008-2009, 2020-2023
+Madagascar: 1980-1981
+Nepal: 2004-2005, 2008-2010
+Sierra Leone: 2001
+Tanzania: 2003-2006"/>
+<rect class="cell" x="213.6" y="352.6" width="20.3" height="17.9" fill="#436a92" data-tip="Bangladesh: 1998-1999
+Bhutan: 1988
+Burkina Faso: 2013, 2015-2020
+Cambodia: 2000-2003
+Equatorial Guinea: 1995
+Eritrea: 2009-2010
+Gambia, The: 1980-1996, 1998, 2000-2009, 2013, 2018-2022
+Ghana: 1983
+Guinea: 2000-2009
+Guinea-Bissau: 2001-2003, 2005-2017, 2020
+Lesotho: 2000
+Liberia: 2010-2013, 2019
+Sierra Leone: 1997-1999
+Sudan: 1984-1986
+Togo: 1992-1996, 2001-2002, 2005-2007"/>
+<rect class="cell" x="213.6" y="334.7" width="20.3" height="17.9" fill="#688cb0" data-tip="Afghanistan: 2013
+Bangladesh: 2000-2004
+Gambia, The: 2010-2012, 2014-2017
+Guinea: 2010-2012
+Guinea-Bissau: 1991, 1995-1997
 Liberia: 2014-2017
-Mali: 2016
-Myanmar: 2009
+Myanmar: 2006, 2008
 Sudan: 2023
-Togo: 2008, 2016-2017"/>
-<rect class="cell" x="254.1" y="334.7" width="20.3" height="17.9" fill="#688cb0" data-tip="Bangladesh: 2010-2012
-Benin: 2006
-Cambodia: 2009
-Kiribati: 2000, 2002
-Lao PDR: 2007
-Lesotho: 2007
-Mozambique: 2012-2014
-Nigeria: 2002-2003
-Sudan: 2004, 2021
-Togo: 2009-2012
-Yemen, Rep.: 2017
-Zambia: 2005"/>
-<rect class="cell" x="254.1" y="316.8" width="20.3" height="17.9" fill="#688cb0" data-tip="Bhutan: 2000-2001
-Mauritania: 2003-2004
-Sao Tome and Principe: 2004-2006
-Senegal: 2003
-Solomon Islands: 2002
-Sri Lanka: 2000-2002
-Sudan: 2018-2019
-Zimbabwe: 2009"/>
-<rect class="cell" x="254.1" y="298.8" width="20.3" height="17.9" fill="#96afca" data-tip="India: 2005
-Pakistan: 2004-2005
-Papua New Guinea: 2005
-Tajikistan: 2008, 2010-2011
-Yemen, Rep.: 2005-2006"/>
-<rect class="cell" x="254.1" y="280.9" width="20.3" height="17.9" fill="#688cb0" data-tip="Djibouti: 2000-2005
-India: 2006
-Indonesia: 2000-2001
-Syrian Arab Republic: 2021
-Tajikistan: 2016-2020
-Viet Nam: 2005-2006"/>
-<rect class="cell" x="254.1" y="263.0" width="20.3" height="17.9" fill="#96afca" data-tip="Armenia: 2002
-Georgia: 2000-2002
-Kyrgyz Republic: 2007, 2009
-Mongolia: 2004
-Syrian Arab Republic: 2015, 2017"/>
-<rect class="cell" x="254.1" y="245.1" width="20.3" height="17.9" fill="#e7edf4" data-tip="Iraq: 2003"/>
-<rect class="cell" x="254.1" y="227.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Azerbaijan: 2001-2002"/>
-<rect class="cell" x="254.1" y="209.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Uzbekistan: 2007"/>
-<rect class="cell" x="254.1" y="191.3" width="20.3" height="17.9" fill="#e7edf4" data-tip="Turkmenistan: 2001
-Ukraine: 2001"/>
-<rect class="cell" x="274.4" y="478.1" width="20.3" height="17.9" fill="#e7edf4" data-tip="Chad: 2006-2007"/>
-<rect class="cell" x="274.4" y="460.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Chad: 2009"/>
-<rect class="cell" x="274.4" y="424.3" width="20.3" height="17.9" fill="#e7edf4" data-tip="Chad: 2015"/>
-<rect class="cell" x="274.4" y="406.4" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Chad: 2018-2019, 2021-2023"/>
-<rect class="cell" x="274.4" y="388.5" width="20.3" height="17.9" fill="#96afca" data-tip="Ethiopia: 2021-2022
-Guinea-Bissau: 2023
-Mali: 2011
-Rwanda: 2022-2023
-Sierra Leone: 2012, 2015
-South Sudan: 2012
-Uganda: 2014, 2021-2023"/>
-<rect class="cell" x="274.4" y="370.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Ethiopia: 2023
-Gambia, The: 2023
-Guinea-Bissau: 2021-2022
-Mali: 2013-2014
-Sierra Leone: 2013-2014, 2021
-South Sudan: 2015
-Tanzania: 2013-2015, 2017, 2020
-Timor-Leste: 2011"/>
-<rect class="cell" x="274.4" y="352.6" width="20.3" height="17.9" fill="#436a92" data-tip="Burkina Faso: 2021
-Cameroon: 2003
-Comoros: 2003-2005
-Congo, Rep.: 2000, 2002-2003
-Ghana: 2006-2007
-Guinea: 2018
-Haiti: 2007-2008
-Kenya: 2008
-Lesotho: 2006, 2008
-Mali: 2017-2020, 2022-2023
-Myanmar: 2010
-Nepal: 2016-2017
-Tanzania: 2016, 2018-2019
-Timor-Leste: 2012
-Togo: 2014, 2018-2020
-Yemen, Rep.: 2016
-Zambia: 2007"/>
-<rect class="cell" x="274.4" y="334.7" width="20.3" height="17.9" fill="#436a92" data-tip="Bangladesh: 2013
-Benin: 2007-2008, 2012
-Cambodia: 2010-2011
-Cote d&#x27;Ivoire: 2000-2003
-Ghana: 2009
-Guinea: 2019-2020
-Kenya: 2009-2011
-Lao PDR: 2008-2009
-Lesotho: 2009-2010, 2015-2017, 2019-2021, 2023
-Mali: 2021
-Nigeria: 2004
-Sudan: 2005, 2012, 2022
-Togo: 2013, 2021-2022
-Zambia: 2006"/>
-<rect class="cell" x="274.4" y="316.8" width="20.3" height="17.9" fill="#688cb0" data-tip="Angola: 2002
-Bangladesh: 2014
-Benin: 2009-2011, 2015-2017
-Kiribati: 2003-2004
-Lesotho: 2022
-Mauritania: 2005
-Sao Tome and Principe: 2007-2008
-Senegal: 2004-2006
-Solomon Islands: 2000-2001, 2003-2004
-Sri Lanka: 2003-2004
-Sudan: 2016-2017
-Zambia: 2020
-Zimbabwe: 2010"/>
-<rect class="cell" x="274.4" y="298.8" width="20.3" height="17.9" fill="#688cb0" data-tip="Bhutan: 2002-2003
-Bolivia: 2001
-Djibouti: 2006-2007
-Honduras: 2000
-Nicaragua: 2000-2004
-Pakistan: 2006-2010
-Philippines: 2000-2004
-Sao Tome and Principe: 2010
-Tajikistan: 2012-2013, 2015
-Yemen, Rep.: 2007-2009
-Zimbabwe: 2011"/>
-<rect class="cell" x="274.4" y="280.9" width="20.3" height="17.9" fill="#96afca" data-tip="Bolivia: 2000, 2002-2005
-Djibouti: 2008
-India: 2007-2009
+Togo: 2008
+Viet Nam: 1984-1991"/>
+<rect class="cell" x="213.6" y="316.8" width="20.3" height="17.9" fill="#96afca" data-tip="Cabo Verde: 1982-1984
+Mozambique: 2014-2015, 2018-2023
+Myanmar: 2007
+Togo: 2009-2011"/>
+<rect class="cell" x="213.6" y="298.8" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Honduras: 1992-1993
+India: 1994
+Mozambique: 2016-2017"/>
+<rect class="cell" x="213.6" y="280.9" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Cabo Verde: 1980-1981
+India: 1995-1998
+Tajikistan: 2008"/>
+<rect class="cell" x="213.6" y="263.0" width="20.3" height="17.9" fill="#96afca" data-tip="China: 1984-1986
 Syrian Arab Republic: 2022
-Tajikistan: 2014, 2021-2022
-Viet Nam: 2007"/>
-<rect class="cell" x="274.4" y="263.0" width="20.3" height="17.9" fill="#688cb0" data-tip="Egypt, Arab Rep.: 2002
-Georgia: 2003
-Guyana: 2005
-Indonesia: 2002-2003
-Kyrgyz Republic: 2008, 2010-2011, 2015-2016
-Mongolia: 2005
-Syrian Arab Republic: 2013-2014, 2018-2019"/>
-<rect class="cell" x="274.4" y="245.1" width="20.3" height="17.9" fill="#96afca" data-tip="Armenia: 2003
-China: 2000-2001
-Egypt, Arab Rep.: 2003-2005
-Guyana: 2000-2004
-Moldova: 2004-2005"/>
-<rect class="cell" x="274.4" y="227.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Azerbaijan: 2003"/>
-<rect class="cell" x="274.4" y="209.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Azerbaijan: 2004
-Uzbekistan: 2008"/>
-<rect class="cell" x="274.4" y="191.3" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Turkmenistan: 2002
-Ukraine: 2002-2003"/>
-<rect class="cell" x="294.7" y="478.1" width="20.3" height="17.9" fill="#e7edf4" data-tip="Chad: 2008"/>
-<rect class="cell" x="294.7" y="460.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Chad: 2010"/>
-<rect class="cell" x="294.7" y="442.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Chad: 2011"/>
-<rect class="cell" x="294.7" y="424.3" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Chad: 2012-2014"/>
-<rect class="cell" x="294.7" y="388.5" width="20.3" height="17.9" fill="#e7edf4" data-tip="South Sudan: 2014"/>
-<rect class="cell" x="294.7" y="370.5" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Comoros: 2007, 2009
-Haiti: 2010-2011"/>
-<rect class="cell" x="294.7" y="352.6" width="20.3" height="17.9" fill="#688cb0" data-tip="Cameroon: 2004-2007
-Comoros: 2006, 2010, 2015-2016
-Congo, Rep.: 2004
-Haiti: 2009, 2012, 2015-2017, 2019-2020
-Kenya: 2012
-Myanmar: 2011
-Nepal: 2019
-Tanzania: 2021-2023
-Zambia: 2009"/>
-<rect class="cell" x="294.7" y="334.7" width="20.3" height="17.9" fill="#436a92" data-tip="Benin: 2013-2014, 2021-2022
-Cambodia: 2012-2014
-Cameroon: 2010, 2015
-Comoros: 2017
-Cote d&#x27;Ivoire: 2004-2007
-Ghana: 2008, 2010
-Guinea: 2021-2022
-Kenya: 2013
-Lesotho: 2011-2014, 2018
-Myanmar: 2012-2013, 2015
+Tajikistan: 2004-2007"/>
+<rect class="cell" x="213.6" y="245.1" width="20.3" height="17.9" fill="#96afca" data-tip="Bosnia and Herzegovina: 1992
+Kyrgyz Republic: 1994-2000
+Tajikistan: 1993"/>
+<rect class="cell" x="233.9" y="460.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Chad: 2004, 2006"/>
+<rect class="cell" x="233.9" y="442.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Chad: 2008-2009"/>
+<rect class="cell" x="233.9" y="406.4" width="20.3" height="17.9" fill="#96afca" data-tip="Cambodia: 1987-1993
+Mali: 2003-2005"/>
+<rect class="cell" x="233.9" y="388.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Benin: 1982, 1984, 1987-1988, 1999
+Chad: 2017-2023
+Lao PDR: 1995-1999
+Mali: 2001-2002, 2006-2007
+Rwanda: 2016-2020
+Sierra Leone: 2003-2005, 2007-2010
+Uganda: 2009"/>
+<rect class="cell" x="233.9" y="370.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Benin: 1980-1981, 1985-1986, 1990-1995
+Cabo Verde: 1986-1987
+Congo, Dem. Rep.: 1990-1991
+Ethiopia: 2020-2022
+Guinea-Bissau: 2023
+Liberia: 2000-2002
+Mali: 2008-2012
+Nepal: 2011
+Rwanda: 2021
+Sierra Leone: 2002, 2006
+Tanzania: 2007-2009
+Uganda: 2010-2018, 2020-2021"/>
+<rect class="cell" x="233.9" y="352.6" width="20.3" height="17.9" fill="#436a92" data-tip="Benin: 1996-1998, 2000
+Bhutan: 1989-1991
+Cabo Verde: 1988-1991
+Cambodia: 2004-2005
+Eritrea: 2006-2007, 2011
+Ethiopia: 2019, 2023
+Gambia, The: 2023
+Ghana: 1984-1986
+Guinea: 2013-2014
+Guinea-Bissau: 2021-2022
+Lao PDR: 2000
+Lesotho: 2001-2002
+Liberia: 1991
+Mali: 2013-2015
+Nepal: 2012-2015
+Sierra Leone: 1992-1996
+Sudan: 1980-1983, 1987-1990, 1992-1996
+Tanzania: 2010-2014
+Timor-Leste: 2006
+Togo: 1980-1983, 1985-1990, 1997-2000, 2015"/>
+<rect class="cell" x="233.9" y="334.7" width="20.3" height="17.9" fill="#436a92" data-tip="Bangladesh: 2005-2007
+Benin: 2001-2005
+Bhutan: 1992-1993
+Burkina Faso: 2021-2023
+Cabo Verde: 1992
+Eritrea: 2000-2005
+Ghana: 1980-1982, 1987-1994
+Guinea: 2015-2018
+Lesotho: 2003-2006
+Liberia: 1990
+Mali: 2016-2023
+Myanmar: 2009-2011
+Nepal: 2016
+Sudan: 1991
+Togo: 1984, 1991, 2003-2004, 2012-2014, 2016-2020
+Viet Nam: 1992-1993
+Zambia: 1999-2001"/>
+<rect class="cell" x="233.9" y="316.8" width="20.3" height="17.9" fill="#96afca" data-tip="Bangladesh: 2008-2009
+Benin: 2006
+Cabo Verde: 1985
+Eritrea: 1994
+Pakistan: 1980-1982
+Viet Nam: 1994
+Zambia: 1991-1998, 2002-2004"/>
+<rect class="cell" x="233.9" y="298.8" width="20.3" height="17.9" fill="#96afca" data-tip="Eritrea: 1995-1999
+Honduras: 1994
+Pakistan: 1983-1987
+Zambia: 1986-1987, 1989-1990
+Zimbabwe: 2008-2009"/>
+<rect class="cell" x="233.9" y="280.9" width="20.3" height="17.9" fill="#96afca" data-tip="India: 1999-2004
+Tajikistan: 2009-2013"/>
+<rect class="cell" x="233.9" y="263.0" width="20.3" height="17.9" fill="#96afca" data-tip="China: 1987
+Kyrgyz Republic: 2005
+Syrian Arab Republic: 2015-2017, 2019-2021"/>
+<rect class="cell" x="233.9" y="245.1" width="20.3" height="17.9" fill="#96afca" data-tip="Bosnia and Herzegovina: 1993-1994
+China: 1988-1990
+Kyrgyz Republic: 2001-2004, 2006-2007
+Syrian Arab Republic: 2013-2014, 2018
+Tajikistan: 1992"/>
+<rect class="cell" x="233.9" y="227.2" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Armenia: 1993-1994
+Kyrgyz Republic: 1993"/>
+<rect class="cell" x="233.9" y="209.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Armenia: 1992"/>
+<rect class="cell" x="254.1" y="442.2" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Chad: 2005, 2007, 2010"/>
+<rect class="cell" x="254.1" y="424.3" width="20.3" height="17.9" fill="#e7edf4" data-tip="Chad: 2011"/>
+<rect class="cell" x="254.1" y="406.4" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Chad: 2012-2016"/>
+<rect class="cell" x="254.1" y="370.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Comoros: 1991, 1994
+Congo, Dem. Rep.: 1980-1989
+Rwanda: 2022-2023
+Sierra Leone: 2011-2012, 2015-2020
+South Sudan: 2012
+Sudan: 1998
+Uganda: 2019, 2022-2023"/>
+<rect class="cell" x="254.1" y="352.6" width="20.3" height="17.9" fill="#688cb0" data-tip="Cambodia: 2006
+Comoros: 2000
+Equatorial Guinea: 1996
+Lao PDR: 2001
+Sierra Leone: 1983, 1985-1986, 2013-2014, 2021-2023
+South Sudan: 2015
+Sudan: 1997, 1999
+Tanzania: 2015, 2017-2018, 2020
+Timor-Leste: 2003-2005, 2007-2009"/>
+<rect class="cell" x="254.1" y="334.7" width="20.3" height="17.9" fill="#436a92" data-tip="Bhutan: 1994
+Cabo Verde: 1993-1994
+Cambodia: 2007-2009
+Cameroon: 1993-2000
+Ghana: 1995-1999, 2001-2005
+Guinea: 2019
+Lao PDR: 2002-2005
+Lesotho: 2008
+Nepal: 2017, 2019
+Sao Tome and Principe: 1984, 1986-1989
+Senegal: 1988-1991
+Sierra Leone: 1987-1991
+Sudan: 2000-2001
+Tanzania: 2016, 2019, 2021-2023
+Zambia: 2007-2009"/>
+<rect class="cell" x="254.1" y="316.8" width="20.3" height="17.9" fill="#436a92" data-tip="Bangladesh: 2010-2014
+Benin: 2007-2009, 2011-2015
+Bhutan: 1995-1996
+Cambodia: 2010
+Ghana: 2000
+Guinea: 2020-2023
+Indonesia: 1980
+Lesotho: 2007, 2009-2021, 2023
+Myanmar: 2012-2014
 Nepal: 2018, 2020-2023
-Sudan: 2006, 2013-2015
-Timor-Leste: 2013-2018
-Togo: 2023
-Yemen, Rep.: 2015
-Zambia: 2008, 2015-2016, 2019"/>
-<rect class="cell" x="294.7" y="316.8" width="20.3" height="17.9" fill="#436a92" data-tip="Angola: 2003
-Bangladesh: 2015
-Benin: 2018-2020, 2023
-Kiribati: 2005, 2007, 2009
-Lao PDR: 2010-2011
-Mauritania: 2006-2007
-Myanmar: 2014, 2016, 2021-2023
-Nigeria: 2005
-Senegal: 2007-2017, 2019
-Solomon Islands: 2005-2006
-Sudan: 2009-2011
-Vanuatu: 2001-2002
-West Bank and Gaza: 2001-2003
-Yemen, Rep.: 2012
-Zambia: 2021, 2023"/>
-<rect class="cell" x="294.7" y="298.8" width="20.3" height="17.9" fill="#436a92" data-tip="Bhutan: 2004-2005
-Cabo Verde: 2000-2002
-Djibouti: 2009-2012
-Honduras: 2001-2003, 2005-2006
-Kiribati: 2006, 2008
-Myanmar: 2017-2019
-Nicaragua: 2005-2007
-Pakistan: 2011-2015, 2023
-Papua New Guinea: 2006-2007
-Philippines: 2005-2006
-Sao Tome and Principe: 2009, 2011-2013, 2015-2016
-Solomon Islands: 2007
-Sri Lanka: 2005-2006
-West Bank and Gaza: 2004
-Yemen, Rep.: 2010-2011, 2013-2014
-Zimbabwe: 2012-2016"/>
-<rect class="cell" x="294.7" y="280.9" width="20.3" height="17.9" fill="#96afca" data-tip="Bhutan: 2006
-Honduras: 2004
-India: 2010, 2012-2013
-Pakistan: 2016, 2019-2020
-Paraguay: 2002
-Samoa: 2000
-Tajikistan: 2023
-Viet Nam: 2008-2009"/>
-<rect class="cell" x="294.7" y="263.0" width="20.3" height="17.9" fill="#688cb0" data-tip="Albania: 2000-2001
-Bolivia: 2006-2007
-Egypt, Arab Rep.: 2000-2001
-Eswatini: 2001-2002
-Georgia: 2004
-Indonesia: 2004-2005
-Kyrgyz Republic: 2017, 2019-2021"/>
-<rect class="cell" x="294.7" y="245.1" width="20.3" height="17.9" fill="#96afca" data-tip="Armenia: 2004
-China: 2002
-Ecuador: 2000
-Egypt, Arab Rep.: 2006
-Kyrgyz Republic: 2012-2014, 2018
-Moldova: 2006
-Mongolia: 2006"/>
-<rect class="cell" x="294.7" y="227.2" width="20.3" height="17.9" fill="#96afca" data-tip="Bosnia and Herzegovina: 2000-2001
-China: 2003
-Iraq: 2002, 2004
-Syrian Arab Republic: 2000-2004"/>
-<rect class="cell" x="294.7" y="209.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Uzbekistan: 2009"/>
-<rect class="cell" x="294.7" y="191.3" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Belarus: 2000-2001
-Kazakhstan: 2000-2001
-Ukraine: 2004"/>
-<rect class="cell" x="294.7" y="173.4" width="20.3" height="17.9" fill="#e7edf4" data-tip="Turkmenistan: 2003-2004"/>
-<rect class="cell" x="314.9" y="388.5" width="20.3" height="17.9" fill="#e7edf4" data-tip="Haiti: 2023
-South Sudan: 2013"/>
-<rect class="cell" x="314.9" y="370.5" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Comoros: 2008, 2011-2012"/>
-<rect class="cell" x="314.9" y="352.6" width="20.3" height="17.9" fill="#688cb0" data-tip="Cameroon: 2008-2009, 2013, 2021-2023
-Comoros: 2013-2014, 2018-2020
-Haiti: 2013-2014, 2018, 2021-2022
-Nigeria: 2009
+Sao Tome and Principe: 2000-2002
+Senegal: 1980-1987, 1992-2000, 2003, 2006, 2009-2010, 2012-2013
+Sri Lanka: 1980-1983
+Sudan: 2020-2022
+Togo: 2021-2023
+Viet Nam: 1995-1996
+Yemen, Rep.: 2017-2018
+Zambia: 2005-2006"/>
+<rect class="cell" x="254.1" y="298.8" width="20.3" height="17.9" fill="#688cb0" data-tip="Benin: 2010, 2016-2020
+Bhutan: 1997
+Honduras: 1995
+Indonesia: 1981-1983
+Lesotho: 2022
+Myanmar: 2021
+Pakistan: 1988-1994, 1997
+Sao Tome and Principe: 1990-1999, 2003-2006
+Senegal: 2001-2002, 2004-2005, 2007-2008, 2011
+Sudan: 2019
+Viet Nam: 1997-1999
+Zambia: 1983-1985, 1988
+Zimbabwe: 2010"/>
+<rect class="cell" x="254.1" y="280.9" width="20.3" height="17.9" fill="#688cb0" data-tip="India: 2005-2006
+Pakistan: 1995-1996, 1998-2004
+Tajikistan: 2014-2018
+Zambia: 1980-1982
+Zimbabwe: 2005-2007"/>
+<rect class="cell" x="254.1" y="263.0" width="20.3" height="17.9" fill="#96afca" data-tip="Albania: 1992
+Georgia: 1994
+India: 2007-2009
+Kyrgyz Republic: 2020-2021
+Tajikistan: 2019"/>
+<rect class="cell" x="254.1" y="245.1" width="20.3" height="17.9" fill="#96afca" data-tip="China: 1991-1992
+Georgia: 1993, 1995
+Kyrgyz Republic: 2008-2017
+Syrian Arab Republic: 1980, 2012"/>
+<rect class="cell" x="254.1" y="227.2" width="20.3" height="17.9" fill="#96afca" data-tip="Armenia: 1995, 1997-1998
+Bosnia and Herzegovina: 1995
+Syrian Arab Republic: 1984-1994"/>
+<rect class="cell" x="254.1" y="209.2" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Armenia: 1996
+Azerbaijan: 1996
+Kyrgyz Republic: 1992"/>
+<rect class="cell" x="254.1" y="191.3" width="20.3" height="17.9" fill="#e7edf4" data-tip="Azerbaijan: 1995"/>
+<rect class="cell" x="274.4" y="406.4" width="20.3" height="17.9" fill="#e7edf4" data-tip="Comoros: 1986"/>
+<rect class="cell" x="274.4" y="388.5" width="20.3" height="17.9" fill="#e7edf4" data-tip="Haiti: 1993-1994"/>
+<rect class="cell" x="274.4" y="370.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Comoros: 1980-1985, 1987-1990, 1992-1993, 1995-1999
+Haiti: 1995-1996, 2023
+South Sudan: 2013-2014"/>
+<rect class="cell" x="274.4" y="352.6" width="20.3" height="17.9" fill="#688cb0" data-tip="Comoros: 2001-2002, 2007-2009, 2011-2012, 2014
+Haiti: 1997-2006, 2009-2011
+Kiribati: 1986
+Sierra Leone: 1980-1981, 1984
+Timor-Leste: 2010-2011"/>
+<rect class="cell" x="274.4" y="334.7" width="20.3" height="17.9" fill="#436a92" data-tip="Cabo Verde: 1995-1996
+Cameroon: 1980, 2001-2009, 2013, 2017, 2021-2022
+Comoros: 2003-2006, 2010, 2013, 2015-2016, 2018-2020
+Cote d&#x27;Ivoire: 2011
+Ghana: 2006-2008
+Haiti: 2007-2008, 2012-2022
+Kenya: 1983-2009, 2012-2013
+Kiribati: 1987, 1990-1991
+Sao Tome and Principe: 1980-1983, 1985
+Sierra Leone: 1982
+Sudan: 2002-2004
+Timor-Leste: 2012
+Yemen, Rep.: 2016
 Zambia: 2010"/>
-<rect class="cell" x="314.9" y="334.7" width="20.3" height="17.9" fill="#436a92" data-tip="Cameroon: 2011-2012, 2014, 2016-2020
-Comoros: 2021, 2023
-Congo, Rep.: 2005
-Cote d&#x27;Ivoire: 2008-2013, 2015
-Guinea: 2023
-Kenya: 2014-2017
-Nigeria: 2006-2007
-Sudan: 2007
-Timor-Leste: 2020, 2023
-Vanuatu: 2004
-West Bank and Gaza: 2000
-Zambia: 2011-2014, 2017"/>
-<rect class="cell" x="314.9" y="316.8" width="20.3" height="17.9" fill="#436a92" data-tip="Angola: 2004, 2020
-Bangladesh: 2016-2017
-Cambodia: 2015-2017
-Comoros: 2022
-Ghana: 2011-2012, 2015
-Kiribati: 2010-2011, 2013-2016, 2019-2020
-Lao PDR: 2012
-Mauritania: 2008-2010, 2015-2016
-Papua New Guinea: 2008
-Senegal: 2018, 2020-2023
-Sudan: 2008
-Timor-Leste: 2019
-Vanuatu: 2000, 2003
-Zambia: 2018, 2022"/>
-<rect class="cell" x="314.9" y="298.8" width="20.3" height="17.9" fill="#688cb0" data-tip="Cabo Verde: 2003
-Guatemala: 2000-2003
-Honduras: 2009
-Lao PDR: 2013
-Mauritania: 2014, 2017-2018
-Myanmar: 2020
-Nicaragua: 2008-2013
-Papua New Guinea: 2009
-Paraguay: 2000-2001
-Philippines: 2007
-Sao Tome and Principe: 2014, 2017-2018
-Solomon Islands: 2008-2010
-Sri Lanka: 2007
-Tonga: 2001
-West Bank and Gaza: 2006-2007"/>
-<rect class="cell" x="314.9" y="280.9" width="20.3" height="17.9" fill="#688cb0" data-tip="Equatorial Guinea: 2000
-Honduras: 2007-2008
-India: 2011
-Mauritania: 2019-2020
-Morocco: 2000-2002
-Pakistan: 2017-2018, 2021-2022
-Paraguay: 2003-2004
-Samoa: 2001-2003
-Tonga: 2002
-West Bank and Gaza: 2005"/>
-<rect class="cell" x="314.9" y="263.0" width="20.3" height="17.9" fill="#96afca" data-tip="Albania: 2002
-Bolivia: 2008-2009
-Eswatini: 2000
-India: 2014-2016
-Indonesia: 2006-2007
-Kyrgyz Republic: 2022
-Namibia: 2002
-Viet Nam: 2010"/>
-<rect class="cell" x="314.9" y="245.1" width="20.3" height="17.9" fill="#96afca" data-tip="Algeria: 2000
-Armenia: 2005
-Ecuador: 2001
-Egypt, Arab Rep.: 2007
-Georgia: 2005
-Iraq: 2005
-Jordan: 2001
-Moldova: 2007
-Mongolia: 2007, 2009"/>
-<rect class="cell" x="314.9" y="227.2" width="20.3" height="17.9" fill="#96afca" data-tip="Bosnia and Herzegovina: 2002
-China: 2004-2005
-Iraq: 2001
-Jordan: 2000, 2002-2003
-North Macedonia: 2001
-Suriname: 2001
-Syrian Arab Republic: 2005-2006"/>
-<rect class="cell" x="314.9" y="209.2" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Azerbaijan: 2005
-Iran, Islamic Rep.: 2000
-Romania: 2000-2001
+<rect class="cell" x="274.4" y="316.8" width="20.3" height="17.9" fill="#436a92" data-tip="Benin: 2021-2022
+Cambodia: 2011-2013
+Cameroon: 1990-1992, 2010-2012, 2014-2016, 2018, 2020
+Comoros: 2017, 2021-2023
+Cote d&#x27;Ivoire: 2003-2008
+Ghana: 2009-2010
+Kenya: 1980-1982, 2010-2011, 2014
+Kiribati: 2003
+Lao PDR: 2006-2008
+Liberia: 1989
+Mauritania: 1990-1991, 2000-2003
+Myanmar: 2015
+Nicaragua: 1991
+Nigeria: 1983-1988, 1994-2000
+Sri Lanka: 1984-1991
+Sudan: 2005-2009, 2011-2015
+Timor-Leste: 2013-2018, 2023
+Yemen, Rep.: 2015
+Zambia: 2011-2020, 2022"/>
+<rect class="cell" x="274.4" y="298.8" width="20.3" height="17.9" fill="#436a92" data-tip="Bangladesh: 2015-2018
+Benin: 2023
+Bhutan: 1998-2002
+Eswatini: 1983
+Honduras: 1996-1997
+Indonesia: 1984-1989
+Kiribati: 2004-2012
+Mauritania: 2004-2005
+Morocco: 1981-1985
+Myanmar: 2016-2020, 2022-2023
+Nicaragua: 1988-1990, 1992-1998
+Nigeria: 1989
+Sao Tome and Principe: 2007-2009, 2018, 2020-2023
+Senegal: 2014-2023
+Sudan: 2010, 2016-2018
+Viet Nam: 2000
+Zambia: 2021, 2023
+Zimbabwe: 2011, 2016-2017, 2019-2021"/>
+<rect class="cell" x="274.4" y="280.9" width="20.3" height="17.9" fill="#688cb0" data-tip="Albania: 1994
+Eswatini: 1980-1982, 1984-1986
+Morocco: 1980
+Nicaragua: 1999-2000
+Pakistan: 2005-2016
+Sao Tome and Principe: 2010-2017, 2019
+Viet Nam: 2001-2003
+Zimbabwe: 2003-2004, 2012-2015, 2022-2023"/>
+<rect class="cell" x="274.4" y="263.0" width="20.3" height="17.9" fill="#96afca" data-tip="Albania: 1993
+Egypt, Arab Rep.: 1980
+India: 2010-2013
+Mauritania: 1993-1995, 1997-1999
+Tajikistan: 2020-2023"/>
+<rect class="cell" x="274.4" y="245.1" width="20.3" height="17.9" fill="#688cb0" data-tip="Albania: 1991
+Armenia: 1999-2001
+China: 1993-1994
+Georgia: 1996-1998
+Iraq: 1991
+Kyrgyz Republic: 2018-2019, 2022-2023
+Mauritania: 1992
+Moldova: 1996, 1998-2001
+Mongolia: 1993-1994
+Syrian Arab Republic: 1981-1983"/>
+<rect class="cell" x="274.4" y="227.2" width="20.3" height="17.9" fill="#96afca" data-tip="Moldova: 1997
+Mongolia: 1981, 1992
+Syrian Arab Republic: 1995-1997, 2000-2004"/>
+<rect class="cell" x="274.4" y="209.2" width="20.3" height="17.9" fill="#96afca" data-tip="Azerbaijan: 1997-1999
+Syrian Arab Republic: 1998-1999, 2005-2008
 Venezuela, RB: 2020"/>
-<rect class="cell" x="314.9" y="191.3" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Belarus: 2002-2003
-Bulgaria: 2000-2001
-Kazakhstan: 2002"/>
-<rect class="cell" x="314.9" y="173.4" width="20.3" height="17.9" fill="#e7edf4" data-tip="Turkmenistan: 2005"/>
-<rect class="cell" x="314.9" y="155.5" width="20.3" height="17.9" fill="#e7edf4" data-tip="Russian Federation: 2000"/>
-<rect class="cell" x="335.2" y="334.7" width="20.3" height="17.9" fill="#688cb0" data-tip="Angola: 2005
-Cote d&#x27;Ivoire: 2014, 2018, 2020
-Kenya: 2018-2023
-Nigeria: 2008, 2010
-Solomon Islands: 2017-2023
-Vanuatu: 2005-2006"/>
-<rect class="cell" x="335.2" y="316.8" width="20.3" height="17.9" fill="#436a92" data-tip="Angola: 2021
-Bangladesh: 2018, 2020
-Congo, Rep.: 2006-2007
-Cote d&#x27;Ivoire: 2016-2017, 2019, 2022
-Equatorial Guinea: 2001
-Ghana: 2013-2014, 2016-2019
-Kiribati: 2012, 2017-2018, 2021-2023
-Mauritania: 2011, 2013
-Nigeria: 2016-2018, 2023
-Papua New Guinea: 2010-2011
-Solomon Islands: 2013-2016
-Timor-Leste: 2022
-Vanuatu: 2007
-Zimbabwe: 2019-2020"/>
-<rect class="cell" x="335.2" y="298.8" width="20.3" height="17.9" fill="#436a92" data-tip="Angola: 2016
-Bangladesh: 2019
-Bhutan: 2007-2008
-Cabo Verde: 2004
-Cambodia: 2018-2022
-Congo, Rep.: 2009, 2017, 2020
-Djibouti: 2013
-Ghana: 2020, 2022
-Guatemala: 2004-2006
-Honduras: 2010-2011
-Lao PDR: 2014
-Mauritania: 2012, 2021, 2023
-Nicaragua: 2014, 2017-2022
-Papua New Guinea: 2016
-Philippines: 2008-2010
-Sao Tome and Principe: 2019-2020
-Solomon Islands: 2011-2012
-Sri Lanka: 2008-2009
-West Bank and Gaza: 2008-2009
-Zimbabwe: 2018, 2023"/>
-<rect class="cell" x="335.2" y="280.9" width="20.3" height="17.9" fill="#436a92" data-tip="Bhutan: 2009
-Congo, Rep.: 2016
-Djibouti: 2014
-El Salvador: 2000-2004
-Honduras: 2012-2016, 2020
-Lao PDR: 2015
-Mauritania: 2022
-Micronesia, Fed. Sts.: 2000-2007
-Morocco: 2003-2005
-Namibia: 2000
-Nicaragua: 2015-2016
-Paraguay: 2005
-Peru: 2000-2003
-Samoa: 2004
-Tonga: 2000, 2003-2004"/>
-<rect class="cell" x="335.2" y="263.0" width="20.3" height="17.9" fill="#688cb0" data-tip="Albania: 2003
-Bolivia: 2010-2011
-Cabo Verde: 2005-2006
-Colombia: 2003
-Ecuador: 2002-2003
-Eswatini: 2003
-Fiji: 2002
-Georgia: 2006
-India: 2017-2022
-Indonesia: 2008-2009
-Kyrgyz Republic: 2023
-Namibia: 2001
-Viet Nam: 2011-2012"/>
-<rect class="cell" x="335.2" y="245.1" width="20.3" height="17.9" fill="#688cb0" data-tip="Algeria: 2001-2003
-Armenia: 2006
-Bosnia and Herzegovina: 2003
-Egypt, Arab Rep.: 2008-2009
-Fiji: 2000-2001
-Iraq: 2006
-Lao PDR: 2016, 2022-2023
-Maldives: 2000
-Moldova: 2008-2009
-Mongolia: 2008
-Syrian Arab Republic: 2012
-Tunisia: 2000-2002"/>
-<rect class="cell" x="335.2" y="227.2" width="20.3" height="17.9" fill="#688cb0" data-tip="Iraq: 2000
-Jordan: 2004-2006
-North Macedonia: 2000, 2002
-Suriname: 2000, 2002
-Syrian Arab Republic: 2007
-Thailand: 2000-2003
-Uzbekistan: 2019-2020"/>
-<rect class="cell" x="335.2" y="209.2" width="20.3" height="17.9" fill="#96afca" data-tip="China: 2006
-Iran, Islamic Rep.: 2001
-Naoero: 2007
-Romania: 2002
-Ukraine: 2015-2016
-Uzbekistan: 2010-2011, 2017-2018
-Venezuela, RB: 2021"/>
-<rect class="cell" x="335.2" y="191.3" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Bulgaria: 2002
-Iran, Islamic Rep.: 2002-2003
-Kazakhstan: 2003"/>
-<rect class="cell" x="335.2" y="173.4" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Equatorial Guinea: 2002
-Naoero: 2001-2002
-Turkmenistan: 2006
-Ukraine: 2005"/>
-<rect class="cell" x="335.2" y="155.5" width="20.3" height="17.9" fill="#e7edf4" data-tip="Russian Federation: 2001"/>
-<rect class="cell" x="355.5" y="334.7" width="20.3" height="17.9" fill="#e7edf4" data-tip="Timor-Leste: 2021"/>
-<rect class="cell" x="355.5" y="316.8" width="20.3" height="17.9" fill="#688cb0" data-tip="Angola: 2006, 2017, 2023
-Congo, Rep.: 2008
-Cote d&#x27;Ivoire: 2021, 2023
-Nigeria: 2011-2013, 2015, 2020-2022
-Papua New Guinea: 2012-2014, 2021
-Sao Tome and Principe: 2022
-Vanuatu: 2008, 2010, 2012
-Zimbabwe: 2021"/>
-<rect class="cell" x="355.5" y="298.8" width="20.3" height="17.9" fill="#436a92" data-tip="Angola: 2018-2019
-Bangladesh: 2021-2023
-Congo, Rep.: 2018-2019, 2021-2023
-Djibouti: 2015-2020
-Ghana: 2021, 2023
-Guatemala: 2007-2010
-Nicaragua: 2023
-Papua New Guinea: 2015, 2017-2020, 2023
-Philippines: 2011-2014
-Sao Tome and Principe: 2021, 2023
-Sri Lanka: 2010
-Vanuatu: 2009
-West Bank and Gaza: 2010-2011
-Zimbabwe: 2022"/>
-<rect class="cell" x="355.5" y="280.9" width="20.3" height="17.9" fill="#688cb0" data-tip="Bhutan: 2010-2011
-Cambodia: 2023
-Congo, Rep.: 2010, 2015
-El Salvador: 2005-2009
-Honduras: 2017-2019, 2021-2022
-Micronesia, Fed. Sts.: 2008, 2010-2012
-Morocco: 2006-2007
-Paraguay: 2006
-Peru: 2004
-Philippines: 2015-2016
-Samoa: 2005-2006
-Tonga: 2005-2007, 2009"/>
-<rect class="cell" x="355.5" y="263.0" width="20.3" height="17.9" fill="#688cb0" data-tip="Albania: 2004-2005
-Bhutan: 2012-2015
-Bolivia: 2012-2013, 2015
-Colombia: 2000-2002
-Dominican Republic: 2004
-Eswatini: 2004-2006, 2008
-Fiji: 2003
-India: 2023
-Micronesia, Fed. Sts.: 2009, 2013-2016
-Namibia: 2003
-Peru: 2005
-Viet Nam: 2013-2014"/>
-<rect class="cell" x="355.5" y="245.1" width="20.3" height="17.9" fill="#688cb0" data-tip="Algeria: 2004
-Armenia: 2009
-Bosnia and Herzegovina: 2004-2005
-Colombia: 2004
-Cuba: 2000-2002
-Dominican Republic: 2000-2001, 2003
-Ecuador: 2004-2005
-Egypt, Arab Rep.: 2010-2012, 2017-2019
-Georgia: 2007, 2009
-Lao PDR: 2017-2021
-Moldova: 2010-2011, 2015
-Syrian Arab Republic: 2011
-Tunisia: 2003
-Viet Nam: 2015-2017"/>
-<rect class="cell" x="355.5" y="227.2" width="20.3" height="17.9" fill="#96afca" data-tip="Armenia: 2007
-Brazil: 2002
-Jordan: 2007
-Moldova: 2016
-Mongolia: 2010
-North Macedonia: 2003-2004
-Suriname: 2003-2004
-Syrian Arab Republic: 2008-2010
-Thailand: 2004-2005"/>
-<rect class="cell" x="355.5" y="209.2" width="20.3" height="17.9" fill="#96afca" data-tip="Argentina: 2002
-Azerbaijan: 2006
-China: 2007
-Naoero: 2006
-Romania: 2003
-Ukraine: 2017
-Uzbekistan: 2012-2013, 2021-2022
+<rect class="cell" x="274.4" y="191.3" width="20.3" height="17.9" fill="#96afca" data-tip="Azerbaijan: 1994
+Uzbekistan: 1992-2001
+Venezuela, RB: 2021-2023"/>
+<rect class="cell" x="274.4" y="173.4" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Ukraine: 1996-2000"/>
+<rect class="cell" x="294.7" y="370.5" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Haiti: 1986, 1990-1992"/>
+<rect class="cell" x="294.7" y="352.6" width="20.3" height="17.9" fill="#96afca" data-tip="Haiti: 1987-1989
+Kiribati: 1984-1985, 1992-1999"/>
+<rect class="cell" x="294.7" y="334.7" width="20.3" height="17.9" fill="#96afca" data-tip="Cabo Verde: 1997-1999
+Cameroon: 1981, 1984, 1987-1988, 2019, 2023
+Cote d&#x27;Ivoire: 1991-1995
+Kiribati: 1988-1989, 2001
+Mauritania: 1986"/>
+<rect class="cell" x="294.7" y="316.8" width="20.3" height="17.9" fill="#436a92" data-tip="Angola: 1993-1994
+Cambodia: 2014-2015
+Cameroon: 1982-1983, 1985-1986, 1989
+Cote d&#x27;Ivoire: 1996-2002, 2009-2010, 2012-2015
+Kenya: 2015-2023
+Kiribati: 1980-1983, 2000, 2002
+Lao PDR: 2009
+Mauritania: 1980-1983, 1987-1988
+Nigeria: 1981-1982, 1990, 2001-2004
+Solomon Islands: 1985-1987, 2022-2023
+Sri Lanka: 1992-1993
+Timor-Leste: 2019, 2022"/>
+<rect class="cell" x="294.7" y="298.8" width="20.3" height="17.9" fill="#436a92" data-tip="Bangladesh: 2019-2022
+Bhutan: 2003
+Bolivia: 1985-1988
+Cambodia: 2016-2017
+Ghana: 2011-2017
+Honduras: 2000
+Kiribati: 2013-2020
+Lao PDR: 2010-2012
+Mauritania: 1984-1985, 1989, 2006-2016
+Morocco: 1986-1987
+Nicaragua: 1982, 1984-1987
+Nigeria: 1991-1993
+Philippines: 1984-1992
+Solomon Islands: 1988-1990, 2000-2007
+Sri Lanka: 1994-1998
+West Bank and Gaza: 2002
+Yemen, Rep.: 1993
+Zimbabwe: 2018"/>
+<rect class="cell" x="294.7" y="280.9" width="20.3" height="17.9" fill="#436a92" data-tip="Albania: 1995-1997, 1999
+Bhutan: 2004-2005
+Bolivia: 1983-1984, 1989-1994
+Congo, Rep.: 2020-2023
+Eswatini: 1987-1989
+Honduras: 1998-1999, 2001-2003
+Indonesia: 1990-1994
+Mauritania: 2017-2023
+Morocco: 1988-1995, 1997
+Nicaragua: 2001-2011
+Pakistan: 2017-2020, 2022-2023
+Papua New Guinea: 2003-2004
+Philippines: 1993-2002
+Thailand: 1980-1986
+Viet Nam: 2004, 2006
+Yemen, Rep.: 1990-1992
+Zimbabwe: 1982-1985, 1997-1998, 2000-2002"/>
+<rect class="cell" x="294.7" y="263.0" width="20.3" height="17.9" fill="#688cb0" data-tip="Albania: 1998
+Bhutan: 2006
+Bosnia and Herzegovina: 1996
+Egypt, Arab Rep.: 1981-1983
+Georgia: 2001
+India: 2014-2017, 2020
+Indonesia: 1998-2000
+Mauritania: 1996
+Pakistan: 2021
+Viet Nam: 2005, 2007
+Zimbabwe: 1980-1981, 1986-1996, 1999"/>
+<rect class="cell" x="294.7" y="245.1" width="20.3" height="17.9" fill="#688cb0" data-tip="Albania: 1990
+Armenia: 2002-2003
+China: 1995-1997
+Egypt, Arab Rep.: 1984-1987
+Georgia: 1999-2000, 2002
+Moldova: 1994-1995, 2002, 2004
+Mongolia: 1995-2003"/>
+<rect class="cell" x="294.7" y="227.2" width="20.3" height="17.9" fill="#96afca" data-tip="Albania: 1987-1988
+Iraq: 1992
+Moldova: 2003
+Mongolia: 1982-1988, 1990-1991
+Syrian Arab Republic: 2009-2011"/>
+<rect class="cell" x="294.7" y="209.2" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Albania: 1980, 1984-1985
+Azerbaijan: 2000-2002
+Georgia: 1992"/>
+<rect class="cell" x="294.7" y="191.3" width="20.3" height="17.9" fill="#96afca" data-tip="Azerbaijan: 1993
+Turkmenistan: 1997
+Uzbekistan: 1987-1991, 2002-2006
 Venezuela, RB: 2019"/>
-<rect class="cell" x="355.5" y="191.3" width="20.3" height="17.9" fill="#96afca" data-tip="Belarus: 2004
-Bulgaria: 2003
-Iran, Islamic Rep.: 2004
-Kazakhstan: 2004
-Naoero: 2005
-South Africa: 2001-2002
-Turkmenistan: 2007
-Ukraine: 2009"/>
-<rect class="cell" x="355.5" y="173.4" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Equatorial Guinea: 2003
-Naoero: 2000, 2003
-Ukraine: 2006"/>
-<rect class="cell" x="355.5" y="155.5" width="20.3" height="17.9" fill="#e7edf4" data-tip="Russian Federation: 2002-2003"/>
-<rect class="cell" x="375.7" y="316.8" width="20.3" height="17.9" fill="#96afca" data-tip="Angola: 2007, 2022
-Nigeria: 2014, 2019
-Vanuatu: 2013-2017
-Zimbabwe: 2017"/>
-<rect class="cell" x="375.7" y="298.8" width="20.3" height="17.9" fill="#688cb0" data-tip="Angola: 2009, 2015
-Djibouti: 2021-2023
-Guatemala: 2011-2014
-Papua New Guinea: 2022
-Sri Lanka: 2011-2013
-Vanuatu: 2011, 2018-2023
-West Bank and Gaza: 2012-2014, 2018"/>
-<rect class="cell" x="375.7" y="280.9" width="20.3" height="17.9" fill="#436a92" data-tip="Cabo Verde: 2020
-Congo, Rep.: 2011-2012, 2014
-El Salvador: 2010-2015
-Eswatini: 2014-2016, 2023
-Fiji: 2009
-Honduras: 2023
-Morocco: 2008-2009
-Paraguay: 2007
-Philippines: 2017-2023
-Sri Lanka: 2022-2023
-Tonga: 2008, 2010
-West Bank and Gaza: 2015-2017, 2019-2023"/>
-<rect class="cell" x="375.7" y="263.0" width="20.3" height="17.9" fill="#436a92" data-tip="Albania: 2006-2007
-Bhutan: 2016-2018
-Bolivia: 2014, 2016, 2020
-Cabo Verde: 2007, 2009-2010, 2012, 2015-2016
-Colombia: 2005
-Congo, Rep.: 2013
-Costa Rica: 2000
-Eswatini: 2007, 2009, 2020
-Gabon: 2001
-Guyana: 2006
-Indonesia: 2010-2017
-Micronesia, Fed. Sts.: 2017-2022
-Morocco: 2010-2023
-Namibia: 2004-2005
-Peru: 2006-2007
-Samoa: 2007-2011
-St. Vincent and the Grenadines: 2000"/>
-<rect class="cell" x="375.7" y="245.1" width="20.3" height="17.9" fill="#436a92" data-tip="Algeria: 2005-2006
-Bhutan: 2019
-Bosnia and Herzegovina: 2006
-Botswana: 2000-2002
-Colombia: 2006
-Cuba: 2003-2005
-Dominican Republic: 2002
-Ecuador: 2006-2007
-Egypt, Arab Rep.: 2013-2016, 2020-2021, 2023
-Fiji: 2004-2007, 2010
-Georgia: 2008, 2010
-Guyana: 2007
-Iraq: 2007, 2009
-Lebanon: 2022
-Maldives: 2001-2003, 2005
-Tunisia: 2004-2007, 2017-2020, 2022
-Uruguay: 2003
-Viet Nam: 2018"/>
-<rect class="cell" x="375.7" y="227.2" width="20.3" height="17.9" fill="#688cb0" data-tip="Algeria: 2020
-Armenia: 2008, 2010-2013, 2015-2016
+<rect class="cell" x="294.7" y="173.4" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Ukraine: 1994-1995, 2001-2003"/>
+<rect class="cell" x="314.9" y="388.5" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Maldives: 1980-1982"/>
+<rect class="cell" x="314.9" y="370.5" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Haiti: 1981-1985"/>
+<rect class="cell" x="314.9" y="352.6" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Congo, Rep.: 1999
+Haiti: 1980
+West Bank and Gaza: 1997"/>
+<rect class="cell" x="314.9" y="334.7" width="20.3" height="17.9" fill="#96afca" data-tip="Congo, Rep.: 1993-1998, 2000-2004
+Nigeria: 2009"/>
+<rect class="cell" x="314.9" y="316.8" width="20.3" height="17.9" fill="#688cb0" data-tip="Angola: 1995-2001
+Congo, Rep.: 1980-1981, 2005-2006
+Cote d&#x27;Ivoire: 1984-1986, 1989-1990, 2017-2020
+El Salvador: 1987
+Liberia: 1987
+Nigeria: 1980, 2006-2008, 2010
+Solomon Islands: 1980, 1991-1999, 2016-2021
+Timor-Leste: 2020-2021
+Yemen, Rep.: 1999"/>
+<rect class="cell" x="314.9" y="298.8" width="20.3" height="17.9" fill="#436a92" data-tip="Bangladesh: 2023
+Cabo Verde: 2000
+Cambodia: 2018
+Congo, Rep.: 2007-2008
+Cote d&#x27;Ivoire: 1983, 1987-1988, 2016, 2021-2023
+El Salvador: 1986, 1988-1989
+Ghana: 2018-2020
+Kiribati: 2021-2023
+Lao PDR: 2013-2014
+Liberia: 1986, 1988
+Nicaragua: 1980-1981, 1983
+Nigeria: 2005, 2020-2023
+Papua New Guinea: 1980-1992, 1997-2002, 2008-2013
+Philippines: 1981-1983
+Solomon Islands: 1981-1984, 2008-2015
+Sri Lanka: 1999-2004
+West Bank and Gaza: 2001, 2003
+Yemen, Rep.: 1994-1998, 2012"/>
+<rect class="cell" x="314.9" y="280.9" width="20.3" height="17.9" fill="#436a92" data-tip="Bhutan: 2007-2008
+Bolivia: 1980-1982, 1995-1996, 1998, 2001-2002
+Botswana: 1982
+Cabo Verde: 2001-2003
+Cambodia: 2019-2023
+Congo, Rep.: 2009, 2017-2019
+Djibouti: 2013-2014
+Eswatini: 1990-1997
+Ghana: 2021-2023
+Honduras: 2004-2014, 2016, 2020
+Indonesia: 1995
+Liberia: 1984-1985
+Morocco: 1996, 1998-2001, 2003
+Nicaragua: 2012-2023
+Papua New Guinea: 2005-2007
+Philippines: 1980, 2003-2009
+Sri Lanka: 2005
+Yemen, Rep.: 2000-2009, 2011, 2013-2014"/>
+<rect class="cell" x="314.9" y="263.0" width="20.3" height="17.9" fill="#688cb0" data-tip="Albania: 2000-2001
+Bhutan: 2009
+Bolivia: 1997, 1999-2000, 2003-2007
+Botswana: 1980-1981
+Congo, Rep.: 2011, 2016
+Egypt, Arab Rep.: 1992-1993
+Eswatini: 1998-1999
+Honduras: 2015
+Indonesia: 1996-1997, 2001-2006
+Lao PDR: 2015
+Lebanon: 1989
+Morocco: 2002, 2004
+Thailand: 1987-1988
+Tunisia: 1980-1983, 1987, 1991
+Viet Nam: 2008-2010"/>
+<rect class="cell" x="314.9" y="245.1" width="20.3" height="17.9" fill="#688cb0" data-tip="Albania: 2002
+Armenia: 2004
+China: 1998-2000
+Egypt, Arab Rep.: 1988-1991, 1994-1998
+Eswatini: 2000-2001
+Georgia: 2003-2005
+India: 2018-2019, 2021-2023
+Iraq: 1984-1985
+Lao PDR: 2016
+Moldova: 2009-2010
+Mongolia: 2004-2006
+Tunisia: 1984-1986, 1988-1990, 1992-1995
+Viet Nam: 2011-2013"/>
+<rect class="cell" x="314.9" y="227.2" width="20.3" height="17.9" fill="#96afca" data-tip="Albania: 1986, 1989
+Armenia: 2005
+Bosnia and Herzegovina: 1997-1998
+Iraq: 1986, 2003
+Moldova: 1993, 2005-2008
+Mongolia: 1989"/>
+<rect class="cell" x="314.9" y="209.2" width="20.3" height="17.9" fill="#96afca" data-tip="Albania: 1981-1983
+Azerbaijan: 2003-2004
+Iraq: 1989, 1993-1996
+Moldova: 1992
+Ukraine: 2022-2023
+Uzbekistan: 2008-2009"/>
+<rect class="cell" x="314.9" y="191.3" width="20.3" height="17.9" fill="#96afca" data-tip="Belarus: 1994-1997
+Turkmenistan: 1995, 1999-2000, 2002
+Ukraine: 2014-2018, 2020
+Uzbekistan: 2007"/>
+<rect class="cell" x="314.9" y="173.4" width="20.3" height="17.9" fill="#96afca" data-tip="Azerbaijan: 1992
+Turkmenistan: 1994, 1996, 1998, 2001, 2003
+Ukraine: 2004-2006, 2009-2010"/>
+<rect class="cell" x="314.9" y="155.5" width="20.3" height="17.9" fill="#e7edf4" data-tip="Ukraine: 1993"/>
+<rect class="cell" x="335.2" y="388.5" width="20.3" height="17.9" fill="#e7edf4" data-tip="Maldives: 1983"/>
+<rect class="cell" x="335.2" y="352.6" width="20.3" height="17.9" fill="#e7edf4" data-tip="Equatorial Guinea: 1997"/>
+<rect class="cell" x="335.2" y="334.7" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Congo, Rep.: 1984
+Equatorial Guinea: 1998
+Maldives: 1984
+West Bank and Gaza: 1999"/>
+<rect class="cell" x="335.2" y="316.8" width="20.3" height="17.9" fill="#688cb0" data-tip="Angola: 1982-1987, 1989-1992, 2002, 2005
+Congo, Rep.: 1982-1983, 1985-1986, 1988-1992
+El Salvador: 1981-1985
+Guatemala: 1984-1989, 1991
+Nigeria: 2011-2012
+St. Vincent and the Grenadines: 1980-1984
+Tonga: 1981-1984
+Vanuatu: 2002, 2004
+West Bank and Gaza: 1998, 2000"/>
+<rect class="cell" x="335.2" y="298.8" width="20.3" height="17.9" fill="#688cb0" data-tip="Angola: 2003-2004, 2020-2023
+Congo, Rep.: 1987
+Cote d&#x27;Ivoire: 1980-1982
+Djibouti: 2017-2018, 2020
+El Salvador: 1980, 1990-1994
+Guatemala: 1983, 1990, 1992-1994
+Nigeria: 2013-2019
+Papua New Guinea: 1993-1996, 2014-2017, 2020-2021, 2023
+Samoa: 1980-1983, 1985-1988, 1992
+Vanuatu: 2003"/>
+<rect class="cell" x="335.2" y="280.9" width="20.3" height="17.9" fill="#436a92" data-tip="Botswana: 1983-1984
+Cabo Verde: 2004
+Congo, Rep.: 2010
+Djibouti: 2015-2016, 2019, 2021
+Dominican Republic: 1980-1982, 1984-1985
+El Salvador: 1995-1998
+Guyana: 1989-1991
+Liberia: 1981-1983
+Mauritius: 1980-1985
+Namibia: 1994
+Papua New Guinea: 2018-2019, 2022
+Philippines: 2010-2015
+Samoa: 1984, 1989-1991, 1993-1999
+Sri Lanka: 2006-2009
+Vanuatu: 1987-1989
+West Bank and Gaza: 2004-2010, 2020
+Yemen, Rep.: 2010"/>
+<rect class="cell" x="335.2" y="263.0" width="20.3" height="17.9" fill="#436a92" data-tip="Belize: 1983-1985
+Bhutan: 2010-2014
+Bolivia: 2008-2011
+Botswana: 1985-1986
+Cabo Verde: 2005-2006
+Congo, Rep.: 2012-2015
+Dominican Republic: 1983, 1986-1988, 1990-1991
+Eswatini: 2003-2007
+Guyana: 1987-1988, 1992-1993
+Honduras: 2017-2019, 2021-2023
+Lebanon: 1990
+Liberia: 1980
+Micronesia, Fed. Sts.: 2000-2010, 2013-2014, 2022
+Morocco: 2005-2012
+Peru: 1989-1993
+Thailand: 1989
+Vanuatu: 1980"/>
+<rect class="cell" x="335.2" y="245.1" width="20.3" height="17.9" fill="#688cb0" data-tip="Albania: 2003-2006
+Bolivia: 2012-2014, 2020
+Egypt, Arab Rep.: 1999-2006
+Eswatini: 2002
+Georgia: 2006
+Guyana: 1982-1986
+Indonesia: 2007-2012
+Iraq: 1980-1983
+Lao PDR: 2020, 2022
+Micronesia, Fed. Sts.: 2015-2016
+Moldova: 2011
+Mongolia: 2007
+Namibia: 1990
+Thailand: 1990-1991
+Tunisia: 1996-2000
+Viet Nam: 2014-2015"/>
+<rect class="cell" x="335.2" y="227.2" width="20.3" height="17.9" fill="#688cb0" data-tip="Armenia: 2006-2007, 2009-2010
+Bosnia and Herzegovina: 1999-2003
+China: 2001-2003
+Egypt, Arab Rep.: 2007
+Georgia: 2007, 2009
+Iran, Islamic Rep.: 1988-1989
+Iraq: 1987-1988
+Lao PDR: 2017-2019, 2021, 2023
+Moldova: 2012-2016
+Mongolia: 2008-2010
+Viet Nam: 2016-2017"/>
+<rect class="cell" x="335.2" y="209.2" width="20.3" height="17.9" fill="#96afca" data-tip="Azerbaijan: 2005
+Iraq: 1997
+North Macedonia: 1994-1996
+Uzbekistan: 2010-2013"/>
+<rect class="cell" x="335.2" y="191.3" width="20.3" height="17.9" fill="#96afca" data-tip="Belarus: 1998-2002
+Ukraine: 2019, 2021
+Venezuela, RB: 2018"/>
+<rect class="cell" x="335.2" y="173.4" width="20.3" height="17.9" fill="#96afca" data-tip="Azerbaijan: 1990-1991
+Belarus: 1992-1993
+Turkmenistan: 1992-1993, 2004-2006
+Ukraine: 2007-2008, 2011-2013
+Venezuela, RB: 2017"/>
+<rect class="cell" x="335.2" y="155.5" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Belarus: 1990-1991
+Turkmenistan: 1987-1989
+Ukraine: 1991-1992"/>
+<rect class="cell" x="355.5" y="334.7" width="20.3" height="17.9" fill="#96afca" data-tip="Equatorial Guinea: 1999
+Maldives: 1985, 1987
+Tonga: 1986
+Vanuatu: 1992-1999"/>
+<rect class="cell" x="355.5" y="316.8" width="20.3" height="17.9" fill="#96afca" data-tip="Angola: 1980-1981, 1988
+Dominica: 1980
+Grenada: 1980
+Maldives: 1986
+Paraguay: 1982-1983
+St. Vincent and the Grenadines: 1985-1988
+Tonga: 1985
+Vanuatu: 2000, 2005-2006"/>
+<rect class="cell" x="355.5" y="298.8" width="20.3" height="17.9" fill="#688cb0" data-tip="Angola: 2006-2008, 2017-2019
+Djibouti: 2022-2023
+Dominica: 1981
+Grenada: 1981-1982
+Guatemala: 1980-1982, 1995-1997
+Paraguay: 1980, 1984-1986
+St. Vincent and the Grenadines: 1989
+Tonga: 1987
+Vanuatu: 1991, 2001, 2007-2010, 2012-2017"/>
+<rect class="cell" x="355.5" y="280.9" width="20.3" height="17.9" fill="#436a92" data-tip="Angola: 2009-2012, 2015-2016
+Belize: 1988
+El Salvador: 1999
+Guatemala: 1998-2012
+Mauritius: 1987
+Namibia: 1991-1993
+Sri Lanka: 2010-2012
+Tonga: 1988-1993
+Vanuatu: 1981-1986, 1990, 2011, 2018-2023
+West Bank and Gaza: 2011-2019, 2021"/>
+<rect class="cell" x="355.5" y="263.0" width="20.3" height="17.9" fill="#436a92" data-tip="Belize: 1982, 1987
+Bhutan: 2015
+Botswana: 1987-1988
+Cabo Verde: 2009, 2020-2021
+Dominican Republic: 1989, 1992-1997
+El Salvador: 2000-2013
+Eswatini: 2008-2018, 2020, 2022
+Fiji: 1983-1994
+Guyana: 1994-1996
+Mauritius: 1986, 1988-1989
+Micronesia, Fed. Sts.: 2011-2012, 2018-2021, 2023
+Morocco: 2013-2016
+Namibia: 1995-2000, 2002-2004
+Peru: 1983-1986, 1988, 1994-2004
+Philippines: 2016-2022
+Samoa: 2000-2004
+Tonga: 1994-1998, 2007, 2009-2010
+West Bank and Gaza: 2022-2023"/>
+<rect class="cell" x="355.5" y="245.1" width="20.3" height="17.9" fill="#436a92" data-tip="Albania: 2007-2011
+Belize: 1980-1981, 1986
+Bhutan: 2016-2019
+Bolivia: 2015-2019, 2021-2023
+Cabo Verde: 2007-2008, 2010-2016
+Colombia: 1980-1989
+Fiji: 1980, 1982
+Guyana: 1980
+Indonesia: 2013-2018
+Micronesia, Fed. Sts.: 2017
+Morocco: 2017-2023
+Namibia: 2001, 2005
+Thailand: 1992-1993
+Tunisia: 2007"/>
+<rect class="cell" x="355.5" y="227.2" width="20.3" height="17.9" fill="#436a92" data-tip="Algeria: 1988-2001
+Armenia: 2008, 2011, 2013, 2015-2016
 Bhutan: 2020
-Brazil: 2000-2001, 2003-2004
-Jamaica: 2002
-Jordan: 2008-2009
-Latvia: 2000
-Lebanon: 2023
-Moldova: 2012-2014, 2017
-Mongolia: 2011, 2015-2016
-North Macedonia: 2005-2006
-Suriname: 2005
-Thailand: 2006
-Turkiye: 2001-2002
-Viet Nam: 2019-2021"/>
-<rect class="cell" x="375.7" y="209.2" width="20.3" height="17.9" fill="#688cb0" data-tip="Argentina: 2003
-Bhutan: 2021-2023
-China: 2008
-Jamaica: 2000-2001, 2003-2004
-Latvia: 2001
-Lithuania: 2000
-Mongolia: 2017
-Naoero: 2008
-Romania: 2004
-Ukraine: 2018-2020
-Uzbekistan: 2014-2016, 2023
-Venezuela, RB: 2022"/>
-<rect class="cell" x="375.7" y="191.3" width="20.3" height="17.9" fill="#688cb0" data-tip="Belarus: 2005
-Bulgaria: 2004
-Iran, Islamic Rep.: 2005-2006
-Kazakhstan: 2005
-Lithuania: 2001
-Naoero: 2004
-South Africa: 2000
-Turkmenistan: 2008
-Ukraine: 2010-2011, 2014
-Venezuela, RB: 2002-2003, 2016-2018, 2023"/>
-<rect class="cell" x="375.7" y="173.4" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Iran, Islamic Rep.: 2020
-Libya: 2002
-Slovak Republic: 2000
-Turkmenistan: 2009
-Ukraine: 2007"/>
-<rect class="cell" x="375.7" y="155.5" width="20.3" height="17.9" fill="#e7edf4" data-tip="Turkmenistan: 2021"/>
-<rect class="cell" x="396.0" y="298.8" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Angola: 2008, 2010
-Sri Lanka: 2014"/>
-<rect class="cell" x="396.0" y="280.9" width="20.3" height="17.9" fill="#688cb0" data-tip="El Salvador: 2016-2017, 2020
-Eswatini: 2010-2013, 2017-2018, 2021-2022
-Guatemala: 2015-2020
-Paraguay: 2008-2010
-Sri Lanka: 2015-2021
-Tonga: 2011"/>
-<rect class="cell" x="396.0" y="263.0" width="20.3" height="17.9" fill="#436a92" data-tip="Albania: 2008-2010, 2012
-Bolivia: 2021
-Cabo Verde: 2008, 2011, 2013-2014, 2017-2019, 2021-2023
-Costa Rica: 2001-2005
-Dominica: 2000
-El Salvador: 2018-2019, 2021
-Equatorial Guinea: 2004
-Eswatini: 2019
-Fiji: 2008, 2011-2013, 2020-2021
-Gabon: 2000, 2002-2003
-Grenada: 2000
-Guatemala: 2021
-Indonesia: 2018, 2020-2021
-Micronesia, Fed. Sts.: 2023
-Namibia: 2006-2009, 2019-2023
-Peru: 2008-2009
-Samoa: 2012-2023
-St. Vincent and the Grenadines: 2001-2003
-Tonga: 2012-2015, 2020
-Tunisia: 2009, 2011"/>
-<rect class="cell" x="396.0" y="245.1" width="20.3" height="17.9" fill="#436a92" data-tip="Albania: 2011, 2013-2016
-Belize: 2000-2002
-Bolivia: 2017-2019, 2022-2023
-Bosnia and Herzegovina: 2007
-Botswana: 2003
-Colombia: 2007
-Cuba: 2006-2007
-Dominican Republic: 2005-2007
-Ecuador: 2008-2010
-Egypt, Arab Rep.: 2022
-Georgia: 2011-2012
-Grenada: 2001
-Guyana: 2008-2010
-Indonesia: 2019, 2022-2023
-Jordan: 2014-2023
-Maldives: 2004
-Namibia: 2015-2016
-St. Vincent and the Grenadines: 2004
-Tonga: 2016-2019
-Tunisia: 2008, 2010, 2012-2016, 2021, 2023
-Uruguay: 2002, 2004"/>
-<rect class="cell" x="396.0" y="227.2" width="20.3" height="17.9" fill="#436a92" data-tip="Algeria: 2007, 2009-2010, 2015-2019, 2021
-Armenia: 2014, 2017-2021
-Bosnia and Herzegovina: 2008-2010
-Brazil: 2005
-Georgia: 2013-2020
-Iraq: 2008, 2010, 2015-2017, 2020-2021
-Jamaica: 2009-2010
-Jordan: 2010-2013
-Lebanon: 2000-2006, 2021
-Mauritius: 2000-2003
-Moldova: 2018-2020
-Mongolia: 2012
-North Macedonia: 2007, 2009-2010
-Suriname: 2020
-Thailand: 2007-2009
-Turkiye: 2000, 2003
-Ukraine: 2022
-Viet Nam: 2022-2023"/>
-<rect class="cell" x="396.0" y="209.2" width="20.3" height="17.9" fill="#436a92" data-tip="Argentina: 2004
-Azerbaijan: 2007, 2016-2020
-Bosnia and Herzegovina: 2012, 2015
-Chile: 2001-2003
-China: 2009-2010
-Jamaica: 2005-2007
-Latvia: 2002-2003
-Mongolia: 2013-2014, 2018-2021
-Montenegro: 2006
-Naoero: 2009-2010
-Panama: 2000-2004
-Romania: 2005
-Ukraine: 2021"/>
-<rect class="cell" x="396.0" y="191.3" width="20.3" height="17.9" fill="#688cb0" data-tip="Belarus: 2006-2007
-Bulgaria: 2005-2006
-Hungary: 2000
-Iran, Islamic Rep.: 2007
-Lithuania: 2002
-Malaysia: 2000-2003
-Poland: 2000
-Serbia: 2006
-South Africa: 2003
-Ukraine: 2008, 2012-2013
-Venezuela, RB: 2000-2001, 2004, 2015"/>
-<rect class="cell" x="396.0" y="173.4" width="20.3" height="17.9" fill="#96afca" data-tip="Estonia: 2000-2001
-Iran, Islamic Rep.: 2018-2019, 2021-2022
-Libya: 2003
-Slovak Republic: 2001-2002
-Turkmenistan: 2010"/>
-<rect class="cell" x="396.0" y="155.5" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Russian Federation: 2004
-Turkmenistan: 2018-2020"/>
-<rect class="cell" x="416.3" y="298.8" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Angola: 2011-2014"/>
-<rect class="cell" x="416.3" y="280.9" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Guatemala: 2022-2023
-Paraguay: 2011"/>
-<rect class="cell" x="416.3" y="263.0" width="20.3" height="17.9" fill="#688cb0" data-tip="Albania: 2020
-Belize: 2008-2009, 2011, 2014
-Dominica: 2001-2003
-El Salvador: 2022-2023
-Fiji: 2014
-Gabon: 2004
-Namibia: 2010-2013, 2018
-Paraguay: 2012, 2015-2020, 2022
-Peru: 2010
-Tonga: 2021-2023"/>
-<rect class="cell" x="416.3" y="245.1" width="20.3" height="17.9" fill="#274a6b" data-tip="Albania: 2017-2019
-Belize: 2003-2007, 2010, 2012-2013, 2015-2021
-Botswana: 2004-2010, 2015
-Colombia: 2008-2009, 2015-2016, 2020-2021
-Costa Rica: 2006-2007
-Cuba: 2008-2009, 2011
-Dominica: 2004-2006
-Dominican Republic: 2008-2013
-Ecuador: 2011-2013, 2015-2016, 2020
-Fiji: 2015-2019, 2022-2023
-Grenada: 2002-2004
-Guyana: 2011-2015
-Jamaica: 2020-2021
-Lebanon: 2007
-Namibia: 2014, 2017
-Paraguay: 2021
-Peru: 2011, 2015-2016, 2020
-St. Lucia: 2000-2003
-St. Vincent and the Grenadines: 2005-2006
-Uruguay: 2005-2006"/>
-<rect class="cell" x="416.3" y="227.2" width="20.3" height="17.9" fill="#436a92" data-tip="Algeria: 2008, 2011-2014, 2022
-Azerbaijan: 2009-2010
-Brazil: 2006
-Cuba: 2010
-Ecuador: 2017, 2019, 2021
-Georgia: 2021
-Guyana: 2016-2018
-Iraq: 2011, 2014, 2018-2019, 2023
-Jamaica: 2008, 2011-2019
-Lebanon: 2008
-Maldives: 2006-2007
-Mauritius: 2004-2006
-Moldova: 2021-2022
-Mongolia: 2022
-North Macedonia: 2008, 2011-2017
-Suriname: 2006-2007, 2016, 2023
-Turkiye: 2004
-Ukraine: 2023"/>
-<rect class="cell" x="416.3" y="209.2" width="20.3" height="17.9" fill="#436a92" data-tip="Algeria: 2023
-Argentina: 2005-2006
-Azerbaijan: 2008, 2015, 2021
-Bosnia and Herzegovina: 2011, 2013-2014, 2016-2020
-Chile: 2000, 2004
-China: 2011
-Croatia: 2000-2002
-Equatorial Guinea: 2020
-Latvia: 2004
-Lebanon: 2020
-Mongolia: 2023
-Montenegro: 2007
-Panama: 2005-2006
-Romania: 2006
-South Africa: 2020, 2023
-Suriname: 2017, 2021-2022
-Thailand: 2010-2016"/>
-<rect class="cell" x="416.3" y="191.3" width="20.3" height="17.9" fill="#688cb0" data-tip="Belarus: 2009-2010, 2015-2017
-Bulgaria: 2007
-Hungary: 2001
-Iran, Islamic Rep.: 2008-2010, 2013, 2015
-Libya: 2021-2023
-Lithuania: 2003
-Malaysia: 2004-2006
-Poland: 2001-2003
-Serbia: 2007, 2010, 2012, 2015-2016
-South Africa: 2004-2006, 2008, 2015-2016
-Venezuela, RB: 2005"/>
-<rect class="cell" x="416.3" y="173.4" width="20.3" height="17.9" fill="#96afca" data-tip="Czechia: 2000
-Estonia: 2002
-Iran, Islamic Rep.: 2014, 2016-2017, 2023
-Kazakhstan: 2006
-Libya: 2004
-Slovak Republic: 2003
-Turkmenistan: 2011"/>
-<rect class="cell" x="416.3" y="155.5" width="20.3" height="17.9" fill="#96afca" data-tip="Russian Federation: 2005
-Turkmenistan: 2012, 2015-2017, 2022-2023"/>
-<rect class="cell" x="416.3" y="137.5" width="20.3" height="17.9" fill="#e7edf4" data-tip="Trinidad and Tobago: 2000"/>
-<rect class="cell" x="436.5" y="263.0" width="20.3" height="17.9" fill="#96afca" data-tip="Gabon: 2005-2007, 2009, 2018-2020, 2023
-Paraguay: 2013-2014, 2023"/>
-<rect class="cell" x="436.5" y="245.1" width="20.3" height="17.9" fill="#436a92" data-tip="Albania: 2021-2022
-Belize: 2022-2023
-Botswana: 2011-2014, 2016-2021, 2023
-Colombia: 2010-2011, 2017, 2019
-Costa Rica: 2008-2009
-Cuba: 2012-2015
-Dominica: 2007-2013, 2020
-Dominican Republic: 2014-2018, 2020
-Gabon: 2015-2017
-Grenada: 2005-2012, 2014
-Maldives: 2020
+Bosnia and Herzegovina: 2004-2007
+Cuba: 1993-1998
+Egypt, Arab Rep.: 2008-2019
+Georgia: 2008, 2010-2012
+Guyana: 1981
+Iran, Islamic Rep.: 1981, 1986-1987
+Iraq: 1999, 2002, 2004-2007
+Jordan: 1990-1999
+Malaysia: 1980-1987
+Moldova: 2017-2020, 2022
+Mongolia: 2011
+Thailand: 1994-1995, 1997-2001
+Tunisia: 2001-2006
+Viet Nam: 2018-2022"/>
+<rect class="cell" x="355.5" y="209.2" width="20.3" height="17.9" fill="#688cb0" data-tip="Armenia: 2012, 2014
+Azerbaijan: 2006
+Bhutan: 2021
+China: 2004-2005
+Cuba: 1980
+Iran, Islamic Rep.: 1990-1998
+Iraq: 1990, 1998
+Moldova: 2021
+Mongolia: 2012-2013
+North Macedonia: 1990-1993, 1997-2005
+Uzbekistan: 2014-2018"/>
+<rect class="cell" x="355.5" y="191.3" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Belarus: 2003
+Bhutan: 2022-2023
+Bulgaria: 1999
+Venezuela, RB: 2003"/>
+<rect class="cell" x="355.5" y="173.4" width="20.3" height="17.9" fill="#96afca" data-tip="Belarus: 2004
+Bulgaria: 1980-1982, 1997
+Kazakhstan: 1995-1996
+Turkmenistan: 1991, 2007-2008
+Venezuela, RB: 1989, 1999, 2002, 2004, 2016"/>
+<rect class="cell" x="355.5" y="155.5" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Turkmenistan: 1990, 2009
+Ukraine: 1987-1989"/>
+<rect class="cell" x="355.5" y="137.5" width="20.3" height="17.9" fill="#e7edf4" data-tip="Ukraine: 1990"/>
+<rect class="cell" x="375.7" y="316.8" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Maldives: 1988-1992
+Paraguay: 1981"/>
+<rect class="cell" x="375.7" y="298.8" width="20.3" height="17.9" fill="#96afca" data-tip="Dominica: 1982-1986
+Grenada: 1983-1986
+Paraguay: 1987-1988, 1990-1992
+St. Vincent and the Grenadines: 1990-1991, 1993"/>
+<rect class="cell" x="375.7" y="280.9" width="20.3" height="17.9" fill="#688cb0" data-tip="Angola: 2013-2014
+Guatemala: 2013-2014
+Paraguay: 1989, 1993-1998, 2000-2006
+Sri Lanka: 2013-2015, 2022-2023
+St. Lucia: 1980
+St. Vincent and the Grenadines: 1992
+Tonga: 2000-2002"/>
+<rect class="cell" x="375.7" y="263.0" width="20.3" height="17.9" fill="#436a92" data-tip="Belize: 1989
+Botswana: 1989
+Cabo Verde: 2022-2023
+Ecuador: 1980-1984
+El Salvador: 2014-2018, 2020-2021
+Equatorial Guinea: 2000
+Eswatini: 2019, 2021, 2023
+Fiji: 1995-1999, 2009, 2011-2012
+Guatemala: 2015-2023
+Guyana: 1997
+Namibia: 2022-2023
+Paraguay: 1999, 2007
+Peru: 1980-1982, 1987, 2005-2007
+Philippines: 2023
+Samoa: 2005-2014, 2020-2022
+Sri Lanka: 2016-2021
+St. Vincent and the Grenadines: 1994-1996
+Tonga: 1999, 2003-2006, 2008, 2011-2012"/>
+<rect class="cell" x="375.7" y="245.1" width="20.3" height="17.9" fill="#274a6b" data-tip="Albania: 2012-2016
+Belize: 1990-1991
+Botswana: 1990-1996
+Cabo Verde: 2017-2019
+Chile: 1980, 1982-1986
+Colombia: 1990-2005
+Cuba: 2001-2003
+Dominican Republic: 1998-1999, 2003-2005
+Ecuador: 1985-1996, 1999-2005
+Egypt, Arab Rep.: 2020
+El Salvador: 2019, 2022-2023
+Fiji: 1981, 2000-2003, 2005, 2007-2008, 2010, 2013, 2021
+Guyana: 1998-2009
+Indonesia: 2019-2021
+Jamaica: 1985-1987
+Jordan: 2020
+Lebanon: 1988, 1991-1992
+Mauritius: 1990-1995
+Namibia: 2006-2013, 2016-2021
+Samoa: 2015-2019
+Tonga: 2013-2016, 2018-2022
+Tunisia: 2009-2013
+Turkiye: 1980-1986"/>
+<rect class="cell" x="375.7" y="227.2" width="20.3" height="17.9" fill="#436a92" data-tip="Albania: 2017
+Algeria: 1980-1987, 2002-2012
+Armenia: 2018
+Bosnia and Herzegovina: 2008
+Chile: 1987
+Cuba: 1991-1992, 1999-2000, 2004
+Dominican Republic: 2000-2002
+Ecuador: 1997-1998
+Egypt, Arab Rep.: 2021-2023
+Fiji: 2004, 2006
+Georgia: 2013-2014
+Indonesia: 2022-2023
+Iran, Islamic Rep.: 1980, 1982-1985
+Iraq: 2000, 2008-2012, 2014-2015
+Jamaica: 1981-1984, 1988-1989
+Jordan: 1980, 1987-1989, 2000-2004, 2015-2019, 2021-2023
+Korea, Rep.: 1980-1981
+Malaysia: 1988-1989
 Moldova: 2023
-Peru: 2012-2014, 2017-2019, 2021-2023
-St. Lucia: 2004-2007
-St. Vincent and the Grenadines: 2007-2008, 2010-2017
-Uruguay: 2000-2001, 2007"/>
-<rect class="cell" x="436.5" y="227.2" width="20.3" height="17.9" fill="#436a92" data-tip="Azerbaijan: 2011-2014
-Brazil: 2007, 2020
-Colombia: 2018, 2022-2023
-Ecuador: 2014, 2018, 2022-2023
-Equatorial Guinea: 2019
-Grenada: 2013
-Guyana: 2019-2020
-Iraq: 2012-2013, 2022
+Thailand: 1996, 2002
+Tonga: 2017
+Tunisia: 2008, 2014-2023"/>
+<rect class="cell" x="375.7" y="209.2" width="20.3" height="17.9" fill="#436a92" data-tip="Algeria: 2013-2014, 2019-2023
+Armenia: 2017, 2019-2021
+Azerbaijan: 2007
+Bosnia and Herzegovina: 2009-2015
+China: 2006-2007
+Cuba: 1981-1982
+Georgia: 2015-2017, 2020
+Iraq: 2001, 2013, 2020-2023
+Jamaica: 1980
+Jordan: 2005-2006
+Latvia: 1993-1995
+Malaysia: 1990-1991
+Mongolia: 2014-2022
+North Macedonia: 2006-2010
+Panama: 1989
+Romania: 1999-2000
+Thailand: 2003-2006
+Uzbekistan: 2019-2023
+Viet Nam: 2023"/>
+<rect class="cell" x="375.7" y="191.3" width="20.3" height="17.9" fill="#688cb0" data-tip="Bulgaria: 2000-2002
+Iran, Islamic Rep.: 1999-2005
+Kazakhstan: 1998-2000
+Latvia: 1992
+Mongolia: 2023
+Naoero: 2007
+Panama: 1988
+Romania: 1991-1995, 1997-1998
+South Africa: 1987, 1990-1999"/>
+<rect class="cell" x="375.7" y="173.4" width="20.3" height="17.9" fill="#688cb0" data-tip="Belarus: 2005-2006
+Bulgaria: 1983-1987, 1990-1996, 1998, 2003
+Kazakhstan: 1994, 1997
+Venezuela, RB: 1980-1988, 1990-1998, 2000-2001, 2005-2015"/>
+<rect class="cell" x="375.7" y="155.5" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Kazakhstan: 1992-1993
+Russian Federation: 1998
+Turkmenistan: 2010-2011"/>
+<rect class="cell" x="396.0" y="316.8" width="20.3" height="17.9" fill="#e7edf4" data-tip="Maldives: 1993"/>
+<rect class="cell" x="396.0" y="298.8" width="20.3" height="17.9" fill="#e7edf4" data-tip="Equatorial Guinea: 2001
+St. Lucia: 1981"/>
+<rect class="cell" x="396.0" y="280.9" width="20.3" height="17.9" fill="#96afca" data-tip="Costa Rica: 1984-1986
+Dominica: 1987-1994
+Grenada: 1987-1989
+Maldives: 1994
+St. Lucia: 1982-1985"/>
+<rect class="cell" x="396.0" y="263.0" width="20.3" height="17.9" fill="#688cb0" data-tip="Belize: 1996
+Costa Rica: 1982-1983, 1987-1988
+Grenada: 1990-1993, 1995
+Maldives: 1995-1996
+Paraguay: 2008-2014
+St. Kitts and Nevis: 1980-1983
+St. Vincent and the Grenadines: 1997-2000"/>
+<rect class="cell" x="396.0" y="245.1" width="20.3" height="17.9" fill="#436a92" data-tip="Albania: 2019-2022
+Belize: 1992-1995, 1998-2000, 2011, 2020-2021
+Botswana: 1997-2005, 2009-2010, 2012
+Brazil: 1983
+Chile: 1981
+Colombia: 2006-2007, 2009
+Cuba: 2005-2006
+Dominican Republic: 2006-2012
+Ecuador: 2006
+Fiji: 2014-2017, 2020, 2022
+Grenada: 1994, 1996-1997
+Mauritius: 1996-1998
+Namibia: 2014-2015
+Paraguay: 2015
+Peru: 2008-2012, 2020
+Samoa: 2023
+St. Vincent and the Grenadines: 2001-2003
+Tonga: 2023
+Turkiye: 1987"/>
+<rect class="cell" x="396.0" y="227.2" width="20.3" height="17.9" fill="#436a92" data-tip="Albania: 2018
+Belize: 1997, 2001, 2017-2019
+Botswana: 2006, 2011
+Brazil: 1984
+Chile: 1988-1991
+Colombia: 2008, 2010-2012, 2020
+Cuba: 1983
+Ecuador: 2007-2013, 2016, 2020-2021
+Fiji: 2018-2019, 2023
+Guyana: 2010-2016
+Iraq: 2016
+Jamaica: 1990-1991, 2009-2018, 2020-2021
+Jordan: 1981-1986, 2007-2014
+Korea, Rep.: 1982-1983
+Lebanon: 1993-1995, 2023
+Mauritius: 1999-2001
+Turkiye: 1988-1996"/>
+<rect class="cell" x="396.0" y="209.2" width="20.3" height="17.9" fill="#436a92" data-tip="Algeria: 2015-2018
+Armenia: 2022-2023
+Azerbaijan: 2008-2021
+Bosnia and Herzegovina: 2016-2020
+China: 2008
+Cuba: 1984-1990
+Equatorial Guinea: 2020, 2023
+Georgia: 2018-2019, 2021-2022
+Iraq: 2017-2019
+Jamaica: 1992-2008, 2019
+Korea, Rep.: 1984
+Latvia: 1996-1998
+Malaysia: 1992-1995
+Montenegro: 2006-2007, 2009
+North Macedonia: 2011-2018, 2020
+Panama: 1991-1993, 1996
+Romania: 2001
+Thailand: 2007-2015"/>
+<rect class="cell" x="396.0" y="191.3" width="20.3" height="17.9" fill="#436a92" data-tip="Azerbaijan: 2022-2023
+Bulgaria: 2004
+China: 2009-2010
+Equatorial Guinea: 2021-2022
+Kazakhstan: 2001-2002
+Lithuania: 1993-1995, 1997
+Malaysia: 1998
+Naoero: 2006, 2008-2011
+Panama: 1980-1987, 1990, 1994-1995
+Poland: 1994
+Romania: 1996, 2002-2003
+Serbia: 2006-2015
+South Africa: 1980-1986, 1988-1989, 2000-2007, 2009, 2020-2023
+Thailand: 2016"/>
+<rect class="cell" x="396.0" y="173.4" width="20.3" height="17.9" fill="#688cb0" data-tip="Belarus: 2007-2010, 2016
+Bulgaria: 1988-1989, 2005-2006
+Iran, Islamic Rep.: 2006-2023
+Kazakhstan: 2003
+Lithuania: 1996
+Naoero: 2001-2005
+Poland: 1990-1993, 1995
+Romania: 1990"/>
+<rect class="cell" x="396.0" y="155.5" width="20.3" height="17.9" fill="#96afca" data-tip="Kazakhstan: 1990-1991
+Russian Federation: 1994-1997, 1999-2001
+Turkmenistan: 2012-2015"/>
+<rect class="cell" x="396.0" y="137.5" width="20.3" height="17.9" fill="#e7edf4" data-tip="Russian Federation: 1993"/>
+<rect class="cell" x="416.3" y="280.9" width="20.3" height="17.9" fill="#e7edf4" data-tip="St. Lucia: 1986-1987"/>
+<rect class="cell" x="416.3" y="263.0" width="20.3" height="17.9" fill="#688cb0" data-tip="Costa Rica: 1980-1981, 1989-1994, 1996
+Dominica: 1995-1999
+Maldives: 1997-1999
+St. Kitts and Nevis: 1984-1985
+St. Lucia: 1988
+Uruguay: 1985"/>
+<rect class="cell" x="416.3" y="245.1" width="20.3" height="17.9" fill="#436a92" data-tip="Albania: 2023
+Belize: 2002-2010, 2012-2016, 2022
+Botswana: 2013-2014, 2020
+Brazil: 1981-1982
+Costa Rica: 1995, 1997
+Cuba: 2007, 2020-2021, 2023
+Dominica: 2000-2003, 2005
+Dominican Republic: 2013-2015, 2017, 2020
+Gabon: 1987, 2002-2011, 2015-2023
+Grenada: 1998-2004
+Maldives: 2001
+Paraguay: 2016-2023
+Peru: 2013-2015
+St. Vincent and the Grenadines: 2004-2008, 2010-2011, 2013-2015
+Uruguay: 1983-1984"/>
+<rect class="cell" x="416.3" y="227.2" width="20.3" height="17.9" fill="#436a92" data-tip="Belize: 2023
+Botswana: 2007-2008, 2015-2019, 2021-2023
+Brazil: 1980, 1985-1999, 2001-2003
+Colombia: 2013-2019, 2021-2023
+Cuba: 2008-2014
+Dominica: 2004, 2020
+Dominican Republic: 2016
+Ecuador: 2014-2015, 2017-2019, 2022-2023
+Gabon: 2012-2014
+Guyana: 2017-2018
 Jamaica: 2022-2023
-Lebanon: 2009-2011, 2014-2015
-Maldives: 2008-2012
-Mauritius: 2007, 2009
-Montenegro: 2009, 2013-2014, 2016
-North Macedonia: 2018-2021
-St. Vincent and the Grenadines: 2009
-Suriname: 2018
-Turkiye: 2005-2006"/>
-<rect class="cell" x="436.5" y="209.2" width="20.3" height="17.9" fill="#436a92" data-tip="Argentina: 2000-2001, 2007
-Armenia: 2022
-Azerbaijan: 2022-2023
-Bosnia and Herzegovina: 2021
-Brazil: 2021
-Chile: 2005
-Equatorial Guinea: 2016, 2021-2023
-Georgia: 2022
-Latvia: 2005
-Mexico: 2000-2004
-Montenegro: 2008, 2010-2012, 2015, 2017, 2020
-Naoero: 2011
-North Macedonia: 2022
-Panama: 2007-2009
-Serbia: 2009, 2014
-South Africa: 2021-2022
-Suriname: 2008-2011, 2019
-Thailand: 2017-2023"/>
-<rect class="cell" x="436.5" y="191.3" width="20.3" height="17.9" fill="#436a92" data-tip="Belarus: 2008, 2011, 2013, 2018-2020, 2022-2023
-Bosnia and Herzegovina: 2022
-Bulgaria: 2008-2013, 2015-2016
-China: 2012-2014
-Equatorial Guinea: 2017
-Hungary: 2002
-Iran, Islamic Rep.: 2011
-Libya: 2011, 2015-2016, 2020
-Lithuania: 2004-2005
-Malaysia: 2007, 2009
-Naoero: 2015
-Poland: 2004-2005
-Serbia: 2008, 2011, 2013, 2017-2019
-South Africa: 2007, 2009-2010, 2013-2014, 2017-2019
-Venezuela, RB: 2014"/>
-<rect class="cell" x="436.5" y="173.4" width="20.3" height="17.9" fill="#96afca" data-tip="Belarus: 2012, 2021
-Czechia: 2001
-Estonia: 2003
-Kazakhstan: 2007, 2009, 2016
-Libya: 2000-2001
-Slovak Republic: 2004
-Turkmenistan: 2013-2014
-Venezuela, RB: 2006"/>
-<rect class="cell" x="436.5" y="155.5" width="20.3" height="17.9" fill="#e7edf4" data-tip="Russian Federation: 2006"/>
-<rect class="cell" x="436.5" y="137.5" width="20.3" height="17.9" fill="#e7edf4" data-tip="Trinidad and Tobago: 2001"/>
-<rect class="cell" x="436.5" y="119.6" width="20.3" height="17.9" fill="#e7edf4" data-tip="Trinidad and Tobago: 2002"/>
-<rect class="cell" x="456.8" y="263.0" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Gabon: 2008, 2021-2022"/>
-<rect class="cell" x="456.8" y="245.1" width="20.3" height="17.9" fill="#436a92" data-tip="Albania: 2023
-Colombia: 2012-2014
-Costa Rica: 2010-2012
-Cuba: 2016-2020
-Dominica: 2014-2019, 2021-2023
-Dominican Republic: 2019, 2021
-Gabon: 2010-2014
-Grenada: 2015-2017, 2020
-St. Lucia: 2008-2014
-St. Vincent and the Grenadines: 2018-2022"/>
-<rect class="cell" x="456.8" y="227.2" width="20.3" height="17.9" fill="#688cb0" data-tip="Armenia: 2023
-Botswana: 2022
-Brazil: 2008-2009
-Dominican Republic: 2022
-Grenada: 2018, 2021
-Guyana: 2021
-Lebanon: 2013, 2016
-Maldives: 2013, 2015-2016, 2021
-Mauritius: 2008, 2010
-Mexico: 2020
-St. Lucia: 2020
-Suriname: 2015
-Turkiye: 2009
-Uruguay: 2008-2009"/>
-<rect class="cell" x="456.8" y="209.2" width="20.3" height="17.9" fill="#436a92" data-tip="Argentina: 2008-2010, 2019-2020
-Brazil: 2015-2019, 2022
-Chile: 2006, 2009
-Equatorial Guinea: 2015, 2018
+Lebanon: 2005-2007, 2022
+Maldives: 2000, 2002, 2005, 2020
+Mauritius: 2002-2004
+Panama: 1999
+Peru: 2016-2019, 2021-2023
+Seychelles: 1981-1982
+St. Vincent and the Grenadines: 2009, 2012
+Suriname: 1984, 1987, 2003
+Turkiye: 1997-2003"/>
+<rect class="cell" x="416.3" y="209.2" width="20.3" height="17.9" fill="#436a92" data-tip="Brazil: 2000, 2004-2005
+Chile: 1992-1995
+Croatia: 1992-1995
+Equatorial Guinea: 2018-2019
 Georgia: 2023
-Latvia: 2006
-Lebanon: 2012, 2017-2019
-Maldives: 2014
-Mauritius: 2011-2013, 2015-2016, 2020-2022
-Mexico: 2005-2007, 2009-2010, 2015-2018
-Montenegro: 2018-2019, 2021-2022
-North Macedonia: 2023
-Panama: 2010-2011
-Romania: 2007, 2009-2016
-St. Kitts and Nevis: 2000-2001, 2003
-Suriname: 2012-2014
-Turkiye: 2007, 2018-2021"/>
-<rect class="cell" x="456.8" y="191.3" width="20.3" height="17.9" fill="#688cb0" data-tip="Belarus: 2014
-Bosnia and Herzegovina: 2023
-Bulgaria: 2014, 2017-2018
-China: 2015-2018
-Croatia: 2003-2004
-Equatorial Guinea: 2005-2006
-Hungary: 2003-2004
-Iran, Islamic Rep.: 2012
-Libya: 2019
-Lithuania: 2006
-Malaysia: 2010-2011
-Naoero: 2012-2014, 2016-2017
+Guyana: 2019
+Korea, Rep.: 1985-1986
+Latvia: 1999-2001
+Lebanon: 1996-2004, 2020-2021
+Mauritius: 2005-2007
+Montenegro: 2010-2018, 2020-2021
+North Macedonia: 2019, 2021-2023
+Panama: 1997-1998, 2002-2003
+Seychelles: 1980, 1983-1987
+Suriname: 1983, 1985-1986, 1988-2002, 2004-2005, 2020-2023
+Thailand: 2020-2023
+Turkiye: 2004"/>
+<rect class="cell" x="416.3" y="191.3" width="20.3" height="17.9" fill="#436a92" data-tip="Antigua and Barbuda: 1980
+Belarus: 2015
+Bosnia and Herzegovina: 2021-2023
+Bulgaria: 2009-2010, 2013
+China: 2011-2013
+Equatorial Guinea: 2017
+Hungary: 1992-1993
+Libya: 2011, 2016, 2020
+Lithuania: 1999-2002
+Malaysia: 1996-1997, 1999-2002
+Montenegro: 2008
+Naoero: 2012-2013, 2017-2018
+Panama: 2000-2001
+Poland: 1999-2000
+Romania: 2004-2006
+Serbia: 2016-2020
+South Africa: 2010-2019
+Suriname: 1980, 1982
+Thailand: 2017-2019"/>
+<rect class="cell" x="416.3" y="173.4" width="20.3" height="17.9" fill="#688cb0" data-tip="Belarus: 2011-2014, 2017-2023
+Bulgaria: 2007-2008, 2011-2012, 2014-2015
+Equatorial Guinea: 2002-2003
+Kazakhstan: 2004-2005
+Latvia: 1991
+Libya: 2022
+Lithuania: 1992, 1998
+Malaysia: 2003-2005
+Poland: 1996-1998
+Slovak Republic: 1992-1994
+South Africa: 2008"/>
+<rect class="cell" x="416.3" y="155.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Estonia: 1992-1995
+Naoero: 2000
+Russian Federation: 2002-2005
+Slovak Republic: 1991
+Trinidad and Tobago: 1985-1992
+Turkmenistan: 2016-2019"/>
+<rect class="cell" x="416.3" y="137.5" width="20.3" height="17.9" fill="#96afca" data-tip="Naoero: 1998-1999
+Russian Federation: 1991-1992
+Trinidad and Tobago: 1993-1995
+Turkmenistan: 2020-2021"/>
+<rect class="cell" x="436.5" y="263.0" width="20.3" height="17.9" fill="#96afca" data-tip="St. Kitts and Nevis: 1986-1988
+St. Lucia: 1989-1999
+Uruguay: 1986"/>
+<rect class="cell" x="436.5" y="245.1" width="20.3" height="17.9" fill="#688cb0" data-tip="Costa Rica: 1998-2006
+Cuba: 2016, 2019, 2022
+Dominica: 2006
+Equatorial Guinea: 2004
+Gabon: 1986, 2000-2001
+Grenada: 2005
+Maldives: 2003
+St. Lucia: 2000, 2002
+St. Vincent and the Grenadines: 2016
+Uruguay: 1980-1982, 1987-1992"/>
+<rect class="cell" x="436.5" y="227.2" width="20.3" height="17.9" fill="#436a92" data-tip="Cuba: 2015, 2017-2018
+Dominica: 2007-2019, 2021-2023
+Dominican Republic: 2018-2019, 2021-2023
+Gabon: 1980, 1982-1983, 1985, 1988-1999
+Grenada: 2006-2017, 2020-2021
+Lebanon: 2008
+Maldives: 2004, 2006-2007, 2009-2011
+Malta: 1983, 1985
+Mexico: 1980
+St. Lucia: 2001, 2003, 2020
+St. Vincent and the Grenadines: 2017-2023"/>
+<rect class="cell" x="436.5" y="209.2" width="20.3" height="17.9" fill="#436a92" data-tip="Antigua and Barbuda: 1983
+Argentina: 1982, 1985-1986, 1988-1992, 2002
+Brazil: 2006-2023
+Chile: 1996-1999
+Croatia: 1991
+Equatorial Guinea: 2015-2016
+Guyana: 2020
+Korea, Rep.: 1987
+Latvia: 2002-2003
+Lebanon: 2009-2019
+Maldives: 2012-2013
+Malta: 1980-1982, 1984, 1986-1987
+Mauritius: 2008-2014
+Mexico: 1981-1999, 2002-2003, 2009, 2020
+Montenegro: 2019, 2022-2023
+Panama: 2004-2005
+Romania: 2009-2010, 2012-2016
+Suriname: 2006-2009, 2011-2019
+Turkiye: 2005-2011"/>
+<rect class="cell" x="436.5" y="191.3" width="20.3" height="17.9" fill="#688cb0" data-tip="Antigua and Barbuda: 1981, 1984
+Bulgaria: 2020
+Chile: 2000-2003
+China: 2014-2017
+Croatia: 1996-2000
+Hungary: 1994-2001
+Korea, Rep.: 1988-1989
+Latvia: 2004
+Libya: 2015
+Malta: 1988
+Naoero: 2019-2022
+Panama: 2006
+Poland: 2001-2005
+Romania: 2007-2008, 2011
+Serbia: 2021-2023
+Seychelles: 1988-1991
+Suriname: 1981, 2010"/>
+<rect class="cell" x="436.5" y="173.4" width="20.3" height="17.9" fill="#688cb0" data-tip="Antigua and Barbuda: 1982
+Bulgaria: 2016-2019, 2021
+Estonia: 1998-1999
+Hungary: 1980-1991
+Kazakhstan: 2006-2011
+Latvia: 1990
+Libya: 2014, 2019, 2021, 2023
+Lithuania: 2003-2004
+Malaysia: 2006-2014
+Naoero: 2014-2016, 2023
 Poland: 2006
-Serbia: 2020-2022
-South Africa: 2011-2012"/>
-<rect class="cell" x="456.8" y="173.4" width="20.3" height="17.9" fill="#436a92" data-tip="American Samoa: 2002-2008
-Czechia: 2002
-Estonia: 2004
-Kazakhstan: 2008, 2010, 2015, 2017-2021
-Libya: 2005-2006, 2009, 2014, 2017
-Malaysia: 2008, 2015-2017, 2020
-Seychelles: 2000-2003
-Slovak Republic: 2005
-Slovenia: 2000
-Venezuela, RB: 2007, 2013"/>
-<rect class="cell" x="456.8" y="155.5" width="20.3" height="17.9" fill="#96afca" data-tip="Czechia: 2003
-Oman: 2000-2002
-Russian Federation: 2007, 2009, 2015-2016, 2020
-Seychelles: 2009"/>
-<rect class="cell" x="456.8" y="119.6" width="20.3" height="17.9" fill="#e7edf4" data-tip="Trinidad and Tobago: 2003-2004"/>
-<rect class="cell" x="477.1" y="263.0" width="20.3" height="17.9" fill="#e7edf4" data-tip="Costa Rica: 2020"/>
-<rect class="cell" x="477.1" y="245.1" width="20.3" height="17.9" fill="#96afca" data-tip="Costa Rica: 2013-2019, 2021
-St. Lucia: 2015-2017
-St. Vincent and the Grenadines: 2023"/>
-<rect class="cell" x="477.1" y="227.2" width="20.3" height="17.9" fill="#688cb0" data-tip="Brazil: 2010
-Dominican Republic: 2023
-Grenada: 2019, 2022-2023
-Maldives: 2017-2019, 2022-2023
-St. Lucia: 2018-2019, 2021-2022
-Turkiye: 2008
-Uruguay: 2010"/>
-<rect class="cell" x="477.1" y="209.2" width="20.3" height="17.9" fill="#436a92" data-tip="Argentina: 2011-2012, 2014, 2016, 2018, 2021
-Brazil: 2012-2014, 2023
-Chile: 2007-2008, 2010, 2020
-Croatia: 2015-2016
-Latvia: 2009, 2011
-Lithuania: 2010
-Mauritius: 2014, 2017-2019, 2023
-Mexico: 2008, 2011-2014, 2019, 2021-2022
-Montenegro: 2023
-Romania: 2008, 2017-2020
-St. Kitts and Nevis: 2002, 2004-2005
-Turkiye: 2010-2017, 2022"/>
-<rect class="cell" x="477.1" y="191.3" width="20.3" height="17.9" fill="#436a92" data-tip="Antigua and Barbuda: 2000-2004
-Argentina: 2013
-Barbados: 2000-2004
-Bulgaria: 2019-2021
-China: 2019-2023
-Croatia: 2005-2006
+Slovak Republic: 1995-2000"/>
+<rect class="cell" x="436.5" y="155.5" width="20.3" height="17.9" fill="#96afca" data-tip="Estonia: 1996-1997
+Lithuania: 1990-1991
+Russian Federation: 2006-2011, 2015-2016
+Slovak Republic: 1990, 2001
+Trinidad and Tobago: 1980-1984
+Turkmenistan: 2023"/>
+<rect class="cell" x="436.5" y="137.5" width="20.3" height="17.9" fill="#96afca" data-tip="Estonia: 1990-1991
+Naoero: 1996-1997
+Russian Federation: 1989-1990
+Trinidad and Tobago: 1996-1998
+Turkmenistan: 2022"/>
+<rect class="cell" x="456.8" y="263.0" width="20.3" height="17.9" fill="#e7edf4" data-tip="St. Kitts and Nevis: 1989-1990"/>
+<rect class="cell" x="456.8" y="245.1" width="20.3" height="17.9" fill="#96afca" data-tip="Costa Rica: 2007-2015
+St. Kitts and Nevis: 1991-1993, 1995
+Uruguay: 1993-1997, 2002-2003"/>
+<rect class="cell" x="456.8" y="227.2" width="20.3" height="17.9" fill="#688cb0" data-tip="Gabon: 1981, 1984
+Grenada: 2018-2019, 2022
+Maldives: 2008, 2018-2019, 2021
+Portugal: 1980-1981
+St. Kitts and Nevis: 1994
+St. Lucia: 2004-2017
+Uruguay: 1998-2001, 2004-2006"/>
+<rect class="cell" x="456.8" y="209.2" width="20.3" height="17.9" fill="#436a92" data-tip="Argentina: 1980-1981, 1983-1984, 1987, 1993-2001, 2003-2004, 2020
+Cyprus: 1980-1983
+Grenada: 2023
+Guyana: 2021
+Maldives: 2015-2017, 2022-2023
+Mauritius: 2015-2016, 2018, 2020-2023
+Mexico: 2000-2001, 2004-2008, 2010-2019, 2021-2023
+Panama: 2007
+Portugal: 1982-1986
+Romania: 2020
+St. Lucia: 2018-2019, 2021-2023
+Turkiye: 2012-2014"/>
+<rect class="cell" x="456.8" y="191.3" width="20.3" height="17.9" fill="#436a92" data-tip="Antigua and Barbuda: 1985-1987
+Argentina: 2005
+Chile: 2004-2010
+China: 2018-2019
+Croatia: 1990, 2001-2005, 2012
+Equatorial Guinea: 2005-2006, 2010-2014
+Hungary: 2002-2003, 2009-2013
+Korea, Rep.: 1990-1991
+Latvia: 2005-2006, 2009-2011
+Lithuania: 2005-2006, 2009-2010
+Maldives: 2014
+Malta: 1989-1994
+Mauritius: 2017, 2019
+Panama: 2008-2011
+Romania: 2017-2019, 2021
+Seychelles: 1992-1996, 1998-1999
+Turkiye: 2015-2016"/>
+<rect class="cell" x="456.8" y="173.4" width="20.3" height="17.9" fill="#436a92" data-tip="Bulgaria: 2022-2023
+China: 2020-2022
 Equatorial Guinea: 2007
-Hungary: 2005-2006, 2009, 2012, 2015
-Latvia: 2010
-Lithuania: 2007, 2009
-Naoero: 2018-2021
-Panama: 2012-2013
-Poland: 2007, 2009-2010, 2012, 2015-2016
-Portugal: 2000-2002
-Serbia: 2023"/>
-<rect class="cell" x="477.1" y="173.4" width="20.3" height="17.9" fill="#436a92" data-tip="American Samoa: 2009-2019
-Estonia: 2005-2006
-Greece: 2000-2001
-Kazakhstan: 2011-2012, 2014, 2022-2023
-Libya: 2007, 2010, 2013, 2018
-Malaysia: 2012-2014, 2018-2019, 2021-2023
-Malta: 2000
-Seychelles: 2007-2008, 2010-2012
-Slovak Republic: 2006
-Slovenia: 2001-2002
-Venezuela, RB: 2008-2009, 2011-2012"/>
-<rect class="cell" x="477.1" y="155.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Czechia: 2004
-Korea, Rep.: 2000-2001
-Malta: 2001-2002
-Oman: 2003-2004
-Russian Federation: 2008, 2010, 2017-2019, 2021
-Seychelles: 2004-2006"/>
-<rect class="cell" x="477.1" y="137.5" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Saudi Arabia: 2000-2004"/>
-<rect class="cell" x="477.1" y="119.6" width="20.3" height="17.9" fill="#e7edf4" data-tip="Trinidad and Tobago: 2005"/>
-<rect class="cell" x="497.3" y="245.1" width="20.3" height="17.9" fill="#e7edf4" data-tip="Costa Rica: 2022"/>
-<rect class="cell" x="497.3" y="227.2" width="20.3" height="17.9" fill="#96afca" data-tip="French Polynesia: 2000-2002
-Macao SAR, China: 2000-2001
-St. Lucia: 2023
-Uruguay: 2011-2012, 2020"/>
-<rect class="cell" x="497.3" y="209.2" width="20.3" height="17.9" fill="#436a92" data-tip="Argentina: 2015, 2017, 2022-2023
-Brazil: 2011
-Chile: 2011-2015
-Croatia: 2011-2014, 2017, 2020
-Equatorial Guinea: 2014
-Latvia: 2007-2008, 2012-2016
+Estonia: 2000
+Hungary: 2004-2007
+Kazakhstan: 2015-2017, 2020, 2022
+Korea, Rep.: 1992
+Libya: 1987-1990, 1993-2004, 2013, 2017-2018
+Malaysia: 2015-2023
+Poland: 2007-2013
+Seychelles: 1997, 2002-2003
+Slovak Republic: 2003-2004
+Slovenia: 1992"/>
+<rect class="cell" x="456.8" y="155.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Czechia: 1991-1995
+Estonia: 2001-2002
+Kazakhstan: 2012-2014, 2018-2019, 2021, 2023
+Naoero: 1993-1994
+Russian Federation: 2012-2014, 2017-2022
+Seychelles: 2000-2001, 2004-2005
+Slovak Republic: 2002, 2005"/>
+<rect class="cell" x="456.8" y="137.5" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Naoero: 1995
+Russian Federation: 2023
+Trinidad and Tobago: 1999"/>
+<rect class="cell" x="456.8" y="119.6" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Trinidad and Tobago: 2000-2002"/>
+<rect class="cell" x="477.1" y="245.1" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Costa Rica: 2016-2017, 2020-2022"/>
+<rect class="cell" x="477.1" y="227.2" width="20.3" height="17.9" fill="#96afca" data-tip="Costa Rica: 2018-2019, 2023
+St. Kitts and Nevis: 1996-1999
+Uruguay: 2007"/>
+<rect class="cell" x="477.1" y="209.2" width="20.3" height="17.9" fill="#688cb0" data-tip="Cyprus: 1984-1986
+Hong Kong SAR, China: 1980-1983
+Oman: 1980-1982
+Portugal: 1987-1989
+Romania: 2022-2023
+St. Kitts and Nevis: 2000-2003
+Uruguay: 2008-2010"/>
+<rect class="cell" x="477.1" y="191.3" width="20.3" height="17.9" fill="#436a92" data-tip="Antigua and Barbuda: 1988-1994
+Argentina: 2006-2019, 2021-2023
+Chile: 2011-2023
+Croatia: 2006-2011, 2013-2020
+Cyprus: 1987
+Equatorial Guinea: 2008-2009
+Greece: 1981-1985, 1987
+Hungary: 2014-2018, 2020
+Latvia: 2007-2008, 2012-2017, 2020
+Libya: 1982
 Lithuania: 2011-2016
-Macao SAR, China: 2002
-Mexico: 2023
-Panama: 2020-2021
-Romania: 2021-2022
-St. Kitts and Nevis: 2006-2010
+Malta: 1995-1997
+Panama: 2012-2016, 2020-2021
+Poland: 2014
+Portugal: 1990
+Spain: 1980-1982
+St. Kitts and Nevis: 2004
+Turkiye: 2017-2022"/>
+<rect class="cell" x="477.1" y="173.4" width="20.3" height="17.9" fill="#436a92" data-tip="American Samoa: 2002-2004, 2011-2022
+Antigua and Barbuda: 1995-1997
+China: 2023
+Hungary: 2008
+Korea, Rep.: 1993-1995
+Kuwait: 1991
+Libya: 1981, 1983-1986, 1991-1992, 2005-2010, 2012
+Lithuania: 2007-2008
+Malta: 1998-1999
+Poland: 2015-2018
+Seychelles: 2011, 2013
+Slovak Republic: 2006-2010
+Slovenia: 1990-1991, 1993-1998"/>
+<rect class="cell" x="477.1" y="155.5" width="20.3" height="17.9" fill="#688cb0" data-tip="American Samoa: 2005-2010
+Czechia: 1990, 1996-2004
+Estonia: 2003-2005, 2009-2010
+Korea, Rep.: 1996, 1998
+Naoero: 1992
+Seychelles: 2006-2010, 2012, 2014
+Singapore: 1980-1981"/>
+<rect class="cell" x="477.1" y="119.6" width="20.3" height="17.9" fill="#e7edf4" data-tip="Trinidad and Tobago: 2003-2004"/>
+<rect class="cell" x="497.3" y="245.1" width="20.3" height="17.9" fill="#e7edf4" data-tip="Aruba: 1986"/>
+<rect class="cell" x="497.3" y="227.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Uruguay: 2020"/>
+<rect class="cell" x="497.3" y="209.2" width="20.3" height="17.9" fill="#688cb0" data-tip="Barbados: 1980-1984, 2021
+Guyana: 2022
+Hong Kong SAR, China: 1984-1986
+Oman: 1983
+Puerto Rico (US): 1985, 1987-1988, 1990
+St. Kitts and Nevis: 2005-2006
+Uruguay: 2011-2019, 2021-2023"/>
+<rect class="cell" x="497.3" y="191.3" width="20.3" height="17.9" fill="#436a92" data-tip="Antigua and Barbuda: 1998-2001
+Barbados: 1985, 1992-1995, 2020
+Croatia: 2021-2023
+Cyprus: 1988-1992, 1994
+Greece: 1980, 1986, 1988-1991, 2014, 2016, 2020
+Hungary: 2019, 2022-2023
+Ireland: 1981-1985
+Israel: 1980
+Latvia: 2018-2019, 2021-2023
+Lithuania: 2017-2021, 2023
+Oman: 1984, 1986-1990, 1994
+Panama: 2017-2018, 2022-2023
+Portugal: 1991-1999, 2012-2013
+Puerto Rico (US): 1980-1984, 1986
+Seychelles: 2021
+Spain: 1983-1989
+St. Kitts and Nevis: 2007-2013
 Turkiye: 2023"/>
-<rect class="cell" x="497.3" y="191.3" width="20.3" height="17.9" fill="#436a92" data-tip="Antigua and Barbuda: 2005-2006, 2010-2014, 2020
-Barbados: 2005-2006, 2009
-Bulgaria: 2022-2023
-Chile: 2016-2019, 2021-2022
-Croatia: 2007-2010, 2018-2019
-Cyprus: 2000-2002
-Equatorial Guinea: 2009-2010, 2013
-Hungary: 2007-2008, 2010-2011, 2013-2014, 2016-2018, 2020
-Latvia: 2017
-Lithuania: 2008, 2017
-Naoero: 2022-2023
-Panama: 2014-2019
-Poland: 2008, 2011, 2013-2014, 2017-2020
-Portugal: 2003
-Seychelles: 2020-2022
-Venezuela, RB: 2010"/>
-<rect class="cell" x="497.3" y="173.4" width="20.3" height="17.9" fill="#688cb0" data-tip="American Samoa: 2020-2021
-Antigua and Barbuda: 2009, 2015-2016
-Estonia: 2009
-Greece: 2002
-Kazakhstan: 2013
-Libya: 2008, 2012
-New Caledonia: 2000-2002
-Puerto Rico (US): 2000
-Seychelles: 2013-2016
-Slovak Republic: 2007, 2009, 2015-2016
-Slovenia: 2003
-Spain: 2000-2001"/>
-<rect class="cell" x="497.3" y="155.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Czechia: 2005-2006
-Estonia: 2007, 2010
-Korea, Rep.: 2002-2003
-Malta: 2003-2006
-New Zealand: 2000-2001
-Oman: 2005
-Russian Federation: 2011-2014, 2022-2023"/>
-<rect class="cell" x="497.3" y="137.5" width="20.3" height="17.9" fill="#e7edf4" data-tip="Oman: 2020
-Saudi Arabia: 2005"/>
-<rect class="cell" x="497.3" y="119.6" width="20.3" height="17.9" fill="#e7edf4" data-tip="Trinidad and Tobago: 2020"/>
-<rect class="cell" x="497.3" y="101.7" width="20.3" height="17.9" fill="#96afca" data-tip="Bahrain: 2000-2004
-Trinidad and Tobago: 2006-2007, 2009-2010"/>
-<rect class="cell" x="517.6" y="245.1" width="20.3" height="17.9" fill="#e7edf4" data-tip="Costa Rica: 2023"/>
-<rect class="cell" x="517.6" y="227.2" width="20.3" height="17.9" fill="#688cb0" data-tip="French Polynesia: 2012, 2015-2017, 2019-2021
-Turks and Caicos Islands: 2001
-Uruguay: 2013-2019, 2021-2022"/>
-<rect class="cell" x="517.6" y="209.2" width="20.3" height="17.9" fill="#688cb0" data-tip="Barbados: 2014, 2017, 2020-2021
-French Polynesia: 2003, 2022
-Guyana: 2022-2023
-Latvia: 2018, 2020-2022
-Macao SAR, China: 2003
-Panama: 2022-2023
-Romania: 2023
-St. Kitts and Nevis: 2011-2016, 2020-2021
-Turks and Caicos Islands: 2002-2004"/>
-<rect class="cell" x="517.6" y="191.3" width="20.3" height="17.9" fill="#436a92" data-tip="Antigua and Barbuda: 2007, 2017-2019, 2021-2022
-Barbados: 2007-2008, 2010-2013, 2015-2016, 2018
-Chile: 2023
-Croatia: 2021-2022
-Cyprus: 2003
-Equatorial Guinea: 2008, 2011-2012
-Greece: 2013-2022
-Hungary: 2019, 2021-2022
-Latvia: 2019
-Lithuania: 2018-2020
-Poland: 2021-2022
-Portugal: 2004-2006, 2012, 2015-2017
-Seychelles: 2019, 2023
-Slovak Republic: 2014, 2020, 2022
-St. Kitts and Nevis: 2022"/>
-<rect class="cell" x="517.6" y="173.4" width="20.3" height="17.9" fill="#436a92" data-tip="American Samoa: 2022
-Antigua and Barbuda: 2008
-Czechia: 2009, 2012-2017
-Greece: 2003-2004
-Greenland: 2000-2002
-Israel: 2001-2005
-Italy: 2000-2001
-New Caledonia: 2003
-Puerto Rico (US): 2001-2004
-Seychelles: 2017-2018
-Slovak Republic: 2008, 2010-2013, 2017-2019
-Slovenia: 2004-2006, 2015-2016
-Spain: 2002-2003
-Turks and Caicos Islands: 2020"/>
-<rect class="cell" x="517.6" y="155.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Aruba: 2000-2002
-Australia: 2001-2002
-Brunei Darussalam: 2000-2001
-Czechia: 2007, 2010
-Estonia: 2008, 2011-2017
-Korea, Rep.: 2004-2005, 2009
-Malta: 2007, 2009
-New Zealand: 2002
-Oman: 2006-2007"/>
-<rect class="cell" x="517.6" y="137.5" width="20.3" height="17.9" fill="#96afca" data-tip="Brunei Darussalam: 2002-2003
-Guam: 2002
-Oman: 2009, 2015-2019, 2021, 2023
-Saudi Arabia: 2006-2007, 2009"/>
-<rect class="cell" x="517.6" y="119.6" width="20.3" height="17.9" fill="#96afca" data-tip="Kuwait: 2000-2002
-Trinidad and Tobago: 2016, 2018-2019, 2021-2023"/>
-<rect class="cell" x="517.6" y="101.7" width="20.3" height="17.9" fill="#96afca" data-tip="Bahrain: 2005-2007, 2009
-Trinidad and Tobago: 2008, 2011-2013, 2015, 2017"/>
-<rect class="cell" x="537.9" y="227.2" width="20.3" height="17.9" fill="#96afca" data-tip="French Polynesia: 2004, 2006, 2011, 2013-2014, 2018
-Uruguay: 2023"/>
-<rect class="cell" x="537.9" y="209.2" width="20.3" height="17.9" fill="#688cb0" data-tip="Barbados: 2022
-Cyprus: 2014
-French Polynesia: 2005, 2007-2010, 2023
-Latvia: 2023
+<rect class="cell" x="497.3" y="173.4" width="20.3" height="17.9" fill="#436a92" data-tip="Antigua and Barbuda: 2002-2005, 2009-2023
+Cyprus: 1993
+Greece: 1992-2001, 2012-2013, 2015, 2017-2018
+Hungary: 2021
+Ireland: 1980, 1986
+Oman: 1991-1993, 1995-1996
+Panama: 2019
+Poland: 2019-2023
+Portugal: 2000
+Seychelles: 2018, 2020, 2022-2023
+Slovak Republic: 2011-2021
+Slovenia: 1999-2003"/>
+<rect class="cell" x="497.3" y="155.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Czechia: 2005-2016
+Estonia: 2006-2008, 2011-2016
+Korea, Rep.: 1997, 1999-2001
+Malta: 2000-2006
+Naoero: 1991
+Seychelles: 2015-2017
+Singapore: 1982-1986
+Slovenia: 2004"/>
+<rect class="cell" x="497.3" y="137.5" width="20.3" height="17.9" fill="#96afca" data-tip="Kuwait: 1985, 1988
+Oman: 2014-2015, 2017-2020, 2023"/>
+<rect class="cell" x="497.3" y="119.6" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Oman: 2021-2022
+Trinidad and Tobago: 2020-2023"/>
+<rect class="cell" x="497.3" y="101.7" width="20.3" height="17.9" fill="#96afca" data-tip="Bahrain: 1982-1983, 1985-1990
+Trinidad and Tobago: 2005-2011, 2016-2019"/>
+<rect class="cell" x="517.6" y="245.1" width="20.3" height="17.9" fill="#e7edf4" data-tip="Aruba: 1987
+Macao SAR, China: 1982"/>
+<rect class="cell" x="517.6" y="227.2" width="20.3" height="17.9" fill="#c3d2e2" data-tip="French Polynesia: 1994, 1996-1999, 2020"/>
+<rect class="cell" x="517.6" y="209.2" width="20.3" height="17.9" fill="#688cb0" data-tip="Barbados: 1988, 1996
+French Polynesia: 1995, 2000-2019, 2021-2023
+Puerto Rico (US): 1989, 1991-1997"/>
+<rect class="cell" x="517.6" y="191.3" width="20.3" height="17.9" fill="#436a92" data-tip="Aruba: 1988
+Barbados: 1986-1987, 1989-1991, 1997-2005, 2009-2019, 2022-2023
+Cyprus: 2013-2015
+Guyana: 2023
+Hong Kong SAR, China: 1987-1991
+Israel: 1981-1991
 Lithuania: 2022
-Macao SAR, China: 2004-2005
-St. Kitts and Nevis: 2017-2018
-Turks and Caicos Islands: 2005, 2013-2014"/>
-<rect class="cell" x="537.9" y="191.3" width="20.3" height="17.9" fill="#436a92" data-tip="Antigua and Barbuda: 2023
-Bahamas, The: 2011, 2020
-Barbados: 2019, 2023
-Croatia: 2023
-Cyprus: 2004, 2006, 2015-2017
-Greece: 2011-2012, 2023
-Hong Kong SAR, China: 2000
-Hungary: 2023
-Lithuania: 2021
-Poland: 2023
-Portugal: 2007-2011, 2013-2014, 2018-2022
-Puerto Rico (US): 2008-2011
-Slovak Republic: 2023
-Spain: 2020
-St. Kitts and Nevis: 2019, 2023
-Turks and Caicos Islands: 2009-2012"/>
-<rect class="cell" x="537.9" y="173.4" width="20.3" height="17.9" fill="#436a92" data-tip="Aruba: 2011, 2013-2014, 2016, 2020-2021
-Bahamas, The: 2003-2004, 2009-2010
-Cyprus: 2005
-Czechia: 2011, 2018-2020
-Estonia: 2019-2020
-Greece: 2005-2006, 2010
-Greenland: 2003
-Hong Kong SAR, China: 2001-2005
-Ireland: 2000
-Israel: 2000, 2006-2007
-Italy: 2002-2003
-New Caledonia: 2004-2005
-Puerto Rico (US): 2005-2007
-Slovak Republic: 2021
-Slovenia: 2007-2014, 2017-2020
-Spain: 2004-2005, 2015-2016
-Turks and Caicos Islands: 2021"/>
-<rect class="cell" x="537.9" y="155.5" width="20.3" height="17.9" fill="#436a92" data-tip="Aruba: 2003-2007, 2009-2010, 2012, 2015
-Australia: 2000
-Austria: 2000-2002
-Bahamas, The: 2000-2002
-Czechia: 2008
-Estonia: 2018
-Faroe Islands: 2000
-France: 2000-2002
-Germany: 2000-2002
-Korea, Rep.: 2006-2008, 2010-2012
-Malta: 2008, 2011-2015
-Netherlands: 2000-2001
-New Zealand: 2003-2004, 2006"/>
-<rect class="cell" x="537.9" y="137.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Australia: 2003
-Belgium: 2000-2002
-Brunei Darussalam: 2004
-Faroe Islands: 2001-2002
-Finland: 2000-2002
-Guam: 2003-2005, 2007
-Kuwait: 2020
-Malta: 2010, 2016
-Oman: 2008, 2010-2014, 2022
-Saudi Arabia: 2008, 2010, 2020
-Sweden: 2001"/>
-<rect class="cell" x="537.9" y="119.6" width="20.3" height="17.9" fill="#688cb0" data-tip="Brunei Darussalam: 2016, 2020
-Canada: 2000-2002
-Guam: 2006
-Kuwait: 2003, 2016
-Saudi Arabia: 2011, 2015-2017
-Singapore: 2000-2004"/>
-<rect class="cell" x="537.9" y="101.7" width="20.3" height="17.9" fill="#688cb0" data-tip="Bahrain: 2008, 2010-2021
-Kuwait: 2004
-Qatar: 2001
-Trinidad and Tobago: 2014"/>
-<rect class="cell" x="537.9" y="83.8" width="20.3" height="17.9" fill="#e7edf4" data-tip="Qatar: 2000, 2002"/>
-<rect class="cell" x="558.1" y="209.2" width="20.3" height="17.9" fill="#96afca" data-tip="Cyprus: 2020-2021
-Macao SAR, China: 2006
-Puerto Rico (US): 2020
-Turks and Caicos Islands: 2006, 2015-2016"/>
-<rect class="cell" x="558.1" y="191.3" width="20.3" height="17.9" fill="#436a92" data-tip="Bahamas, The: 2013-2016, 2018-2019, 2021-2022
-Cyprus: 2007, 2009-2013, 2018-2019, 2022
-Guam: 2011-2015
-Italy: 2012, 2015-2020
-Lithuania: 2023
-Portugal: 2023
-Puerto Rico (US): 2012-2019, 2021
-Slovenia: 2022
-Spain: 2013-2014, 2019, 2021-2023
-Turks and Caicos Islands: 2007-2008, 2017"/>
-<rect class="cell" x="558.1" y="173.4" width="20.3" height="17.9" fill="#436a92" data-tip="Aruba: 2018-2019, 2022-2023
-Bahamas, The: 2005-2006, 2008, 2012, 2017
-Czechia: 2021-2023
-Denmark: 2000-2002
-Estonia: 2021-2023
-Greece: 2007-2009
-Greenland: 2004
-Guam: 2008, 2010
-Hong Kong SAR, China: 2006-2011
-Ireland: 2001-2002
-Israel: 2008-2012
-Italy: 2004-2006
-Japan: 2023
-New Caledonia: 2006-2007, 2009
-Slovenia: 2021, 2023
-Spain: 2006-2007, 2009-2012, 2017-2018
-Turks and Caicos Islands: 2018-2019, 2022
-United Kingdom: 2000-2003"/>
-<rect class="cell" x="558.1" y="155.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Aruba: 2008, 2017
-Austria: 2003
-Bahamas, The: 2007
-France: 2003-2005
-Germany: 2003-2005
-Greenland: 2005
-Japan: 2001-2002
-Korea, Rep.: 2013-2017, 2019-2020
-Netherlands: 2002
-New Caledonia: 2015, 2020-2023
-New Zealand: 2005, 2007-2010
-Virgin Islands (U.S.): 2013"/>
-<rect class="cell" x="558.1" y="137.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Australia: 2004-2005
-Belgium: 2003
-Brunei Darussalam: 2005, 2009
-Faroe Islands: 2003
-Finland: 2003
-Guam: 2009
-Korea, Rep.: 2022
-Malta: 2017-2020
-New Caledonia: 2016-2019
-Saudi Arabia: 2013, 2019, 2021
-Sweden: 2000, 2002"/>
-<rect class="cell" x="558.1" y="119.6" width="20.3" height="17.9" fill="#688cb0" data-tip="Brunei Darussalam: 2010, 2015, 2017-2019, 2021, 2023
-Canada: 2003-2004
-Iceland: 2000-2002
-Kuwait: 2015, 2017-2019, 2021, 2023
-Saudi Arabia: 2012, 2014, 2018
-Singapore: 2005-2006
-Virgin Islands (U.S.): 2014-2016"/>
-<rect class="cell" x="558.1" y="101.7" width="20.3" height="17.9" fill="#96afca" data-tip="Bahrain: 2022-2023
-Brunei Darussalam: 2006
-United Arab Emirates: 2000-2004"/>
-<rect class="cell" x="558.1" y="83.8" width="20.3" height="17.9" fill="#e7edf4" data-tip="Qatar: 2003"/>
-<rect class="cell" x="558.1" y="47.9" width="20.3" height="17.9" fill="#e7edf4" data-tip="Virgin Islands (U.S.): 2002"/>
-<rect class="cell" x="558.1" y="30.0" width="20.3" height="17.9" fill="#e7edf4" data-tip="Virgin Islands (U.S.): 2003-2004"/>
-<rect class="cell" x="578.4" y="209.2" width="20.3" height="17.9" fill="#96afca" data-tip="Macao SAR, China: 2007-2009, 2020-2022
-Puerto Rico (US): 2022"/>
-<rect class="cell" x="578.4" y="191.3" width="20.3" height="17.9" fill="#688cb0" data-tip="Cyprus: 2008, 2023
-Guam: 2016-2021
-Israel: 2014, 2020
-Italy: 2009, 2011, 2013-2014, 2021-2023
+Oman: 1985
+Portugal: 2002, 2004-2009, 2011, 2014-2015, 2019-2023
+Spain: 1990-1991, 1993
+St. Kitts and Nevis: 2014-2023"/>
+<rect class="cell" x="517.6" y="173.4" width="20.3" height="17.9" fill="#436a92" data-tip="Antigua and Barbuda: 2006-2008
+Cyprus: 1995-2002
+Czechia: 2023
+Estonia: 2023
+France: 1982
+Greece: 2002-2006, 2009-2011, 2019, 2021-2023
+Hong Kong SAR, China: 1992
+Ireland: 1987-1990
+Israel: 1992
+Italy: 1980-1985
+Japan: 1980-1985
+Libya: 1980
+Oman: 1997-1999
+Portugal: 2001, 2003, 2010, 2016-2018
+Seychelles: 2019
+Slovak Republic: 2022-2023
+Slovenia: 2011-2018, 2020
+Spain: 1992, 1994-1999
+United Kingdom: 1981-1982"/>
+<rect class="cell" x="517.6" y="155.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Aruba: 2020
+Czechia: 2017-2022
+Estonia: 2017-2022
+France: 1980-1981
+Korea, Rep.: 2002-2006
+Kuwait: 1990, 1992
+Malta: 2007-2008
+Naoero: 1989-1990
+New Zealand: 1980
+Oman: 2000-2004
+Slovenia: 2005-2010
+United Kingdom: 1980"/>
+<rect class="cell" x="517.6" y="137.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Kuwait: 1981-1984, 1986-1987, 1989
+Malta: 2009-2013
+Naoero: 1988
+Oman: 2005-2013, 2016
+Saudi Arabia: 1996-2004, 2007
+Singapore: 1987-1989"/>
+<rect class="cell" x="517.6" y="119.6" width="20.3" height="17.9" fill="#96afca" data-tip="Bahrain: 1980-1981, 1984
+Saudi Arabia: 2005-2006, 2008-2017, 2020
+Singapore: 1990"/>
+<rect class="cell" x="517.6" y="101.7" width="20.3" height="17.9" fill="#96afca" data-tip="Bahrain: 1991-1992, 1994-1995, 2004-2011, 2015-2017, 2020
+Trinidad and Tobago: 2012-2015"/>
+<rect class="cell" x="537.9" y="263.0" width="20.3" height="17.9" fill="#e7edf4" data-tip="French Polynesia: 1980"/>
+<rect class="cell" x="537.9" y="245.1" width="20.3" height="17.9" fill="#e7edf4" data-tip="French Polynesia: 1981
+Macao SAR, China: 1985"/>
+<rect class="cell" x="537.9" y="227.2" width="20.3" height="17.9" fill="#c3d2e2" data-tip="French Polynesia: 1982
+Macao SAR, China: 1983-1984, 1986-1989"/>
+<rect class="cell" x="537.9" y="209.2" width="20.3" height="17.9" fill="#96afca" data-tip="French Polynesia: 1983, 1985, 1990-1993
+Greenland: 1987
+Puerto Rico (US): 1998-1999"/>
+<rect class="cell" x="537.9" y="191.3" width="20.3" height="17.9" fill="#688cb0" data-tip="Bahamas, The: 2020
+Barbados: 2006-2007
+Cyprus: 2012, 2016-2021
+French Polynesia: 1984, 1986-1989
+Greenland: 1983, 1986
+Hong Kong SAR, China: 1994, 1997, 1999
+Italy: 2020
+Puerto Rico (US): 2010, 2013-2022
+Turks and Caicos Islands: 2010-2015"/>
+<rect class="cell" x="537.9" y="173.4" width="20.3" height="17.9" fill="#436a92" data-tip="Aruba: 1989-1993, 1996, 2011
+Austria: 1981-1984
+Bahamas, The: 1991-1994, 2021
+Barbados: 2008
+Cyprus: 2003-2011
+France: 1983
+Greece: 2007-2008
+Greenland: 1982, 1985, 1988, 1990-1998
+Hong Kong SAR, China: 1993, 1995-1996, 1998, 2000-2003
+Ireland: 1991-1995
+Israel: 1993-2005
+Italy: 1986-1996
+Japan: 1986-1989
+Puerto Rico (US): 2000-2003, 2005-2009, 2011-2012
+Slovenia: 2019, 2021-2023
+Spain: 2000-2023
+United Kingdom: 1983-1984"/>
+<rect class="cell" x="537.9" y="155.5" width="20.3" height="17.9" fill="#436a92" data-tip="Aruba: 1994-1995, 1997-2003, 2008-2010, 2012-2019, 2021-2022
+Austria: 1980, 1985-1988
+Bahamas, The: 1983-1984, 1995-1998
+Belgium: 1980-1989
+Finland: 1980-1986
+France: 1984-1996
+Germany: 1980-1990
+Greenland: 1980-1981, 1984, 1999
+Japan: 1990-1994
+Korea, Rep.: 2007-2009
+Kuwait: 1980, 1993
+Netherlands: 1981-1988
+New Zealand: 1981-1998
+United Kingdom: 1985-1989, 1991-1992"/>
+<rect class="cell" x="537.9" y="137.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Aruba: 2005-2007
+Bahamas, The: 1980-1982
+Belgium: 1990
+Finland: 1987-1988, 1991-1995
+Guam: 2002-2003
+Korea, Rep.: 2010-2014
+Malta: 2014-2020
+Naoero: 1983-1987
+Netherlands: 1980
+Saudi Arabia: 1989-1993, 1995
+Sweden: 1980-1983"/>
+<rect class="cell" x="537.9" y="119.6" width="20.3" height="17.9" fill="#688cb0" data-tip="Brunei Darussalam: 2016-2018, 2021-2023
+Canada: 1980-1985
+Kuwait: 2015-2023
+Saudi Arabia: 1985-1988, 1994, 2018-2019, 2021-2023
+Singapore: 1991-1994"/>
+<rect class="cell" x="537.9" y="101.7" width="20.3" height="17.9" fill="#96afca" data-tip="Bahrain: 1993, 1996-2003, 2012-2014, 2018-2019, 2021-2023"/>
+<rect class="cell" x="558.1" y="227.2" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Macao SAR, China: 1990-1993"/>
+<rect class="cell" x="558.1" y="209.2" width="20.3" height="17.9" fill="#96afca" data-tip="Macao SAR, China: 1994-2002, 2020, 2022"/>
+<rect class="cell" x="558.1" y="191.3" width="20.3" height="17.9" fill="#96afca" data-tip="Cyprus: 2022-2023
+Guam: 2017-2021
+Italy: 2023
 Puerto Rico (US): 2023
-United Kingdom: 2018-2020"/>
-<rect class="cell" x="578.4" y="173.4" width="20.3" height="17.9" fill="#436a92" data-tip="Austria: 2015-2016
-Bahamas, The: 2023
-Denmark: 2003
-France: 2009-2023
-Germany: 2007, 2009-2010, 2012, 2015-2016
-Guam: 2022
-Hong Kong SAR, China: 2012-2016
-Ireland: 2003
-Israel: 2013, 2015-2019
-Italy: 2007-2008, 2010
-Japan: 2009, 2013-2022
-New Caledonia: 2008
-New Zealand: 2020
-Spain: 2008
-Turks and Caicos Islands: 2023
-United Kingdom: 2004-2006, 2009-2013, 2016-2017"/>
-<rect class="cell" x="578.4" y="155.5" width="20.3" height="17.9" fill="#436a92" data-tip="Austria: 2004-2006
-Belgium: 2009, 2012, 2015-2017
-Faroe Islands: 2005-2006
-Finland: 2005, 2015-2016
-France: 2006-2007
-Germany: 2006
-Greenland: 2006-2010, 2015
-Japan: 2000, 2003-2008
-Malta: 2021
-Netherlands: 2003-2006
-New Caledonia: 2010-2014
-New Zealand: 2011-2019
-Sweden: 2003
-Switzerland: 2000-2002"/>
-<rect class="cell" x="578.4" y="137.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Australia: 2006-2007, 2009
-Belgium: 2004-2007, 2010
-Brunei Darussalam: 2013
-Faroe Islands: 2004
-Finland: 2004, 2006
-Korea, Rep.: 2018, 2021, 2023
-Malta: 2022-2023
-Saudi Arabia: 2023
-Sweden: 2004-2005
-United States: 2000-2005"/>
-<rect class="cell" x="578.4" y="119.6" width="20.3" height="17.9" fill="#688cb0" data-tip="Brunei Darussalam: 2014, 2022
-Canada: 2005-2007, 2009, 2015-2017, 2020
-Iceland: 2003
-Kuwait: 2006, 2009-2010, 2014, 2022
-Norway: 2000-2002
-Saudi Arabia: 2022
-United Arab Emirates: 2009, 2017, 2020-2021
-Virgin Islands (U.S.): 2012, 2017-2022"/>
-<rect class="cell" x="578.4" y="101.7" width="20.3" height="17.9" fill="#96afca" data-tip="Brunei Darussalam: 2007-2008
-Iceland: 2009-2010
-Kuwait: 2005
-Singapore: 2007-2009
-United Arab Emirates: 2005-2006, 2010, 2015-2016
+Turks and Caicos Islands: 2007, 2009, 2016"/>
+<rect class="cell" x="558.1" y="173.4" width="20.3" height="17.9" fill="#436a92" data-tip="Bahamas, The: 1985-1988, 2003-2005, 2009-2019, 2022-2023
+Denmark: 1981-1984
+France: 2020
+Greenland: 1989, 2002
+Guam: 2010-2016, 2022
+Hong Kong SAR, China: 2004-2006, 2008
+Ireland: 1996-1997
+Israel: 2006-2016
+Italy: 1997-2019, 2021-2022
+Japan: 2019-2022
+Puerto Rico (US): 2004"/>
+<rect class="cell" x="558.1" y="155.5" width="20.3" height="17.9" fill="#436a92" data-tip="Aruba: 2004, 2023
+Australia: 1980-1988, 1991
+Austria: 1989-1999
+Bahamas, The: 1989-1990, 1999-2002, 2006-2008
+Brunei Darussalam: 1998
+Denmark: 1980, 1985
+France: 1997-2017
+Germany: 1991-2006, 2009
+Greenland: 2000-2001, 2003-2005
+Guam: 2008
+Hong Kong SAR, China: 2007, 2009
+Ireland: 1998
+Japan: 1995-2018
+Netherlands: 1989
+New Zealand: 1999-2013
+Turks and Caicos Islands: 2020
+United Kingdom: 1990, 1993-1999
+Virgin Islands (U.S.): 2013"/>
+<rect class="cell" x="558.1" y="137.5" width="20.3" height="17.9" fill="#436a92" data-tip="Australia: 1989-1990, 1992-1993
+Belgium: 1991-2003
+Brunei Darussalam: 1999-2001
+Finland: 1989-1990, 1996-1999
+Guam: 2004, 2007, 2009
+Iceland: 1980-1986, 1988-1994
+Korea, Rep.: 2015-2023
+Kuwait: 1994, 1996-1997
+Malta: 2021-2023
+Naoero: 1980-1982
+Netherlands: 1990-1998
+New Caledonia: 2015
+Saudi Arabia: 1983
+Sweden: 1984-1997
+United States: 1981-1987"/>
+<rect class="cell" x="558.1" y="119.6" width="20.3" height="17.9" fill="#436a92" data-tip="Brunei Darussalam: 2005, 2009-2015, 2019
+Canada: 1986-1999
+Guam: 2005-2006
+Iceland: 1995-1996
+Kuwait: 1995, 1998-2002, 2009, 2012, 2014
+Saudi Arabia: 1984
+Singapore: 1995-2003
+United States: 1980
+Virgin Islands (U.S.): 2012, 2014-2022"/>
+<rect class="cell" x="558.1" y="101.7" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Brunei Darussalam: 2007-2008, 2020
+Kuwait: 2003, 2010-2011, 2013"/>
+<rect class="cell" x="578.4" y="209.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Macao SAR, China: 2003, 2021"/>
+<rect class="cell" x="578.4" y="191.3" width="20.3" height="17.9" fill="#e7edf4" data-tip="Macao SAR, China: 2004
+Turks and Caicos Islands: 2008"/>
+<rect class="cell" x="578.4" y="173.4" width="20.3" height="17.9" fill="#688cb0" data-tip="Denmark: 1988-1990
+France: 2021-2023
+Germany: 2022-2023
+Hong Kong SAR, China: 2020-2023
+Ireland: 2009-2012
+Israel: 2017-2023
+Japan: 2023
+United Kingdom: 2008-2018, 2020-2021"/>
+<rect class="cell" x="578.4" y="155.5" width="20.3" height="17.9" fill="#436a92" data-tip="Austria: 2000-2023
+Belgium: 2014-2015, 2020, 2022-2023
+Brunei Darussalam: 1992-1994, 1996-1997
+Denmark: 1986-1987, 1991-1999
+Faroe Islands: 2009, 2011
+Finland: 2015, 2017, 2019-2023
+France: 2018-2019
+Germany: 2007-2008, 2010-2021
+Greenland: 2006-2009, 2012-2018
+Hong Kong SAR, China: 2010-2019
+Ireland: 1999-2003
+Netherlands: 2014-2015, 2020
+New Zealand: 2014-2023
+Turks and Caicos Islands: 2021
+United Kingdom: 2000-2007"/>
+<rect class="cell" x="578.4" y="137.5" width="20.3" height="17.9" fill="#436a92" data-tip="Australia: 1994-2002
+Belgium: 2004-2013, 2016-2019, 2021
+Brunei Darussalam: 1988, 1990-1991, 1995, 2002-2004
+Faroe Islands: 2008, 2010, 2012
+Finland: 2000-2014, 2016, 2018
+Greenland: 2010-2011
+Iceland: 1987
+Luxembourg: 1982-1984
+Netherlands: 1999-2013, 2016
+Saudi Arabia: 1982
+Sweden: 1998-2005, 2009"/>
+<rect class="cell" x="578.4" y="119.6" width="20.3" height="17.9" fill="#436a92" data-tip="Brunei Darussalam: 1989
+Canada: 2000-2023
+Iceland: 1997-2003
+Luxembourg: 1980-1981
+Norway: 1980-1985
+Singapore: 2004
+United Arab Emirates: 2018, 2020-2021
+United States: 1988-1999"/>
+<rect class="cell" x="578.4" y="101.7" width="20.3" height="17.9" fill="#688cb0" data-tip="Brunei Darussalam: 2006
+Kuwait: 2004-2008
+Qatar: 1985, 1987-1990
+Singapore: 2005-2009
+United Arab Emirates: 2009-2017, 2019, 2022-2023"/>
+<rect class="cell" x="578.4" y="83.8" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Qatar: 1983-1984, 1986, 1991, 1996
 Virgin Islands (U.S.): 2011"/>
-<rect class="cell" x="578.4" y="83.8" width="20.3" height="17.9" fill="#e7edf4" data-tip="Qatar: 2004
-Virgin Islands (U.S.): 2010"/>
-<rect class="cell" x="578.4" y="65.8" width="20.3" height="17.9" fill="#e7edf4" data-tip="Virgin Islands (U.S.): 2008-2009"/>
-<rect class="cell" x="578.4" y="30.0" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Virgin Islands (U.S.): 2005-2007"/>
-<rect class="cell" x="598.7" y="209.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Macao SAR, China: 2010"/>
-<rect class="cell" x="598.7" y="191.3" width="20.3" height="17.9" fill="#96afca" data-tip="Hong Kong SAR, China: 2021-2022
-Israel: 2021, 2023
-United Kingdom: 2021-2023"/>
-<rect class="cell" x="598.7" y="173.4" width="20.3" height="17.9" fill="#436a92" data-tip="Austria: 2011, 2014, 2017-2018, 2020-2023
-Bermuda: 2000
-Denmark: 2004-2006, 2015-2017
-Germany: 2011, 2013-2014, 2017-2023
-Greenland: 2014, 2018, 2020, 2022
-Hong Kong SAR, China: 2019-2020, 2023
-Ireland: 2004-2006, 2009-2014
-Israel: 2022
-Japan: 2010-2012
-New Zealand: 2021-2023
-Switzerland: 2005
-United Kingdom: 2007-2008, 2014-2015"/>
-<rect class="cell" x="598.7" y="155.5" width="20.3" height="17.9" fill="#436a92" data-tip="Australia: 2010, 2015-2020
-Austria: 2007-2010, 2012-2013, 2019
-Belgium: 2011, 2013-2014, 2018-2023
-Faroe Islands: 2008-2013, 2015-2016
-Finland: 2009, 2011-2014, 2017-2023
-France: 2008
-Germany: 2008
-Greenland: 2011-2013, 2016-2017, 2019
-Hong Kong SAR, China: 2017-2018
-Netherlands: 2007, 2009, 2011-2020
-Sweden: 2009-2010, 2012, 2015-2020, 2022-2023
-Switzerland: 2003-2004"/>
-<rect class="cell" x="598.7" y="137.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Australia: 2008
-Belgium: 2008
-Faroe Islands: 2007
-Finland: 2007-2008, 2010
-Luxembourg: 2000-2002
-Netherlands: 2010
-Sweden: 2006-2008
-United States: 2006-2015"/>
-<rect class="cell" x="598.7" y="119.6" width="20.3" height="17.9" fill="#688cb0" data-tip="Brunei Darussalam: 2011-2012
-Canada: 2008, 2010-2014, 2018-2019, 2021-2023
+<rect class="cell" x="578.4" y="65.8" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Qatar: 1992-1995
+Virgin Islands (U.S.): 2009-2010"/>
+<rect class="cell" x="578.4" y="47.9" width="20.3" height="17.9" fill="#e7edf4" data-tip="Virgin Islands (U.S.): 2002"/>
+<rect class="cell" x="578.4" y="30.0" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Virgin Islands (U.S.): 2003-2005"/>
+<rect class="cell" x="598.7" y="209.2" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Macao SAR, China: 2008-2009, 2023"/>
+<rect class="cell" x="598.7" y="191.3" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Macao SAR, China: 2005-2007
+Turks and Caicos Islands: 2017
+United Kingdom: 2023"/>
+<rect class="cell" x="598.7" y="173.4" width="20.3" height="17.9" fill="#96afca" data-tip="Denmark: 2009, 2011-2023
+Ireland: 2013-2014
+Turks and Caicos Islands: 2022-2023
+United Kingdom: 2019, 2022"/>
+<rect class="cell" x="598.7" y="155.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Denmark: 2000-2008, 2010
+Faroe Islands: 2014
+Greenland: 2019-2023
+Ireland: 2004-2008
+Netherlands: 2018-2019, 2021-2023
+Sweden: 2018, 2020, 2022-2023
+Switzerland: 1980-1982
+Turks and Caicos Islands: 2018-2019"/>
+<rect class="cell" x="598.7" y="137.5" width="20.3" height="17.9" fill="#436a92" data-tip="Australia: 2003-2021
+Brunei Darussalam: 1986
+Faroe Islands: 2013, 2015-2023
+Luxembourg: 1986-1988
+Netherlands: 2017
+Saudi Arabia: 1980-1981
+Sweden: 2006-2008, 2010-2017, 2019, 2021
+United States: 2008-2018, 2020"/>
+<rect class="cell" x="598.7" y="119.6" width="20.3" height="17.9" fill="#688cb0" data-tip="Brunei Darussalam: 1984-1985, 1987
 Iceland: 2004-2005
-Kuwait: 2007-2008, 2011-2013
-Norway: 2003
-United Arab Emirates: 2014, 2018-2019, 2022-2023"/>
-<rect class="cell" x="598.7" y="101.7" width="20.3" height="17.9" fill="#688cb0" data-tip="Iceland: 2008, 2011-2015
-Qatar: 2020
-Singapore: 2010-2016
-United Arab Emirates: 2007-2008, 2011-2013"/>
-<rect class="cell" x="598.7" y="83.8" width="20.3" height="17.9" fill="#e7edf4" data-tip="Qatar: 2005"/>
-<rect class="cell" x="618.9" y="209.2" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Macao SAR, China: 2011, 2015-2016, 2023"/>
-<rect class="cell" x="618.9" y="191.3" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Denmark: 2020-2023"/>
-<rect class="cell" x="618.9" y="173.4" width="20.3" height="17.9" fill="#688cb0" data-tip="Bermuda: 2001-2004
-Denmark: 2007-2014, 2018-2019
-Greenland: 2021
-Ireland: 2007-2008, 2015-2017
-Switzerland: 2006-2007, 2009"/>
-<rect class="cell" x="618.9" y="155.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Australia: 2012-2014, 2021-2023
-Faroe Islands: 2014, 2019-2020, 2022-2023
-Greenland: 2023
-Netherlands: 2008, 2021-2023
-Sweden: 2011, 2013-2014, 2021"/>
-<rect class="cell" x="618.9" y="137.5" width="20.3" height="17.9" fill="#96afca" data-tip="Australia: 2011
-Faroe Islands: 2017-2018, 2021
-United States: 2016-2021"/>
-<rect class="cell" x="618.9" y="119.6" width="20.3" height="17.9" fill="#96afca" data-tip="Iceland: 2006
-Luxembourg: 2003
-Norway: 2004-2005, 2016, 2020"/>
-<rect class="cell" x="618.9" y="101.7" width="20.3" height="17.9" fill="#96afca" data-tip="Iceland: 2007, 2016-2017, 2019-2021
-Qatar: 2009, 2021
-Singapore: 2017-2020"/>
-<rect class="cell" x="618.9" y="83.8" width="20.3" height="17.9" fill="#96afca" data-tip="Qatar: 2006-2007, 2015-2019"/>
-<rect class="cell" x="639.2" y="209.2" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Macao SAR, China: 2012-2014, 2018-2019"/>
-<rect class="cell" x="639.2" y="191.3" width="20.3" height="17.9" fill="#e7edf4" data-tip="Macao SAR, China: 2017"/>
-<rect class="cell" x="639.2" y="173.4" width="20.3" height="17.9" fill="#688cb0" data-tip="Bermuda: 2005
-Cayman Islands: 2006, 2009-2018, 2020-2022
-Ireland: 2018-2020
-Switzerland: 2008, 2010-2020"/>
-<rect class="cell" x="639.2" y="155.5" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Cayman Islands: 2007-2008, 2019"/>
-<rect class="cell" x="639.2" y="137.5" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Norway: 2019
-United States: 2022-2023"/>
-<rect class="cell" x="639.2" y="119.6" width="20.3" height="17.9" fill="#96afca" data-tip="Luxembourg: 2004-2006
-Norway: 2006-2007, 2009-2010, 2015, 2017-2018, 2023"/>
-<rect class="cell" x="639.2" y="101.7" width="20.3" height="17.9" fill="#96afca" data-tip="Iceland: 2018, 2022-2023
-Qatar: 2010, 2022
-Singapore: 2021-2023"/>
-<rect class="cell" x="639.2" y="83.8" width="20.3" height="17.9" fill="#e7edf4" data-tip="Qatar: 2008, 2023"/>
-<rect class="cell" x="659.5" y="191.3" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Bermuda: 2011, 2020
-Switzerland: 2021"/>
-<rect class="cell" x="659.5" y="173.4" width="20.3" height="17.9" fill="#96afca" data-tip="Bermuda: 2009, 2012-2015, 2019, 2021-2022
-Ireland: 2021-2023
-Switzerland: 2022-2023"/>
-<rect class="cell" x="659.5" y="155.5" width="20.3" height="17.9" fill="#96afca" data-tip="Bermuda: 2006-2008, 2010, 2016-2018
-Cayman Islands: 2023
-Luxembourg: 2020"/>
-<rect class="cell" x="659.5" y="137.5" width="20.3" height="17.9" fill="#96afca" data-tip="Luxembourg: 2009, 2011-2013, 2015-2019"/>
-<rect class="cell" x="659.5" y="119.6" width="20.3" height="17.9" fill="#96afca" data-tip="Luxembourg: 2007-2008, 2010
-Norway: 2008, 2011-2014, 2021-2022"/>
-<rect class="cell" x="659.5" y="83.8" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Qatar: 2011-2014"/>
-<rect class="cell" x="679.7" y="173.4" width="20.3" height="17.9" fill="#e7edf4" data-tip="Bermuda: 2023"/>
-<rect class="cell" x="679.7" y="155.5" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Luxembourg: 2021-2023"/>
-<rect class="cell" x="679.7" y="137.5" width="20.3" height="17.9" fill="#e7edf4" data-tip="Luxembourg: 2014"/>
-<line class="grid" x1="285.2" y1="30" x2="285.2" y2="496"/>
-<text class="ax" x="285.2" y="518" text-anchor="middle">$1k</text>
-<line class="grid" x1="474.6" y1="30" x2="474.6" y2="496"/>
-<text class="ax" x="474.6" y="518" text-anchor="middle">$10k</text>
-<line class="grid" x1="664.0" y1="30" x2="664.0" y2="496"/>
-<text class="ax" x="664.0" y="518" text-anchor="middle">$100k</text>
-<line class="grid" x1="92" y1="485.3" x2="700" y2="485.3"/>
-<text class="ax" x="82" y="490.3" text-anchor="end">100</text>
-<line class="grid" x1="92" y1="369.0" x2="700" y2="369.0"/>
-<text class="ax" x="82" y="374.0" text-anchor="end">1,000</text>
-<line class="grid" x1="92" y1="252.7" x2="700" y2="252.7"/>
-<text class="ax" x="82" y="257.7" text-anchor="end">10,000</text>
-<line class="grid" x1="92" y1="136.3" x2="700" y2="136.3"/>
-<text class="ax" x="82" y="141.3" text-anchor="end">100,000</text>
-<polyline class="wall" points="122.4,470.7 142.7,476.5 162.9,459.6 183.2,438.4 203.5,441.6 223.7,438.6 244.0,424.3 264.3,414.4 284.5,398.3 304.8,369.5 325.1,362.9 345.3,340.4 365.6,324.6 385.9,310.5 406.1,288.0 426.4,268.2 446.7,262.1 466.9,258.3 487.2,249.9 507.5,228.5 527.7,233.7 548.0,223.8 568.3,208.3 588.5,206.9 608.8,190.0 629.1,192.7 649.3,215.8 669.6,191.6"/>
-<line class="ols" x1="92.0" y1="439.0" x2="700.0" y2="92.1"/>
-<rect class="empty" x="564.9" y="232.2" width="135.1" height="263.8"/>
-<text class="empty-lbl" x="632.5" y="359.1" text-anchor="middle">there are no rich,</text>
-<text class="empty-lbl" x="632.5" y="376.1" text-anchor="middle">low-energy countries</text>
-<circle class="pt" cx="645.8" cy="99.3" r="3.2"/>
-<text class="lbl" x="639.8" y="92.3" text-anchor="end">Qatar</text>
-<circle class="pt" cx="656.2" cy="136.4" r="3.2"/>
-<text class="lbl" x="656.2" y="152.4" text-anchor="middle">Norway</text>
-<circle class="pt" cx="524.3" cy="132.0" r="3.2"/>
-<text class="lbl" x="524.3" y="122.0" text-anchor="middle">Trinidad &amp; Tobago</text>
-<circle class="pt" cx="422.4" cy="162.5" r="3.2"/>
-<text class="lbl" x="414.4" y="166.5" text-anchor="end">Turkmenistan</text>
-<circle class="pt" cx="631.3" cy="221.8" r="3.2"/>
-<text class="lbl" x="623.3" y="225.8" text-anchor="end">Macao</text>
-<circle class="pt" cx="251.1" cy="426.3" r="3.2"/>
-<text class="lbl" x="259.1" y="430.3" text-anchor="start">DR Congo</text>
-<circle class="pt" cx="262.5" cy="380.4" r="3.2"/>
-<text class="lbl" x="270.5" y="384.4" text-anchor="start">Sierra Leone</text>
+Luxembourg: 1985
+Norway: 1986-1995
+United States: 2000-2007"/>
+<rect class="cell" x="598.7" y="101.7" width="20.3" height="17.9" fill="#688cb0" data-tip="Iceland: 2006-2014, 2016, 2019-2023
+Qatar: 1981, 2020
+Singapore: 2010-2017, 2020
+United Arab Emirates: 1988, 1998-2008"/>
+<rect class="cell" x="598.7" y="83.8" width="20.3" height="17.9" fill="#96afca" data-tip="Iceland: 2015, 2017-2018
+Qatar: 1980, 1982, 1997-2003
+United Arab Emirates: 1989, 1993"/>
+<rect class="cell" x="598.7" y="65.8" width="20.3" height="17.9" fill="#e7edf4" data-tip="Virgin Islands (U.S.): 2008"/>
+<rect class="cell" x="598.7" y="30.0" width="20.3" height="17.9" fill="#e7edf4" data-tip="Virgin Islands (U.S.): 2006-2007"/>
+<rect class="cell" x="618.9" y="209.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Macao SAR, China: 2010"/>
+<rect class="cell" x="618.9" y="191.3" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Macao SAR, China: 2015-2017, 2019"/>
+<rect class="cell" x="618.9" y="173.4" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Ireland: 2015-2018"/>
+<rect class="cell" x="618.9" y="155.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Cayman Islands: 2020
+Switzerland: 1983-2003"/>
+<rect class="cell" x="618.9" y="137.5" width="20.3" height="17.9" fill="#96afca" data-tip="Australia: 2022-2023
+Luxembourg: 1995-1996
+United States: 2019, 2021-2023"/>
+<rect class="cell" x="618.9" y="119.6" width="20.3" height="17.9" fill="#688cb0" data-tip="Brunei Darussalam: 1983
+Luxembourg: 1989-1994
+Norway: 1996-1999, 2001-2006, 2009-2013"/>
+<rect class="cell" x="618.9" y="101.7" width="20.3" height="17.9" fill="#96afca" data-tip="Brunei Darussalam: 1981-1982
+Norway: 2000
+Qatar: 2009
+Singapore: 2018-2019, 2021-2023
+United Arab Emirates: 1986-1987, 1990"/>
+<rect class="cell" x="618.9" y="83.8" width="20.3" height="17.9" fill="#96afca" data-tip="Qatar: 2004, 2006-2008, 2010, 2014-2019, 2021-2023
+United Arab Emirates: 1991-1992, 1994-1997"/>
+<rect class="cell" x="618.9" y="65.8" width="20.3" height="17.9" fill="#e7edf4" data-tip="Qatar: 2005"/>
+<rect class="cell" x="639.2" y="209.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Macao SAR, China: 2011-2012"/>
+<rect class="cell" x="639.2" y="191.3" width="20.3" height="17.9" fill="#e7edf4" data-tip="Macao SAR, China: 2014, 2018"/>
+<rect class="cell" x="639.2" y="173.4" width="20.3" height="17.9" fill="#688cb0" data-tip="Bermuda: 1981-1986, 1991-1997
+Cayman Islands: 2013-2014, 2016, 2021
+Ireland: 2019-2021, 2023
+Switzerland: 2015-2023"/>
+<rect class="cell" x="639.2" y="155.5" width="20.3" height="17.9" fill="#688cb0" data-tip="Bermuda: 1980, 1987-1988, 1990
+Cayman Islands: 2008-2012, 2015, 2017-2019, 2022-2023
+Switzerland: 2004-2014"/>
+<rect class="cell" x="639.2" y="137.5" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Bermuda: 1989
+Luxembourg: 1997-2000"/>
+<rect class="cell" x="639.2" y="119.6" width="20.3" height="17.9" fill="#96afca" data-tip="Luxembourg: 2001
+Norway: 2007-2008, 2014-2023
+United Arab Emirates: 1983-1984"/>
+<rect class="cell" x="639.2" y="101.7" width="20.3" height="17.9" fill="#e7edf4" data-tip="Brunei Darussalam: 1980
+United Arab Emirates: 1985"/>
+<rect class="cell" x="639.2" y="83.8" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Qatar: 2011-2013"/>
+<rect class="cell" x="659.5" y="209.2" width="20.3" height="17.9" fill="#e7edf4" data-tip="Macao SAR, China: 2013"/>
+<rect class="cell" x="659.5" y="173.4" width="20.3" height="17.9" fill="#96afca" data-tip="Bermuda: 1998-2001, 2011-2013, 2015, 2020-2023
+Ireland: 2022"/>
+<rect class="cell" x="659.5" y="155.5" width="20.3" height="17.9" fill="#96afca" data-tip="Bermuda: 2002-2004, 2010, 2014, 2016-2019
+Cayman Islands: 2006-2007
+Luxembourg: 2022-2023"/>
+<rect class="cell" x="659.5" y="137.5" width="20.3" height="17.9" fill="#96afca" data-tip="Luxembourg: 2013-2021"/>
+<rect class="cell" x="659.5" y="119.6" width="20.3" height="17.9" fill="#96afca" data-tip="Luxembourg: 2002-2012
+United Arab Emirates: 1980-1982"/>
+<rect class="cell" x="679.7" y="155.5" width="20.3" height="17.9" fill="#c3d2e2" data-tip="Bermuda: 2005-2009"/>
+<line class="grid" x1="261.5" y1="30" x2="261.5" y2="496"/>
+<text class="ax" x="261.5" y="518" text-anchor="middle">$1k</text>
+<line class="grid" x1="462.4" y1="30" x2="462.4" y2="496"/>
+<text class="ax" x="462.4" y="518" text-anchor="middle">$10k</text>
+<line class="grid" x1="663.3" y1="30" x2="663.3" y2="496"/>
+<text class="ax" x="663.3" y="518" text-anchor="middle">$100k</text>
+<line class="grid" x1="92" y1="462.8" x2="700" y2="462.8"/>
+<text class="ax" x="82" y="467.8" text-anchor="end">100</text>
+<line class="grid" x1="92" y1="352.2" x2="700" y2="352.2"/>
+<text class="ax" x="82" y="357.2" text-anchor="end">1,000</text>
+<line class="grid" x1="92" y1="241.6" x2="700" y2="241.6"/>
+<text class="ax" x="82" y="246.6" text-anchor="end">10,000</text>
+<line class="grid" x1="92" y1="131.1" x2="700" y2="131.1"/>
+<text class="ax" x="82" y="136.1" text-anchor="end">100,000</text>
+<polyline class="wall" points="122.4,413.6 142.7,448.8 162.9,455.3 183.2,428.6 203.5,423.4 223.7,423.8 244.0,404.1 264.3,379.5 284.5,376.7 304.8,346.0 325.1,339.2 345.3,323.3 365.6,319.7 385.9,292.4 406.1,281.9 426.4,264.5 446.7,256.7 466.9,249.1 487.2,237.3 507.5,218.9 527.7,221.0 548.0,206.7 568.3,198.3 588.5,182.4 608.8,184.7 629.1,184.7 649.3,185.4 669.6,182.3"/>
+<line class="ols" x1="92.0" y1="422.9" x2="700.0" y2="79.0"/>
+<rect class="empty" x="558.3" y="241.6" width="141.7" height="254.4"/>
+<text class="empty-lbl" x="629.1" y="363.8" text-anchor="middle">no mass:</text>
+<text class="empty-lbl" x="629.1" y="380.8" text-anchor="middle">0 of 1172 country-years</text>
+<circle class="pt" cx="625.9" cy="95.9" r="3.2"/>
+<text class="lbl" x="619.9" y="88.9" text-anchor="end">Qatar</text>
+<circle class="pt" cx="647.2" cy="131.1" r="3.2"/>
+<text class="lbl" x="647.2" y="147.1" text-anchor="middle">Norway</text>
+<circle class="pt" cx="503.0" cy="126.9" r="3.2"/>
+<text class="lbl" x="503.0" y="116.9" text-anchor="middle">Trinidad &amp; Tobago</text>
+<circle class="pt" cx="441.6" cy="156.0" r="3.2"/>
+<text class="lbl" x="433.6" y="160.0" text-anchor="end">Turkmenistan</text>
+<circle class="pt" cx="618.0" cy="212.3" r="3.2"/>
+<text class="lbl" x="610.0" y="216.3" text-anchor="end">Macao</text>
+<circle class="pt" cx="207.6" cy="406.7" r="3.2"/>
+<text class="lbl" x="215.6" y="410.7" text-anchor="start">DR Congo</text>
+<circle class="pt" cx="270.9" cy="363.0" r="3.2"/>
+<text class="lbl" x="278.9" y="367.0" text-anchor="start">Sierra Leone</text>
 <rect class="frame" x="92" y="30" width="608" height="466"/>
-<text class="axtitle" x="396.0" y="552" text-anchor="middle">GDP per capita (US$, log scale)</text>
+<text class="axtitle" x="396.0" y="552" text-anchor="middle">GDP per capita (constant 2015 US$, log scale)</text>
 <text class="axtitle" x="22" y="263.0" text-anchor="middle" transform="rotate(-90 22 263.0)">Primary energy use per capita (kWh/yr, log scale)</text>
 <rect x="716" y="286.7" width="14" height="33.3" fill="#e7edf4"/>
 <rect x="716" y="253.3" width="14" height="33.3" fill="#c3d2e2"/>
@@ -1853,56 +1883,59 @@ Norway: 2008, 2011-2014, 2021-2022"/>
 <rect x="716" y="186.7" width="14" height="33.3" fill="#688cb0"/>
 <rect x="716" y="153.3" width="14" height="33.3" fill="#436a92"/>
 <rect x="716" y="120.0" width="14" height="33.3" fill="#274a6b"/>
-<text class="leg" x="735" y="124">85</text>
+<text class="leg" x="735" y="124">149</text>
 <text class="leg" x="735" y="320.0">1</text>
 <text class="leg" x="723" y="98" text-anchor="middle">country-</text>
 <text class="leg" x="723" y="98" text-anchor="middle" dy="1.1em">years/cell</text>
 </svg>
-<figcaption>Empirical joint density of all 4,728 country-years, 2000&ndash;2023, on log&ndash;log axes. Cell shade is the (log-scaled) count. Burgundy: the OLS line above. Green dashed: the 5th-percentile lower envelope&mdash;the &ldquo;wall.&rdquo; The red box marks GDP $\ge$ \$30k and $E < $ 15,000&nbsp;kWh, which holds <strong>0 of 772</strong> qualifying country-years. The upper-left, by contrast, is populated: petrostates burn rich-world quantities of energy on modest incomes.</figcaption>
+<figcaption>Empirical joint density of all 8,090 country-years, 1980&ndash;2023, on log&ndash;log axes; cell shade is the (log-scaled) count. Burgundy: the pooled OLS line. Green dashed: the 5th-percentile lower envelope&mdash;the &ldquo;wall.&rdquo; The red box marks real GDP $\ge$ \$30k and $E < $ 10,000&nbsp;kWh, which holds <strong>0 of 1,172</strong> qualifying country-years.</figcaption>
 </figure>
+<p>The lower-right corner&mdash;rich but frugal&mdash;is blank. To make that precise, take at each income level the 5th percentile of energy use: the least energy that any country of that wealth has ever run on. This lower envelope is a <em>wall</em>, and it climbs monotonically: raise the income floor and the energy floor rises with it, with no exceptions across the entire range.</p>
+<div id="table-container">
+<table>
+<thead><tr><th>Real GDP/capita $\ge$</th><th style="text-align:right"># countries</th><th style="text-align:right">min $E$ ever recorded</th><th>attained by</th></tr></thead>
+<tbody>
+<tr><td class="value">\$1,000</td><td class="value">184</td><td class="value">258&nbsp;kWh</td><td>Comoros (1986)</td></tr>
+<tr><td class="value">\$5,000</td><td class="value">115</td><td class="value">2,432&nbsp;kWh</td><td>Equatorial Guinea (2001)</td></tr>
+<tr><td class="value">\$10,000</td><td class="value">83</td><td class="value">5,422&nbsp;kWh</td><td>St. Kitts and Nevis (1990)</td></tr>
+<tr><td class="value">\$20,000</td><td class="value">58</td><td class="value">5,808&nbsp;kWh</td><td>French Polynesia (1980)</td></tr>
+<tr><td class="value">\$30,000</td><td class="value">44</td><td class="value">12,160&nbsp;kWh</td><td>Macao SAR, China (1991)</td></tr>
+<tr><td class="value">\$50,000</td><td class="value">21</td><td class="value">18,332&nbsp;kWh</td><td>Macao SAR, China (2008)</td></tr>
+</tbody>
+</table>
+</div>
+<p>Sharpen to the corner itself. Among the <strong>1,172 country-years</strong> with income at or above \$30{,}000&mdash;roughly the level of Spain&mdash;not one runs on less than 10,000&nbsp;kWh of primary energy per person per year:</p>
+<div class="math">$$\widehat{\Pr}\!\left(E < 10{,}000\ \text{kWh} \;\middle|\; G \ge \$30\text{k}\right) \;=\; \frac{0}{1172} \;=\; 0.$$</div>
+<p>Ten thousand kilowatt-hours a year is a continuous draw of about 1.1&nbsp;kW&mdash;eleven old incandescent bulbs burning around the clock, for every man, woman, and child, before anyone switches anything on. That is not the average for a rich country; it is the <em>floor</em>. No rich society, anywhere, in four and a half decades, has run on less.</p>
+<p>And the nearest miss tells you the floor is load-bearing. The most energy-frugal rich economy on record is <strong>Macao</strong>&mdash;a casino-and-services city-state with essentially no industry, no agriculture, and no hinterland, which imports every joule-intensive thing it touches. The places that press hardest against the wall are exactly the ones theory predicts: financial and tourist enclaves that have outsourced their steel, cement, and freight to someone else&rsquo;s territory. Even they only <em>lean</em> on the floor. None has gone through it. And a planet cannot become Macao, because somewhere, someone still has to pour the concrete.</p>
+</section>
+
+<section>
+<h2>Not just a comparison of countries</h2>
+<p>A pooled correlation mixes two questions, and it is worth separating them, because they have different force. The cross-sectional question&mdash;are richer countries hungrier for energy than poorer ones?&mdash;is the easy one. The temporal question is the one that matters for anyone projecting a country&rsquo;s future: when a single country&rsquo;s own income rises, does its own energy use follow?</p>
+<p>Split each series into a country&rsquo;s long-run mean and its deviations from that mean, and read the answers off separately:</p>
+<ul>
+<li><strong>Between countries</strong> (long-run means): $r_B = 0.91$. Richer nations use more. No surprise.</li>
+<li><strong>Within a country over time</strong> (deviations from its own mean): $r_W = 0.68$, slope $\beta_W = 0.80$. When a country grows, its energy use grows with it&mdash;sub-proportionally, because efficiency improves and output tilts toward services, but it grows. A 1% rise in real income has historically come with roughly 0.8% more energy.</li>
+</ul>
+<p>Both cuts of the data agree. The empty corner is not an artefact of comparing frozen snapshots of two hundred different societies; it holds along each society&rsquo;s own path through time. Countries have become steadily more efficient&mdash;and every one of them has still climbed the wall rather than tunnelled under it.</p>
 </section>
 
 <section>
 <h2>The other corner: energy without wealth</h2>
-<p>The empty region is the lower-right; the <em>upper</em>-left is not empty at all, and it says something important. The conspicuous outliers far above the line are petrostates: Turkmenistan (about \$5,300 per head, yet roughly 59,500&nbsp;kWh of primary energy&mdash;some <strong>5&times; above</strong> the fit) and Trinidad&nbsp;&amp; Tobago (about \$18,300 and 109,000&nbsp;kWh, roughly 3&times; above).<label for="sn-oc" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-oc" class="margin-toggle"><span class="sidenote">Both sit on abundant domestic gas; consumption is inflated by subsidised prices, flaring, and energy-intensive export industry&mdash;LNG, ammonia, petrochemicals.</span> These economies have cheap, secure energy in abundance&mdash;and remain middle-income. So the implication runs strictly one way. A great deal of energy is <em>necessary</em> for wealth but not <em>sufficient</em>: energy that is merely extracted and burned, rather than converted into productive capital and diversified output, buys tonnes of oil-equivalent but not much GDP. The empty lower-right is the binding constraint; the populated upper-left is the reminder that clearing it is only the first step.</p>
+<p>The lower-right is empty. The upper-left is not, and its population disciplines the causal story. The conspicuous points far above the band are petrostates: Turkmenistan, at roughly \$7,900 per head yet some 59,500&nbsp;kWh of primary energy&mdash;about four times what the fit predicts&mdash;and Trinidad and Tobago in similar territory. Both sit on abundant domestic gas.<label for="sn-oc" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-oc" class="margin-toggle"><span class="sidenote">Their apparent consumption is further swollen by subsidised domestic prices, flaring, and energy-intensive export industry&mdash;LNG, ammonia, petrochemicals.</span> They enjoy exactly what the empty corner says wealth requires&mdash;cheap, secure, plentiful energy&mdash;and they remain middle-income.</p>
+<p>So the implication runs strictly one way. Abundant energy is <em>necessary</em> for prosperity and nowhere near <em>sufficient</em>. Energy that is merely extracted and burned, rather than converted into productive capital and diversified output, buys tonnes of oil-equivalent and not much GDP. Clearing the wall is the entry ticket, not the prize.</p>
 </section>
 
 <section>
-<h2>Between countries vs. within one</h2>
-<p>A pooled correlation conflates two questions. Split each series into a country mean and a deviation from it, $\log_{10} X_{it} = \bar X_i + \tilde X_{it}$, and measure each piece separately:</p>
-<ul>
-<li><strong>Between</strong> the 200 countries (their long-run means): $r_B = 0.91$. Richer nations use more&mdash;the cross-section.</li>
-<li><strong>Within</strong> a country over time (deviations): $r_W = 0.49$, slope $\beta_W = 0.26$. When a country&rsquo;s own income rises, its energy use rises too, but sub-proportionally&mdash;efficiency improves and the mix tilts toward less energy-intensive services.</li>
-</ul>
-<p>Both signs agree. The pattern is not an artifact of comparing nations frozen at one instant; it also holds along each country&rsquo;s own trajectory.</p>
-</section>
-
-<section>
-<h2>The empty corner</h2>
-<p>The claim concerns the lower edge of the cloud, not its center. Binning by income and taking the 5th percentile of $E$ (the green wall) yields a lower envelope that is monotone increasing: lift the income floor and the energy floor lifts with it. Sharpening to the corner, of the <strong>772 country-years</strong> with $G \ge \$30{,}000$, none has $E$ below 15,000&nbsp;kWh&mdash;the lowest is 17,631&nbsp;kWh (Macao SAR, China, 2022). Empirically</p>
-<div class="math">$$\widehat{\Pr}\bigl(E < 15000\ \text{kWh} \;\big|\; G \ge \$30\text{k}\bigr) \;=\; \frac{0}{772} \;=\; 0.$$</div>
-<div id="table-container">
-<table>
-<thead><tr><th>Countries with GDP/capita $\ge$&hellip;</th><th style="text-align:right"># countries</th><th style="text-align:right">min $E$ (kWh)</th><th>attained by</th></tr></thead>
-<tbody>
-<tr><td class="value">\$1,000</td><td class="value">186</td><td class="value">112</td><td>Chad (2008)</td></tr>
-<tr><td class="value">\$5,000</td><td class="value">125</td><td class="value">3,299</td><td>Angola (2011)</td></tr>
-<tr><td class="value">\$10,000</td><td class="value">92</td><td class="value">8,103</td><td>Costa Rica (2020)</td></tr>
-<tr><td class="value">\$20,000</td><td class="value">64</td><td class="value">13,842</td><td>French Polynesia (2021)</td></tr>
-<tr><td class="value">\$30,000</td><td class="value">49</td><td class="value">17,631</td><td>Macao SAR, China (2022)</td></tr>
-<tr><td class="value">\$50,000</td><td class="value">27</td><td class="value">18,438</td><td>Macao SAR, China (2023)</td></tr>
-</tbody>
-</table>
-</div>
-</section>
-
-<section>
-<h2>Two caveats</h2>
-<p>First, country-years are not independent: a country contributes up to 24 near-repeated points, so the effective sample is far below 4,728. The honest content is <em>persistence across 24 annual cross-sections</em>, not 4,728 independent draws. Second, correlation fixes no direction&mdash;cheap energy enables output and output funds energy, with common drivers (industrialisation, institutions) behind both.<label for="sn-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-1" class="margin-toggle"><span class="sidenote">The literature calls this the &ldquo;energy&ndash;growth nexus&rdquo;; for e.g. see Kraft &amp; Kraft (1978) and Ozturk (2010).</span> Neither caveat touches the support statement, which is what the title asserts: no country has yet been wealthy without consuming a great deal of energy.</p>
+<h2>Two caveats, neither fatal</h2>
+<p><strong>Country-years are not independent draws.</strong> A single country contributes up to 44 highly correlated points, so the effective sample is far smaller than 8,090. The honest reading is <em>persistence across 44 consecutive annual cross-sections</em>&mdash;which, for a claim about where points have never appeared, is precisely the property you want. An empty region that stays empty through the oil glut, the fall of the Soviet Union, the rise of China, the shale revolution, and the renewables build-out is empty for structural reasons, not sampling luck.</p>
+<p><strong>The accounting is territorial, and correlation fixes no direction.</strong> Causality here runs both ways&mdash;cheap energy enables output, output funds energy, and common drivers like industrialisation and institutions push both; the literature has argued about this &ldquo;energy&ndash;growth nexus&rdquo; for decades.<label for="sn-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-1" class="margin-toggle"><span class="sidenote">The debate runs from Kraft &amp; Kraft (1978) to the survey by Ozturk (2010); the direction of causation genuinely varies by country.</span> Separately, territorial energy accounts flatter rich importers: part of their apparent thrift is embodied energy shipped in from trading partners. Note which way that cuts. Consumption-based accounting would move the frugal enclaves <em>up</em>, back toward the wall&mdash;not through it. The floor in this data is, if anything, an underestimate.</p>
+<p>Neither caveat touches the support statement, which is all the title asserts: no country has yet been rich without commanding a great deal of energy. Anyone who claims the future will be different is entitled to the claim&mdash;but they are claiming something with zero precedent in the modern record, and the burden of naming the mechanism is theirs. Until then, the conclusion the data will bear is this: cheap, secure, abundant energy is not a luxury that prosperity affords. It is a precondition for it.</p>
 </section>
 
                 <footer class="de-emphasize">
-                    <p>Sources: Our World in Data (Energy Institute Statistical Review of World Energy; U.S. EIA) &amp; World Bank, 2000&ndash;2023. <a href="files/energy-gdp-panel-2000-2023.csv">Download the panel (CSV)</a>.</p>
+                    <p>Sources: Our World in Data (Energy Institute Statistical Review of World Energy; U.S. EIA) &amp; World Bank (GDP per capita, constant 2015 US\$; NY.GDP.PCAP.KD), 1980&ndash;2023. <a href="files/energy-gdp-panel-1980-2023.csv">Download the panel (CSV)</a>.</p>
                 </footer>
             </article>
 
