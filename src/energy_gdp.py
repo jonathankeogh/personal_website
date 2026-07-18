@@ -374,7 +374,7 @@ PAGE = '''<!DOCTYPE html>
                     </div>
                 </header>
 <section>
-<p>Take every country that reports both figures, once per year from {y0} to {y1}: a panel of <strong>{n:,} economy-year observations</strong> of real GDP per capita against primary energy consumption per capita. Primary means all energy use: electricity, transportation, industrial production, everything.</p>
+<p>Take every country that reports both figures, once per year from {y0} to {y1}: you have <strong>{n:,} economy-year observations</strong> of real GDP per capita against primary energy consumption per capita. Primary means all energy use: electricity, transportation, industrial production, everything.</p>
 <p>This is not the claim that growth cannot be separated from energy. It is a narrow empirical claim: in the joint distribution of income and energy, the corner marked high GDP, low energy, is empty. Over four decades and two hundred countries, no economy has yet been rich while consuming little energy.</p>
 </section>
 
