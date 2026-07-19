@@ -401,18 +401,19 @@ PAGE = '''<!DOCTYPE html>
 </section>
 
 <section>
-<h2>But does it only go the other way, and what about through time?</h2>
+<h2>But is the converse true?</h2>
 <p>The lower-right is empty; the upper-left is not<label for="sn-petro" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-petro" class="margin-toggle"><span class="sidenote">Petrostates like Turkmenistan and Trinidad &amp; Tobago sit here; they own abundant cheap energy, and are middle-income; which is exactly why energy is necessary but not sufficient.</span>, which means the implication runs strictly one way. Abundant energy is necessary for prosperity but not sufficient.</p>
 <p>For the time variable, it&rsquo;s obvious that economy-years are not independent draws. A single economy contributes up to {nyears} highly correlated points, so the effective sample is far smaller than {n:,}. But the empty region that stays empty through the fall of the Soviet Union, the rise of China, the internet explosion, and many wars, strongly suggests this is structural.</p>
 </section>
 
 <section>
-<p>In the light of geopolitical events such as the Ukraine and Iran wars, and forward-looking events such as the AI revolution, this should alarm politicians in countries such as the United Kingdom, which has allowed its energy costs to skyrocket. Too often the recent spike in energy costs across Western economies is framed as a &ldquo;Cost of Living Crisis&rdquo;: with consumption typically closely-aligned with price, this has the potential to enormously underestimate the importance of the issue.</p>
+<p>In the light of geopolitical events such as the Ukraine and Iran wars, and forward-looking events such as the AI revolution, this should alarm politicians in countries such as the United Kingdom, which has allowed its energy costs to skyrocket. Too often the recent spike in energy costs across Western economies is framed as a &ldquo;Cost of Living Crisis&rdquo;; with consumption typically closely-aligned with price, this has the potential to enormously underestimate the importance of the issue.</p>
 <p>Causality can run both ways<label for="sn-nexus" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-nexus" class="margin-toggle"><span class="sidenote">The direction of causation is much debated and is named the &ldquo;energy&ndash;growth nexus&rdquo;. See Kraft &amp; Kraft (1978) and the survey by Ozturk (2010).</span>, but it doesn&rsquo;t matter for the statement, which is all the title asserts: no country has yet been rich without commanding a great deal of energy. Anyone who claims the future will be different is entitled to their claim, but they are claiming something with zero precedent in the modern record, and the burden of naming the mechanism is on them. Until then, the conclusion the data will bear is this: cheap, secure, abundant energy is not a luxury that prosperity affords. It is a precondition for it.</p>
 </section>
 
                 <footer class="de-emphasize">
                     <p>Sources: Our World in Data (Energy Institute Statistical Review of World Energy; U.S. EIA) &amp; World Bank (GDP per capita, constant 2015 US\\$; NY.GDP.PCAP.KD), {y0}&ndash;{y1}. <a href="files/energy-gdp-panel-1980-2023.csv">Download the panel (CSV)</a>.</p>
+                    <p><a class="code-download-btn" href="https://github.com/jonathankeogh/energy-and-gdp" target="_blank" rel="noopener">Download the code used for this post &rarr;</a></p>
                 </footer>
             </article>
 

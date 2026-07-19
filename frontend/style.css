@@ -1274,6 +1274,28 @@ div.highlight:hover .code-copy-btn {
     border-color: rgba(68, 92, 60, 0.3);
 }
 
+/* Download-code button — scholarly, understated */
+.code-download-btn {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.45rem 0.9rem;
+    font-family: et-bembo, Palatino, Georgia, serif;
+    font-size: 0.95rem;
+    font-style: italic;
+    color: rgba(17, 17, 17, 0.7);
+    text-decoration: none;
+    background: transparent;
+    border: 1px solid rgba(17, 17, 17, 0.2);
+    border-radius: 3px;
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.code-download-btn:hover {
+    color: #445c3c;
+    border-color: rgba(68, 92, 60, 0.4);
+    background: rgba(68, 92, 60, 0.04);
+}
+
 /* Responsive adjustments for code blocks */
 @media (max-width: 760px) {
     div.highlight {
