@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <title>Jonathan Keogh | Bohemian eigenvalue explorer</title>
+    <link rel="stylesheet" href="style.css" type="text/css" fetchpriority="high" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <meta name="author" content="Jonathan Keogh" />
+    <meta name="description" content="Interactive Bohemian matrix eigenvalue densities, computed live in the browser: sample n-by-n matrices with entries from {-1, t, 1} and watch the spectra paint the complex plane." />
+    <script>
+      MathJax = {
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true },
+        options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'], ignoreHtmlClass: 'tex2jax_ignore' }
+      };
+    </script>
+    <script id="MathJax-script" async crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+      /* 1.5x the 60% text column, left-aligned with it */
+      #bo-sweep { margin: 1.5rem 0 0; width: 90%; max-width: 100%; float: none; }
+      #bo-sweep img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 4px;
+        background: #000004;
+      }
+      #bo-sweep figcaption { float: none; max-width: 100%; font-size: 0.95rem; margin-top: 0.5rem; }
+      @media (max-width: 760px) { #bo-sweep { width: 100%; } }
+      #bohemian-tool {
+        background: #0d0d10;
+        border-radius: 4px;
+        padding: 1.1rem 1.1rem 0.9rem;
+        margin-top: 1.5rem;
+        font-family: "JetBrains Mono", monospace;
+        color: #c9c4bb;
+      }
+      #bohemian-tool canvas {
+        display: block;
+        width: 100%;
+        max-width: min(100%, 65vh);
+        height: auto;
+        margin: 0 auto;
+        background: #000004;
+        cursor: crosshair;
+      }
+      #bohemian-tool:fullscreen { display: flex; flex-direction: column; justify-content: center; overflow: auto; }
+      #bohemian-tool:fullscreen canvas { width: auto; height: min(76vh, calc(100vh - 220px)); margin: 0 auto; }
+      #bo-families { display: flex; flex-wrap: wrap; gap: 0.25rem 1.1rem; margin: 0.8rem 0 0.7rem; }
+      #bo-families label { font-size: 0.72rem; cursor: pointer; white-space: nowrap; }
+      #bo-families input { accent-color: #e8743d; margin-right: 0.3rem; }
+      .bo-slider { display: flex; align-items: center; gap: 0.7rem; margin: 0.35rem 0; font-size: 0.72rem; }
+      .bo-slider label { width: 4.2rem; flex-shrink: 0; }
+      .bo-slider input[type=range] { flex-grow: 1; accent-color: #e8743d; min-width: 0; }
+      .bo-slider output { width: 5.5rem; flex-shrink: 0; text-align: right; }
+      #bo-buttons { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.7rem; align-items: center; }
+      .bo-btn, #bo-cmap {
+        background: transparent;
+        border: 1px solid #33333d;
+        color: #c9c4bb;
+        font-family: inherit;
+        font-size: 0.7rem;
+        padding: 0.28rem 0.65rem;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: border-color 0.15s ease, color 0.15s ease;
+      }
+      .bo-btn:hover, #bo-cmap:hover { border-color: #e8743d; color: #fff; }
+      .bo-btn.bo-active { border-color: #e8743d; color: #e8743d; }
+      #bo-cmap option { background: #16161c; }
+      #bo-status { margin-top: 0.6rem; font-size: 0.68rem; color: #8a8a94; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+      #bo-status .bo-live { color: #e8743d; }
+      #bo-cursor { text-align: right; }
+    </style>
+</head>
+<body class="">
+    <aside id="asidebar">
+        <div id="logo">
+            <a href="/">Jonathan<br>Keogh</a>
+        </div>
+        <nav class="main-menu">
+<ul>
+    <li><a href="writing.html">Blog</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="links.html">Interesting Links</a></li>
+</ul>        </nav>
+
+<ul id="social">
+    <li><a href="https://github.com/jonathankeogh/" title="GitHub" target=_blank rel="me noopener"><img alt="GitHub" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23000' aria-label='GitHub'><path d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/></svg>"></a></li>
+    <li><a href="https://www.linkedin.com/in/jonathan-keogh-287235101/" title="LinkedIn" target=_blank rel="me noopener"><img alt="LinkedIn" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23000' aria-label='LinkedIn'><path d='M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z'/></svg>"></a></li>
+</ul>    </aside>
+    <main>            <article class="post">
+                <header>
+                    <h1>Bohemian eigenvalue explorer</h1>
+                    <p><span class="newthought">Jonathan Keogh</span></p>
+                    <div class="article-meta">
+                        <p><span class="newthought">Filed under &ldquo;<a href="writing.html" rel="tag">Blog</a>&rdquo; &middot; 20 July 2026</span></p>
+                    </div>
+                </header>
+<section>
+<p>A <a href="http://www.bohemianmatrices.com/" target="_blank" rel="noopener">Bohemian</a> family is the set of $n \times n$ matrices whose entries range over a fixed finite population, here $P_t = \{-1,\, t,\, 1\}$. Draw $A$ uniformly from a structural subfamily &mdash; tridiagonal, dense, unit-subdiagonal Hessenberg, or Toeplitz &mdash; and pool $\operatorname{Spec}(A)$ over $10^5$&ndash;$10^6$ independent draws: the image is the $\log(1+\text{count})$ histogram of those eigenvalues on the window $|\operatorname{Re}\lambda|, |\operatorname{Im}\lambda| \le 1.15\sqrt{n} + 0.35$. Because characteristic polynomials have coefficients in a small discrete set, the real axis carries excess mass (the bright filament) and neighbourhoods of low-height algebraic numbers like $0, \pm 1, \pm i$ are depleted (the dark holes). Everything runs in your browser &mdash; characteristic polynomials by Faddeev&ndash;LeVerrier, roots by Durand&ndash;Kerner, parallelized across your CPU cores &mdash; and the density re-accumulates live as you twiddle.</p>
+</section>
+
+<section class="fullwidth">
+<figure id="bo-sweep">
+<img src="images/bohemian-sweep.gif" alt="Looping animation of the tridiagonal Bohemian eigenvalue density as t sweeps between -1.5 and 1.5: constellations of eigenvalues bloom, merge and dissolve, symmetric about the real axis" />
+<figcaption>Tridiagonal, $n = 8$, $10^6$ matrices per frame, $t$ sweeping $-1.5 \leftrightarrow 1.5$.</figcaption>
+</figure>
+<div id="bohemian-tool">
+  <canvas id="bo-canvas" width="1000" height="1000" aria-label="Eigenvalue density in the complex plane"></canvas>
+  <noscript><p>The explorer needs JavaScript; there is a Python version below.</p></noscript>
+  <div id="bo-controls">
+    <div id="bo-families" role="radiogroup" aria-label="matrix family">
+      <label><input type="radio" name="family" value="tridiagonal" checked>tridiagonal</label>
+      <label><input type="radio" name="family" value="dense">dense</label>
+      <label><input type="radio" name="family" value="hessenberg">hessenberg</label>
+      <label><input type="radio" name="family" value="toeplitz">toeplitz</label>
+    </div>
+    <div class="bo-slider">
+      <label for="bo-n">n</label>
+      <input type="range" id="bo-n" min="3" max="12" step="1" value="5">
+      <output id="bo-n-out">5</output>
+    </div>
+    <div class="bo-slider">
+      <label for="bo-batch">matrices</label>
+      <input type="range" id="bo-batch" min="20000" max="1000000" step="20000" value="200000">
+      <output id="bo-batch-out">200k</output>
+    </div>
+    <div class="bo-slider">
+      <label for="bo-t">t</label>
+      <input type="range" id="bo-t" min="-1.5" max="1.5" step="0.01" value="0">
+      <output id="bo-t-out">+0.00</output>
+    </div>
+    <div id="bo-buttons">
+      <button type="button" class="bo-btn" id="bo-play">&#9654; sweep t</button>
+      <select id="bo-cmap" aria-label="colormap">
+        <option value="magma" selected>magma</option>
+        <option value="inferno">inferno</option>
+        <option value="viridis">viridis</option>
+        <option value="twilight">twilight</option>
+      </select>
+      <button type="button" class="bo-btn" id="bo-save">save png</button>
+      <button type="button" class="bo-btn" id="bo-fs">fullscreen</button>
+    </div>
+    <div id="bo-status"><span id="bo-progress">&nbsp;</span><span id="bo-cursor"></span></div>
+  </div>
+</div>
+</section>
+
+<section>
+<p class="de-emphasize">Prefer a desktop version? <a href="files/bohemian.py">bohemian.py</a> is the same tool in NumPy/Matplotlib, with batched <code>np.linalg.eigvals</code> instead of hand-rolled root finding.</p>
+</section>
+            </article>
+
+        <footer>
+<p class="de-emphasize copyright">&copy;2026 Jonathan Keogh. All rights reserved.</p>        </footer>
+    </main>
+<script>
+(function () {
+  "use strict";
+  var BINS = 1000;
+  var LUT_HEX = {
+    magma: "00000401000501010601010802010902020b02020d03030f03031204041405041606051806051a07061c08071e0907200a08220b09240c09260d0a290e0b2b100b2d110c2f120d31130d34140e36150e38160f3b180f3d19103f1a10421c10441d11471e114920114b21114e22115024125325125527125829115a2a115c2c115f2d11612f116331116533106734106936106b38106c390f6e3b0f703d0f713f0f72400f74420f75440f764510774710784910784a10794c117a4e117b4f127b51127c52137c54137d56147d57157e59157e5a167e5c167f5d177f5f187f601880621980641a80651a80671b80681c816a1c816b1d816d1d816e1e81701f81721f817320817521817621817822817922827b23827c23827e24828025828125818326818426818627818827818928818b29818c29818e2a81902a81912b81932b80942c80962c80982d80992d809b2e7f9c2e7f9e2f7fa02f7fa1307ea3307ea5317ea6317da8327daa337dab337cad347cae347bb0357bb2357bb3367ab5367ab73779b83779ba3878bc3978bd3977bf3a77c03a76c23b75c43c75c53c74c73d73c83e73ca3e72cc3f71cd4071cf4070d0416fd2426fd3436ed5446dd6456cd8456cd9466bdb476adc4869de4968df4a68e04c67e24d66e34e65e44f64e55064e75263e85362e95462ea5661eb5760ec5860ed5a5fee5b5eef5d5ef05f5ef1605df2625df2645cf3655cf4675cf4695cf56b5cf66c5cf66e5cf7705cf7725cf8745cf8765cf9785df9795df97b5dfa7d5efa7f5efa815ffb835ffb8560fb8761fc8961fc8a62fc8c63fc8e64fc9065fd9266fd9467fd9668fd9869fd9a6afd9b6bfe9d6cfe9f6dfea16efea36ffea571fea772fea973feaa74feac76feae77feb078feb27afeb47bfeb67cfeb77efeb97ffebb81febd82febf84fec185fec287fec488fec68afec88cfeca8dfecc8ffecd90fecf92fed194fed395fed597fed799fed89afdda9cfddc9efddea0fde0a1fde2a3fde3a5fde5a7fde7a9fde9aafdebacfcecaefceeb0fcf0b2fcf2b4fcf4b6fcf6b8fcf7b9fcf9bbfcfbbdfcfdbf",
+    inferno: "00000401000501010601010802010a02020c02020e03021004031204031405041706041907051b08051d09061f0a07220b07240c08260d08290e092b10092d110a30120a32140b34150b37160b39180c3c190c3e1b0c411c0c431e0c451f0c48210c4a230c4c240c4f260c51280b53290b552b0b572d0b592f0a5b310a5c320a5e340a5f3609613809623909633b09643d09653e0966400a67420a68440a68450a69470b6a490b6a4a0c6b4c0c6b4d0d6c4f0d6c510e6c520e6d540f6d550f6d57106e59106e5a116e5c126e5d126e5f136e61136e62146e64156e65156e67166e69166e6a176e6c186e6d186e6f196e71196e721a6e741a6e751b6e771c6d781c6d7a1d6d7c1d6d7d1e6d7f1e6c801f6c82206c84206b85216b87216b88226a8a226a8c23698d23698f24699025689225689326679526679727669827669a28659b29649d29649f2a63a02a63a22b62a32c61a52c60a62d60a82e5fa92e5eab2f5ead305dae305cb0315bb1325ab3325ab43359b63458b73557b93556ba3655bc3754bd3853bf3952c03a51c13a50c33b4fc43c4ec63d4dc73e4cc83f4bca404acb4149cc4248ce4347cf4446d04545d24644d34743d44842d54a41d74b3fd84c3ed94d3dda4e3cdb503bdd513ade5238df5337e05536e15635e25734e35933e45a31e55c30e65d2fe75e2ee8602de9612bea632aeb6429eb6628ec6726ed6925ee6a24ef6c23ef6e21f06f20f1711ff1731df2741cf3761bf37819f47918f57b17f57d15f67e14f68013f78212f78410f8850ff8870ef8890cf98b0bf98c0af98e09fa9008fa9207fa9407fb9606fb9706fb9906fb9b06fb9d07fc9f07fca108fca309fca50afca60cfca80dfcaa0ffcac11fcae12fcb014fcb216fcb418fbb61afbb81dfbba1ffbbc21fbbe23fac026fac228fac42afac62df9c72ff9c932f9cb35f8cd37f8cf3af7d13df7d340f6d543f6d746f5d949f5db4cf4dd4ff4df53f4e156f3e35af3e55df2e661f2e865f2ea69f1ec6df1ed71f1ef75f1f179f2f27df2f482f3f586f3f68af4f88ef5f992f6fa96f8fb9af9fc9dfafda1fcffa4",
+    viridis: "44015444025645045745055946075a46085c460a5d460b5e470d60470e6147106347116447136548146748166848176948186a481a6c481b6d481c6e481d6f481f70482071482173482374482475482576482677482878482979472a7a472c7a472d7b472e7c472f7d46307e46327e46337f463480453581453781453882443983443a83443b84433d84433e85423f854240864241864142874144874045884046883f47883f48893e49893e4a893e4c8a3d4d8a3d4e8a3c4f8a3c508b3b518b3b528b3a538b3a548c39558c39568c38588c38598c375a8c375b8d365c8d365d8d355e8d355f8d34608d34618d33628d33638d32648e32658e31668e31678e31688e30698e306a8e2f6b8e2f6c8e2e6d8e2e6e8e2e6f8e2d708e2d718e2c718e2c728e2c738e2b748e2b758e2a768e2a778e2a788e29798e297a8e297b8e287c8e287d8e277e8e277f8e27808e26818e26828e26828e25838e25848e25858e24868e24878e23888e23898e238a8d228b8d228c8d228d8d218e8d218f8d21908d21918c20928c20928c20938c1f948c1f958b1f968b1f978b1f988b1f998a1f9a8a1e9b8a1e9c891e9d891f9e891f9f881fa0881fa1881fa1871fa28720a38620a48621a58521a68522a78522a88423a98324aa8325ab8225ac8226ad8127ad8128ae8029af7f2ab07f2cb17e2db27d2eb37c2fb47c31b57b32b67a34b67935b77937b87838b9773aba763bbb753dbc743fbc7340bd7242be7144bf7046c06f48c16e4ac16d4cc26c4ec36b50c46a52c56954c56856c66758c7655ac8645cc8635ec96260ca6063cb5f65cb5e67cc5c69cd5b6ccd5a6ece5870cf5773d05675d05477d1537ad1517cd2507fd34e81d34d84d44b86d54989d5488bd6468ed64590d74393d74195d84098d83e9bd93c9dd93ba0da39a2da37a5db36a8db34aadc32addc30b0dd2fb2dd2db5de2bb8de29bade28bddf26c0df25c2df23c5e021c8e020cae11fcde11dd0e11cd2e21bd5e21ad8e219dae319dde318dfe318e2e418e5e419e7e419eae51aece51befe51cf1e51df4e61ef6e620f8e621fbe723fde725",
+    twilight: "30143731133932123a33113c34113e3511403611423711443911463a11493c114b3d114e3f125141125442125744135a46145e4714614915644b16684c176b4e186f4f1972511a75521c79531e7c551f7f56218257238557258858278b59298e5a2b905a2d925b30955b32985c359a5c369b5d3a9e5d3ca05d3ea15d40a25e43a55e46a65e48a85e49a95e4dab5e4fac5e52ad5e53ae5f57b05f59b15f5bb25f5db25f60b45f62b45f65b56066b66069b7606cb8606eb8616fb96172ba6275ba6277bb6379bb637abb647dbc657fbd6682bd6684bd6786be6888be698abf6a8bbf6c8ebf6d90c06e92c07094c07196c17398c1759ac1769bc1789ec27aa0c27ca2c27ea4c380a5c382a7c385a9c486aac489adc58cafc58eb1c591b2c693b4c696b6c799b8c89ab8c89ebbc9a1bdc9a4becaa7c0cbaac2ccadc3cdb0c5cdb2c6ceb6c8cfb9c9d0bccbd1bfccd3c2ced4c5cfd5c8d0d6c9d1d7cdd3d8d0d4d9d2d5dbd4d6dcd6d7ddd8d8dedad8dfdbd8dfddd9e0ded9e1e0d9e2e1d9e2e2d9e2e2d9e1e2d9e0e1d8dfe1d8dde1d7dce0d6dadfd5d8dfd4d6ded3d3ddd1d1ddd0cedccecbdbccc8dacbc5d9c9c2d8c7bed8c5bbd7c3b8d6c1b4d5bfb1d4beafd3baaad2b8a7d1b6a3d1b4a0d0b29ccfaf99cfad96ceab92cda88fcda68ccca389cca186cb9f83ca9c80ca9a7dca997cc99578c89275c89073c78e71c68b6ec6896cc5866ac58468c48166c37f64c27c63c27a61c1775fc0755ebf725dbf715cbd6e5abc6b59bb6958ba6657b96456b86255b75f55b65d54b55b53b35953b25652b15452af5251ae5051ac4d51ac4c50a94950a84750a64550a54350a34150a13f50a03d509e3b509c39509a3750983550963350943150922f50902e508f2d508c2a508a29508727508526508325508023507e22507b2150792050761f4f741e4f711d4f6f1c4e6c1b4e691a4d681a4d64194b61184b5f174a5c17495916485716475415465215454f14444d14434a134248134146124043123e41123d40123d3d113c3b113b3a113a3811393611393511383412383312373113373014372f1436"
+  };
+  function parseLut(hex) {
+    var out = new Uint8Array(768);
+    for (var i = 0; i < 768; i++) out[i] = parseInt(hex.substr(2 * i, 2), 16);
+    return out;
+  }
+  var LUTS = {};
+  for (var k in LUT_HEX) LUTS[k] = parseLut(LUT_HEX[k]);
+  var LUT = LUTS.magma;
+
+  var canvas = document.getElementById("bo-canvas");
+  var ctx = canvas.getContext("2d");
+  var canGlow = typeof ctx.filter === "string";
+  var buf = document.createElement("canvas");
+  buf.width = buf.height = BINS;
+  var bctx = buf.getContext("2d");
+  var img = bctx.createImageData(BINS, BINS);
+  var progressEl = document.getElementById("bo-progress");
+  var cursorEl = document.getElementById("bo-cursor");
+
+  var state = { family: "tridiagonal", n: 5, batch: 200000, t: 0 };
+  var radius = 0;
+  var hist = new Uint32Array(BINS * BINS);
+  var drawn = 0;      // matrices merged into hist
+  var assigned = 0;   // matrices handed to workers for the current generation
+  var gen = 0;        // bumped on every knob change; stale worker replies are dropped
+  var jobSize = 1200; // matrices per worker job, adapted toward ~45 ms
+  var lastPaint = 0, needPaint = false;
+  var playing = false, playDir = 1, lastStep = 0;
+
+  function axisRadius(n) { return 1.15 * Math.sqrt(n) + 0.35; }
+
+  // The whole numeric engine lives in this self-contained factory so the same
+  // source can run here (fallback) and inside Web Workers via toString().
+  function makeEngine() {
+    var NMAX = 12;
+    var A = new Float64Array(NMAX * NMAX);
+    var M = new Float64Array(NMAX * NMAX);
+    var T = new Float64Array(NMAX * NMAX);
+    var coef = new Float64Array(NMAX + 1);
+    var zr = new Float64Array(NMAX), zi = new Float64Array(NMAX);
+
+    function fillMatrix(family, n, t) {
+      var i, j, k, r;
+      function draw() { r = (Math.random() * 3) | 0; return r === 0 ? -1 : (r === 1 ? t : 1); }
+      for (i = 0; i < n * n; i++) A[i] = 0;
+      switch (family) {
+        case "dense":
+          for (i = 0; i < n * n; i++) A[i] = draw();
+          break;
+        case "tridiagonal":
+          for (i = 0; i < n; i++)
+            for (j = Math.max(0, i - 1); j <= Math.min(n - 1, i + 1); j++)
+              A[i * n + j] = draw();
+          break;
+        case "hessenberg": // upper triangle random, unit subdiagonal
+          for (i = 0; i < n; i++)
+            for (j = i; j < n; j++) A[i * n + j] = draw();
+          for (i = 1; i < n; i++) A[i * n + i - 1] = 1;
+          break;
+        case "toeplitz": // constant diagonals: 2n-1 draws
+          var c = [];
+          for (k = 0; k < 2 * n - 1; k++) c.push(draw());
+          for (i = 0; i < n; i++)
+            for (j = 0; j < n; j++) A[i * n + j] = c[i - j + n - 1];
+          break;
+      }
+    }
+
+    // p(x) = x^n + coef[1] x^(n-1) + ... + coef[n]  (Faddeev-LeVerrier)
+    function charPoly(n) {
+      var i, j, k, l, s;
+      for (i = 0; i < n * n; i++) M[i] = A[i];
+      s = 0; for (i = 0; i < n; i++) s += M[i * n + i];
+      coef[1] = -s;
+      for (k = 2; k <= n; k++) {
+        for (i = 0; i < n; i++) M[i * n + i] += coef[k - 1];
+        for (i = 0; i < n; i++)
+          for (j = 0; j < n; j++) {
+            s = 0;
+            for (l = 0; l < n; l++) s += A[i * n + l] * M[l * n + j];
+            T[i * n + j] = s;
+          }
+        var tmp = M; M = T; T = tmp;
+        s = 0; for (i = 0; i < n; i++) s += M[i * n + i];
+        coef[k] = -s / k;
+      }
+    }
+
+    // Durand-Kerner with Gauss-Seidel updates
+    function roots(n) {
+      var R = 0, i, j, it;
+      for (i = 1; i <= n; i++) {
+        var a = Math.abs(coef[i]);
+        if (a > 0) { var b = Math.pow(a, 1 / i); if (b > R) R = b; }
+      }
+      R = 2 * R + 0.1; // Fujiwara-type root bound: stays O(root size) even
+                       // when raw coefficients are huge at n = 11, 12
+      for (i = 0; i < n; i++) {
+        var th = (2 * Math.PI * i) / n + 0.7;
+        zr[i] = 0.7 * R * Math.cos(th);
+        zi[i] = 0.7 * R * Math.sin(th);
+      }
+      var tol = 1e-9 * R;
+      for (it = 0; it < 96; it++) {
+        var maxd = 0;
+        for (i = 0; i < n; i++) {
+          var xr = zr[i], xi = zi[i];
+          var pr = 1, pi = 0, kk;
+          for (kk = 1; kk <= n; kk++) {
+            var nr = pr * xr - pi * xi + coef[kk];
+            pi = pr * xi + pi * xr;
+            pr = nr;
+          }
+          var dr = 1, di = 0;
+          for (j = 0; j < n; j++) {
+            if (j === i) continue;
+            var wr = xr - zr[j], wi = xi - zi[j];
+            var tr = dr * wr - di * wi;
+            di = dr * wi + di * wr;
+            dr = tr;
+          }
+          var d2 = dr * dr + di * di;
+          if (d2 < 1e-30) d2 = 1e-30;
+          var cr = (pr * dr + pi * di) / d2;
+          var ci = (pi * dr - pr * di) / d2;
+          zr[i] = xr - cr;
+          zi[i] = xi - ci;
+          var ad = Math.abs(cr) + Math.abs(ci);
+          if (ad > maxd) maxd = ad;
+        }
+        if (maxd < tol) break;
+      }
+    }
+
+    // Sample `count` matrices; return packed histogram bin indices for every
+    // eigenvalue and its conjugate (the ensemble is conjugation-symmetric,
+    // so this halves Monte Carlo noise at no eigensolver cost).
+    return function (family, n, t, count, r, bins) {
+      var out = new Uint32Array(count * n * 2), len = 0;
+      var scale = bins / (2 * r);
+      for (var m = 0; m < count; m++) {
+        fillMatrix(family, n, t);
+        charPoly(n);
+        roots(n);
+        for (var i = 0; i < n; i++) {
+          var fx = (zr[i] + r) * scale;
+          if (fx < 0 || fx >= bins) continue;
+          var fy = (zi[i] + r) * scale;
+          if (fy >= 0 && fy < bins) out[len++] = (bins - 1 - (fy | 0)) * bins + (fx | 0);
+          fy = (-zi[i] + r) * scale;
+          if (fy >= 0 && fy < bins) out[len++] = (bins - 1 - (fy | 0)) * bins + (fx | 0);
+        }
+      }
+      return out.subarray(0, len);
+    };
+  }
+
+  // ---- worker pool ---------------------------------------------------------
+  var workers = [];
+  var localEngine = null;
+  var chunk = 400; // fallback main-thread chunk, adapted to ~12 ms
+  (function () {
+    if (typeof Worker === "undefined" || typeof Blob === "undefined" || typeof URL === "undefined") {
+      localEngine = makeEngine();
+      return;
+    }
+    try {
+      var src = "var run = (" + makeEngine.toString() + ")();\n" +
+        "onmessage = function (e) {\n" +
+        "  var d = e.data, t0 = Date.now();\n" +
+        "  var idx = run(d.family, d.n, d.t, d.count, d.r, d.bins);\n" +
+        "  var copy = new Uint32Array(idx);\n" +
+        "  postMessage({ gen: d.gen, count: d.count, ms: Date.now() - t0, idx: copy }, [copy.buffer]);\n" +
+        "};";
+      var url = URL.createObjectURL(new Blob([src], { type: "text/javascript" }));
+      var nw = Math.min(navigator.hardwareConcurrency || 4, 8);
+      for (var i = 0; i < nw; i++) {
+        var wo = { w: new Worker(url), busy: false };
+        wo.w.onmessage = (function (wo) { return function (e) { onReply(wo, e.data); }; })(wo);
+        workers.push(wo);
+      }
+    } catch (err) {
+      workers = [];
+      localEngine = makeEngine();
+    }
+  })();
+
+  function dispatch(wo) {
+    if (assigned >= state.batch) return;
+    var cnt = Math.min(jobSize, state.batch - assigned);
+    assigned += cnt;
+    wo.busy = true;
+    wo.w.postMessage({ gen: gen, family: state.family, n: state.n, t: state.t,
+                       count: cnt, r: radius, bins: BINS });
+  }
+
+  function onReply(wo, d) {
+    wo.busy = false;
+    if (d.gen === gen) {
+      var idx = d.idx;
+      for (var i = 0; i < idx.length; i++) hist[idx[i]]++;
+      drawn += d.count;
+      needPaint = true;
+      if (d.ms > 1) {
+        var target = (jobSize * 45) / d.ms;
+        jobSize = Math.max(200, Math.min(50000, (0.5 * jobSize + 0.5 * target) | 0));
+      }
+    }
+    dispatch(wo);
+  }
+
+  function kickIdle() {
+    for (var i = 0; i < workers.length; i++) if (!workers[i].busy) dispatch(workers[i]);
+  }
+
+  // ---- rendering -----------------------------------------------------------
+  // Real-axis bins hold thousands of eigenvalues; clip the color scale at a
+  // high quantile of populated bins so the off-axis cloud stays visible.
+  // For sparse (discrete) spectra, push 1-2 count bins to the bright end.
+  var LOG1P = new Float64Array(4096);
+  for (var li = 0; li < 4096; li++) LOG1P[li] = Math.log1p(li);
+
+  function computeVmax() {
+    var samples = [], stride = 17, nz = 0, seen = 0, i;
+    for (i = 0; i < hist.length; i += stride) {
+      seen++;
+      if (hist[i] > 0) { nz++; samples.push(hist[i]); }
+    }
+    if (!nz) return 1;
+    samples.sort(function (a, b) { return a - b; });
+    var occ = nz / seen;
+    var q = occ < 0.03 ? 0.90 : 0.98;
+    var v = Math.log1p(samples[Math.min(nz - 1, (q * nz) | 0)]);
+    if (occ < 0.03) v = Math.max(v, Math.log1p(2));
+    return v;
+  }
+
+  function paint() {
+    var vmax = computeVmax();
+    var data = img.data, i, c, v, idx;
+    for (i = 0; i < BINS * BINS; i++) {
+      c = hist[i];
+      v = c < 4096 ? LOG1P[c] : Math.log1p(c);
+      idx = ((v / vmax) * 255) | 0;
+      if (idx > 255) idx = 255;
+      var o = 4 * i, l = 3 * idx;
+      data[o] = LUT[l]; data[o + 1] = LUT[l + 1]; data[o + 2] = LUT[l + 2]; data[o + 3] = 255;
+    }
+    bctx.putImageData(img, 0, 0);
+    ctx.globalCompositeOperation = "source-over";
+    if (canGlow) ctx.filter = "none";
+    ctx.globalAlpha = 1;
+    ctx.drawImage(buf, 0, 0);
+    if (canGlow) { // soft bloom: blurred copy screened on top
+      ctx.globalCompositeOperation = "screen";
+      ctx.filter = "blur(5px)";
+      ctx.globalAlpha = 0.55;
+      ctx.drawImage(buf, 0, 0);
+      ctx.filter = "none";
+      ctx.globalAlpha = 1;
+      ctx.globalCompositeOperation = "source-over";
+    }
+    var live = drawn < state.batch;
+    progressEl.innerHTML =
+      (drawn * state.n).toLocaleString() + " eigenvalues &middot; " +
+      drawn.toLocaleString() + " / " + state.batch.toLocaleString() + " matrices" +
+      " &middot; window &plusmn;" + radius.toFixed(2) +
+      " &middot; " + (workers.length ? workers.length + " threads" : "main thread") +
+      (live ? ' &middot; <span class="bo-live">accumulating&hellip;</span>' : "");
+    needPaint = false;
+  }
+
+  function reset() {
+    gen++;
+    hist.fill(0);
+    drawn = 0;
+    assigned = 0;
+    radius = axisRadius(state.n);
+    needPaint = true;
+    lastPaint = 0;
+    kickIdle();
+  }
+
+  function tick(now) {
+    if (needPaint && (now - lastPaint > 140 || drawn >= state.batch)) {
+      paint();
+      lastPaint = now;
+    }
+    // Step the sweep only once the current frame is fully accumulated AND
+    // painted, then dwell briefly so each t is actually seen.
+    if (playing && drawn >= state.batch && !needPaint && now - lastStep > 500) {
+      state.t = Math.round((state.t + 0.02 * playDir) * 100) / 100;
+      if (state.t >= 1.5) { state.t = 1.5; playDir = -1; }
+      else if (state.t <= -1.5) { state.t = -1.5; playDir = 1; }
+      tIn.value = state.t;
+      tOut.textContent = fmtT(state.t);
+      lastStep = now;
+      reset();
+    }
+    if (localEngine && drawn < state.batch) {
+      var todo = Math.min(chunk, state.batch - drawn);
+      var t0 = performance.now();
+      var idx = localEngine(state.family, state.n, state.t, todo, radius, BINS);
+      for (var i = 0; i < idx.length; i++) hist[idx[i]]++;
+      drawn += todo;
+      needPaint = true;
+      var ms = performance.now() - t0;
+      if (ms > 1) chunk = Math.max(100, Math.min(20000, (chunk * 12 / ms) | 0));
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // ---- controls ------------------------------------------------------------
+  var nIn = document.getElementById("bo-n");
+  var batchIn = document.getElementById("bo-batch");
+  var tIn = document.getElementById("bo-t");
+  var tOut = document.getElementById("bo-t-out");
+  var playBtn = document.getElementById("bo-play");
+
+  function fmtT(t) { return (t >= 0 ? "+" : "") + t.toFixed(2); }
+
+  document.querySelectorAll('#bo-families input').forEach(function (r) {
+    r.addEventListener("input", function () { state.family = r.value; reset(); });
+  });
+  nIn.addEventListener("input", function () {
+    state.n = +nIn.value;
+    document.getElementById("bo-n-out").textContent = nIn.value;
+    reset();
+  });
+  batchIn.addEventListener("input", function () {
+    state.batch = +batchIn.value;
+    document.getElementById("bo-batch-out").textContent = (state.batch / 1000) + "k";
+    if (drawn > state.batch) reset(); // growing the target just keeps accumulating
+    else { needPaint = true; kickIdle(); }
+  });
+  tIn.addEventListener("input", function () {
+    state.t = +tIn.value;
+    tOut.textContent = fmtT(state.t);
+    reset();
+  });
+
+  playBtn.addEventListener("click", function () {
+    playing = !playing;
+    if (playing) lastStep = performance.now(); // full dwell before the first step
+    playBtn.classList.toggle("bo-active", playing);
+    playBtn.innerHTML = playing ? "&#9646;&#9646; sweeping" : "&#9654; sweep t";
+  });
+  document.getElementById("bo-save").addEventListener("click", function () {
+    var name = "bohemian-" + state.family + "-n" + state.n +
+               "-t" + state.t.toFixed(2) + "-" + drawn + "mats.png";
+    var a = document.createElement("a");
+    a.download = name;
+    if (canvas.toBlob) {
+      canvas.toBlob(function (b) {
+        a.href = URL.createObjectURL(b);
+        a.click();
+        setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+      });
+    } else {
+      a.href = canvas.toDataURL("image/png");
+      a.click();
+    }
+  });
+  document.getElementById("bo-cmap").addEventListener("input", function (e) {
+    LUT = LUTS[e.target.value];
+    needPaint = true;
+    lastPaint = 0;
+  });
+  document.getElementById("bo-fs").addEventListener("click", function () {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else document.getElementById("bohemian-tool").requestFullscreen();
+  });
+
+  // cursor readout (fixed window centred on 0)
+  canvas.addEventListener("pointermove", function (e) {
+    var rect = canvas.getBoundingClientRect();
+    var x = (2 * (e.clientX - rect.left) / rect.width - 1) * radius;
+    var y = (1 - 2 * (e.clientY - rect.top) / rect.height) * radius;
+    cursorEl.textContent = "z ≈ " + x.toFixed(4) + (y >= 0 ? " + " : " − ") + Math.abs(y).toFixed(4) + "i";
+  });
+  canvas.addEventListener("pointerleave", function () { cursorEl.textContent = ""; });
+
+  reset();
+  paint();
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
