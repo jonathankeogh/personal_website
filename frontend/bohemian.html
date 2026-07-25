@@ -56,7 +56,7 @@
       .bo-slider input[type=range] { flex-grow: 1; accent-color: #e8743d; min-width: 0; }
       .bo-slider output { width: 5.5rem; flex-shrink: 0; text-align: right; }
       #bo-buttons { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.7rem; align-items: center; }
-      .bo-btn, #bo-cmap {
+      .bo-btn, #bo-cmap, #bo-gifres {
         background: transparent;
         border: 1px solid #33333d;
         color: #c9c4bb;
@@ -67,9 +67,10 @@
         cursor: pointer;
         transition: border-color 0.15s ease, color 0.15s ease;
       }
-      .bo-btn:hover, #bo-cmap:hover { border-color: #e8743d; color: #fff; }
+      .bo-btn:hover, #bo-cmap:hover, #bo-gifres:hover { border-color: #e8743d; color: #fff; }
       .bo-btn.bo-active { border-color: #e8743d; color: #e8743d; }
-      #bo-cmap option { background: #16161c; }
+      .bo-btn:disabled { opacity: 0.4; cursor: default; border-color: #33333d; color: #c9c4bb; }
+      #bo-cmap option, #bo-gifres option { background: #16161c; }
       #bo-status { margin-top: 0.6rem; font-size: 0.68rem; color: #8a8a94; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
       #bo-status .bo-live { color: #e8743d; }
       #bo-cursor { text-align: right; }
@@ -143,6 +144,13 @@
         <option value="twilight">twilight</option>
       </select>
       <button type="button" class="bo-btn" id="bo-save">save png</button>
+      <button type="button" class="bo-btn" id="bo-gif">&#8615; download gif sweep</button>
+      <select id="bo-gifres" aria-label="gif resolution" title="gif output resolution">
+        <option value="400">400px</option>
+        <option value="560" selected>560px</option>
+        <option value="720">720px</option>
+      </select>
+      <button type="button" class="bo-btn" id="bo-gifcancel" style="display:none">cancel</button>
       <button type="button" class="bo-btn" id="bo-fs">fullscreen</button>
     </div>
     <div id="bo-status"><span id="bo-progress">&nbsp;</span><span id="bo-cursor"></span></div>
@@ -196,6 +204,7 @@
   var jobSize = 1200; // matrices per worker job, adapted toward ~45 ms
   var lastPaint = 0, needPaint = false;
   var playing = false, playDir = 1, lastStep = 0;
+  var capturing = false; // true while a GIF sweep is being generated
 
   function axisRadius(n) { return 1.15 * Math.sqrt(n) + 0.35; }
 
@@ -390,11 +399,12 @@
   var LOG1P = new Float64Array(4096);
   for (var li = 0; li < 4096; li++) LOG1P[li] = Math.log1p(li);
 
-  function computeVmax() {
+  function computeVmax(grid) {
+    grid = grid || hist;
     var samples = [], stride = 17, nz = 0, seen = 0, i;
-    for (i = 0; i < hist.length; i += stride) {
+    for (i = 0; i < grid.length; i += stride) {
       seen++;
-      if (hist[i] > 0) { nz++; samples.push(hist[i]); }
+      if (grid[i] > 0) { nz++; samples.push(grid[i]); }
     }
     if (!nz) return 1;
     samples.sort(function (a, b) { return a - b; });
@@ -452,6 +462,7 @@
   }
 
   function tick(now) {
+    if (capturing) { requestAnimationFrame(tick); return; } // workers are on loan
     if (needPaint && (now - lastPaint > 140 || drawn >= state.batch)) {
       paint();
       lastPaint = now;
@@ -480,6 +491,208 @@
     requestAnimationFrame(tick);
   }
 
+  // ---- GIF sweep: encoder --------------------------------------------------
+  // Self-contained GIF89a writer (no library). The colormap LUT doubles as the
+  // 256-entry global color table, so a pixel's palette index IS its GIF byte -
+  // no color quantization, exact colors.
+  function ByteBuf() { this.a = new Uint8Array(1 << 16); this.n = 0; }
+  ByteBuf.prototype._ensure = function (k) {
+    if (this.n + k <= this.a.length) return;
+    var cap = this.a.length;
+    while (cap < this.n + k) cap *= 2;
+    var b = new Uint8Array(cap); b.set(this.a.subarray(0, this.n)); this.a = b;
+  };
+  ByteBuf.prototype.b = function (x) { this._ensure(1); this.a[this.n++] = x & 255; };
+  ByteBuf.prototype.u16 = function (x) { this.b(x); this.b(x >> 8); };
+  ByteBuf.prototype.arr = function (u) { this._ensure(u.length); this.a.set(u, this.n); this.n += u.length; };
+  ByteBuf.prototype.str = function (s) { for (var i = 0; i < s.length; i++) this.b(s.charCodeAt(i)); };
+  ByteBuf.prototype.done = function () { return this.a.subarray(0, this.n); };
+
+  // LZW-compress one 8-bit-index frame into GIF image sub-blocks (GIF early
+  // change: grow code size when the dictionary index reaches 2^codeSize).
+  function lzwInto(buf, px) {
+    var clear = 256, eoi = 257, codeSize = 9, next = 258;
+    var dict = new Map();
+    var cur = 0, nbits = 0, block = new Uint8Array(255), bn = 0;
+    function emit(byte) { block[bn++] = byte; if (bn === 255) { buf.b(255); buf.arr(block); bn = 0; } }
+    function put(code) { cur |= code << nbits; nbits += codeSize; while (nbits >= 8) { emit(cur & 255); cur >>>= 8; nbits -= 8; } }
+    put(clear);
+    var prev = px[0];
+    for (var i = 1; i < px.length; i++) {
+      var c = px[i], key = prev * 256 + c, v = dict.get(key);
+      if (v !== undefined) { prev = v; }
+      else {
+        put(prev);
+        if (next < 4096) {
+          dict.set(key, next); next++;
+          // GIF early-change: the decoder's table lags the encoder's by one
+          // entry, so the code size must grow one entry late (at 2^cs + 1).
+          if (next === (1 << codeSize) + 1 && codeSize < 12) codeSize++;
+        } else { put(clear); dict.clear(); codeSize = 9; next = 258; }
+        prev = c;
+      }
+    }
+    put(prev); put(eoi);
+    if (nbits > 0) emit(cur & 255);
+    if (bn) { buf.b(bn); buf.arr(block.subarray(0, bn)); }
+    buf.b(0); // block terminator
+  }
+
+  function encodeGIF(indexFrames, w, h, palette, delayCs) {
+    var buf = new ByteBuf();
+    buf.str("GIF89a");
+    buf.u16(w); buf.u16(h);
+    buf.b(0xF7); buf.b(0); buf.b(0);        // 256-color GCT, bg 0, no aspect
+    buf.arr(palette);                        // 768-byte global color table
+    buf.b(0x21); buf.b(0xFF); buf.b(0x0B);   // Netscape loop-forever extension
+    buf.str("NETSCAPE2.0"); buf.b(0x03); buf.b(0x01); buf.u16(0); buf.b(0x00);
+    for (var f = 0; f < indexFrames.length; f++) {
+      buf.b(0x21); buf.b(0xF9); buf.b(0x04); buf.b(0x04); // GCE, disposal=leave
+      buf.u16(delayCs); buf.b(0x00); buf.b(0x00);
+      buf.b(0x2C); buf.u16(0); buf.u16(0); buf.u16(w); buf.u16(h); buf.b(0x00); // image descriptor
+      buf.b(8); // LZW minimum code size
+      lzwInto(buf, indexFrames[f]);
+    }
+    buf.b(0x3B); // trailer
+    return buf.done();
+  }
+
+  function toIndexFrame(grid, vmax) {
+    var out = new Uint8Array(grid.length);
+    for (var i = 0; i < grid.length; i++) {
+      var c = grid[i], v = c < 4096 ? LOG1P[c] : Math.log1p(c);
+      var idx = (v / vmax * 255) | 0;
+      out[i] = idx > 255 ? 255 : idx;
+    }
+    return out;
+  }
+
+  // ---- GIF sweep: headless capture across t --------------------------------
+  var gifBtn, gifCancel, gifRes;
+  var captureCancelled = false;
+
+  function captureBin(out, idx) { for (var i = 0; i < idx.length; i++) out[idx[i]]++; }
+
+  // Accumulate one full-batch frame at resolution `bins`, driving whichever
+  // compute path exists. Resolves the filled count grid.
+  function captureFrame(fam, n, t, batch, r, bins) {
+    return new Promise(function (resolve) {
+      var grid = new Uint32Array(bins * bins), got = 0;
+      if (!workers.length) { // main-thread fallback, yielding between chunks
+        (function step() {
+          var todo = Math.min(20000, batch - got);
+          captureBin(grid, localEngine(fam, n, t, todo, r, bins));
+          got += todo;
+          if (got >= batch) resolve(grid); else setTimeout(step, 0);
+        })();
+        return;
+      }
+      var assignedC = 0;
+      function give(wo) {
+        if (assignedC >= batch) { wo.busy = false; return; }
+        var cnt = Math.min(jobSize, batch - assignedC);
+        assignedC += cnt; wo.busy = true;
+        wo.w.postMessage({ gen: "cap", family: fam, n: n, t: t, count: cnt, r: r, bins: bins });
+      }
+      workers.forEach(function (wo) {
+        wo.w.onmessage = function (e) {
+          var d = e.data;
+          if (d.gen === "cap") { captureBin(grid, d.idx); got += d.count; }
+          if (got >= batch) { wo.busy = false; resolve(grid); return; }
+          give(wo);
+        };
+      });
+      workers.forEach(function (wo) { if (!wo.busy) give(wo); });
+    });
+  }
+
+  function waitDrain() { // let any in-flight live jobs finish before we borrow
+    return new Promise(function (resolve) {
+      if (!workers.some(function (w) { return w.busy; })) { resolve(); return; }
+      workers.forEach(function (wo) {
+        wo.w.onmessage = function () {
+          wo.busy = false;
+          if (!workers.some(function (w) { return w.busy; })) resolve();
+        };
+      });
+    });
+  }
+
+  function smoothVmax(v, half) {
+    var out = new Float64Array(v.length);
+    for (var i = 0; i < v.length; i++) {
+      var s = 0, c = 0;
+      for (var j = -half; j <= half; j++) {
+        var k = i + j; if (k < 0) k = 0; else if (k >= v.length) k = v.length - 1;
+        s += v[k]; c++;
+      }
+      out[i] = s / c;
+    }
+    return out;
+  }
+
+  function setGifProgress(msg) { progressEl.innerHTML = msg; }
+
+  async function captureSweep() {
+    if (capturing) return;
+    var fam = state.family, n = state.n, batch = state.batch, r = axisRadius(n);
+    var out = +gifRes.value, dt = 0.03, fps = 20, delayCs = Math.round(100 / fps);
+    var pal = LUT.slice();                    // freeze the colormap for this run
+    var ts = [];
+    for (var t = -1.5; t <= 1.5 + 1e-9; t += dt) ts.push(Math.round(t * 100) / 100);
+
+    capturing = true; captureCancelled = false;
+    gifBtn.disabled = true; gifCancel.style.display = "";
+    setGifProgress('<span class="bo-live">preparing GIF sweep&hellip;</span>');
+    await waitDrain();
+
+    var grids = new Array(ts.length), vmaxes = new Float64Array(ts.length);
+    var t0 = performance.now();
+    for (var f = 0; f < ts.length; f++) {
+      if (captureCancelled) { finishCapture(); return; }
+      var g = await captureFrame(fam, n, ts[f], batch, r, out);
+      grids[f] = new Uint16Array(g.length);   // clip: bins past 65535 saturate anyway
+      for (var i = 0; i < g.length; i++) grids[f][i] = g[i] > 65535 ? 65535 : g[i];
+      vmaxes[f] = computeVmax(g);
+      var per = (performance.now() - t0) / (f + 1);
+      var eta = Math.round(per * (ts.length - 1 - f) / 1000);
+      setGifProgress('<span class="bo-live">GIF sweep</span> &middot; frame ' + (f + 1) + '/' + ts.length +
+        ' &middot; ~' + eta + 's left &middot; ' + fam + ' n=' + n + ' ' + out + 'px');
+      await new Promise(function (res) { requestAnimationFrame(function () { res(); }); });
+    }
+    if (captureCancelled) { finishCapture(); return; }
+
+    setGifProgress('<span class="bo-live">encoding GIF&hellip;</span>');
+    await new Promise(function (res) { setTimeout(res, 30); });
+    var vs = smoothVmax(vmaxes, 4);
+    // forward frames, then the interior reversed = seamless boomerang loop
+    var order = [];
+    for (var a = 0; a < grids.length; a++) order.push(a);
+    for (var b = grids.length - 2; b >= 1; b--) order.push(b);
+    var frames = order.map(function (gi) { return toIndexFrame(grids[gi], vs[gi]); });
+    var bytes = encodeGIF(frames, out, out, pal, delayCs);
+
+    var name = "bohemian-sweep-" + fam + "-n" + n + "-" + out + "px-" + batch + "mats.gif";
+    var blob = new Blob([bytes], { type: "image/gif" });
+    var a2 = document.createElement("a");
+    a2.href = URL.createObjectURL(blob); a2.download = name; a2.click();
+    setTimeout(function () { URL.revokeObjectURL(a2.href); }, 4000);
+    setGifProgress("saved " + name + " (" + (bytes.length / 1048576).toFixed(1) + " MB, " +
+      order.length + " frames)");
+    finishCapture(true);
+  }
+
+  function finishCapture(keepMsg) {
+    capturing = false;
+    gifBtn.disabled = false; gifCancel.style.display = "none";
+    workers.forEach(function (wo) { // restore live reply handlers
+      wo.busy = false;
+      wo.w.onmessage = (function (wo) { return function (e) { onReply(wo, e.data); }; })(wo);
+    });
+    if (!keepMsg) setGifProgress("GIF sweep cancelled");
+    reset(); // resume the live view
+  }
+
   // ---- controls ------------------------------------------------------------
   var nIn = document.getElementById("bo-n");
   var batchIn = document.getElementById("bo-batch");
@@ -490,26 +703,36 @@
   function fmtT(t) { return (t >= 0 ? "+" : "") + t.toFixed(2); }
 
   document.querySelectorAll('#bo-families input').forEach(function (r) {
-    r.addEventListener("input", function () { state.family = r.value; reset(); });
+    r.addEventListener("input", function () { if (capturing) return; state.family = r.value; reset(); });
   });
   nIn.addEventListener("input", function () {
+    if (capturing) { nIn.value = state.n; return; }
     state.n = +nIn.value;
     document.getElementById("bo-n-out").textContent = nIn.value;
     reset();
   });
   batchIn.addEventListener("input", function () {
+    if (capturing) { batchIn.value = state.batch; return; }
     state.batch = +batchIn.value;
     document.getElementById("bo-batch-out").textContent = (state.batch / 1000) + "k";
     if (drawn > state.batch) reset(); // growing the target just keeps accumulating
     else { needPaint = true; kickIdle(); }
   });
   tIn.addEventListener("input", function () {
+    if (capturing) { tIn.value = state.t; return; }
     state.t = +tIn.value;
     tOut.textContent = fmtT(state.t);
     reset();
   });
 
+  gifBtn = document.getElementById("bo-gif");
+  gifCancel = document.getElementById("bo-gifcancel");
+  gifRes = document.getElementById("bo-gifres");
+  gifBtn.addEventListener("click", captureSweep);
+  gifCancel.addEventListener("click", function () { captureCancelled = true; });
+
   playBtn.addEventListener("click", function () {
+    if (capturing) return;
     playing = !playing;
     if (playing) lastStep = performance.now(); // full dwell before the first step
     playBtn.classList.toggle("bo-active", playing);
@@ -532,6 +755,7 @@
     }
   });
   document.getElementById("bo-cmap").addEventListener("input", function (e) {
+    if (capturing) return;
     LUT = LUTS[e.target.value];
     needPaint = true;
     lastPaint = 0;
