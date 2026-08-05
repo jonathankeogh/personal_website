@@ -314,6 +314,21 @@ article > header > p,
     flex: 1;
 }
 
+/* Maths goblin — a different face on each page load, in the logo slot */
+#asidebar #logo img#goblin-img {
+    display: block;
+    width: 100%;
+    max-width: 260px;
+    height: auto;
+    margin: 0 auto;
+    opacity: 0.85;
+    transition: opacity 0.3s ease;
+}
+
+#asidebar #logo a:hover img#goblin-img {
+    opacity: 1;
+}
+
 section.available {
     padding-top: 0;
     padding-bottom: 2rem;
@@ -1660,6 +1675,7 @@ section > div.math.nudge::before {
     }
 
     #asidebar #social { display: none; }
+    #asidebar #logo img#goblin-img { max-width: 145px; }
 
     h1 { font-size: 2.4rem; margin-top: 2rem; }
     h2 { font-size: 1.8rem; }

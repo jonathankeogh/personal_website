@@ -79,8 +79,9 @@
 <body class="">
     <aside id="asidebar">
         <div id="logo">
-            <a href="/">Jonathan<br>Keogh</a>
+            <a href="/" title="Maths goblins"><img id="goblin-img" src="images/goblins/02_original_prod_face.svg" width="320" height="185" alt="Maths goblin"></a>
         </div>
+        <script src="goblin.js"></script>
         <nav class="main-menu">
 <ul>
     <li><a href="writing.html">Blog</a></li>
@@ -92,6 +93,7 @@
 <ul id="social">
     <li><a href="https://github.com/jonathankeogh/" title="GitHub" target=_blank rel="me noopener"><img alt="GitHub" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23000' aria-label='GitHub'><path d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/></svg>"></a></li>
     <li><a href="https://www.linkedin.com/in/jonathan-keogh-287235101/" title="LinkedIn" target=_blank rel="me noopener"><img alt="LinkedIn" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23000' aria-label='LinkedIn'><path d='M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z'/></svg>"></a></li>
+    <li><a href="https://x.com/marquislaplace9" title="X" target=_blank rel="me noopener"><img alt="X" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23000' aria-label='X'><path d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'/></svg>"></a></li>
 </ul>    </aside>
     <main>            <article class="post">
                 <header>
@@ -203,8 +205,18 @@
   var gen = 0;        // bumped on every knob change; stale worker replies are dropped
   var jobSize = 1200; // matrices per worker job, adapted toward ~45 ms
   var lastPaint = 0, needPaint = false;
-  var playing = false, playDir = 1, lastStep = 0;
-  var capturing = false; // true while a GIF sweep is being generated
+  var playing = false;
+  var capturing = false; // true while a GIF sweep or a sweep prerender is running
+
+  // The t-sweep is rendered to completion before it plays, so playback is one
+  // drawImage per frame instead of a fresh accumulation at every t.
+  var SWEEP_DT = 0.05;   // t step; 61 frames over -1.5 .. 1.5
+  var SWEEP_RES = 600;   // prerender pixels; upscaled to the 1000px canvas
+  var SWEEP_MS = 55;     // frame dwell (~18 fps)
+  var sweepFrames = null; // [{ t, bmp }] once rendered
+  var sweepKey = "";      // the settings sweepFrames was rendered for
+  var sweepIdx = 0, sweepDir = 1, sweepLast = 0;
+  var cmapName = "magma";
 
   function axisRadius(n) { return 1.15 * Math.sqrt(n) + 0.35; }
 
@@ -463,20 +475,14 @@
 
   function tick(now) {
     if (capturing) { requestAnimationFrame(tick); return; } // workers are on loan
+    if (playing) { // prerendered playback: no compute, just blit the next frame
+      if (now - sweepLast > SWEEP_MS) showSweepFrame(now);
+      requestAnimationFrame(tick);
+      return;
+    }
     if (needPaint && (now - lastPaint > 140 || drawn >= state.batch)) {
       paint();
       lastPaint = now;
-    }
-    // Step the sweep only once the current frame is fully accumulated AND
-    // painted, then dwell briefly so each t is actually seen.
-    if (playing && drawn >= state.batch && !needPaint && now - lastStep > 500) {
-      state.t = Math.round((state.t + 0.02 * playDir) * 100) / 100;
-      if (state.t >= 1.5) { state.t = 1.5; playDir = -1; }
-      else if (state.t <= -1.5) { state.t = -1.5; playDir = 1; }
-      tIn.value = state.t;
-      tOut.textContent = fmtT(state.t);
-      lastStep = now;
-      reset();
     }
     if (localEngine && drawn < state.batch) {
       var todo = Math.min(chunk, state.batch - drawn);
@@ -635,6 +641,7 @@
 
   async function captureSweep() {
     if (capturing) return;
+    stopSweep();
     var fam = state.family, n = state.n, batch = state.batch, r = axisRadius(n);
     var out = +gifRes.value, dt = 0.03, fps = 20, delayCs = Math.round(100 / fps);
     var pal = LUT.slice();                    // freeze the colormap for this run
@@ -682,15 +689,146 @@
     finishCapture(true);
   }
 
-  function finishCapture(keepMsg) {
-    capturing = false;
-    gifBtn.disabled = false; gifCancel.style.display = "none";
+  function restoreWorkers() {
     workers.forEach(function (wo) { // restore live reply handlers
       wo.busy = false;
       wo.w.onmessage = (function (wo) { return function (e) { onReply(wo, e.data); }; })(wo);
     });
+  }
+
+  function finishCapture(keepMsg) {
+    capturing = false;
+    gifBtn.disabled = false; gifCancel.style.display = "none";
+    restoreWorkers();
     if (!keepMsg) setGifProgress("GIF sweep cancelled");
     reset(); // resume the live view
+  }
+
+  // ---- t-sweep: prerender, then play ---------------------------------------
+  // Same headless capture as the GIF, but the frames stay in memory as bitmaps
+  // with the bloom already baked in, so playback costs one drawImage.
+  var sbuf = document.createElement("canvas");  // colormapped source
+  var scomp = document.createElement("canvas"); // source + bloom
+
+  function frameBitmap(grid, vmax) {
+    var N = SWEEP_RES, i;
+    if (sbuf.width !== N) { sbuf.width = sbuf.height = N; scomp.width = scomp.height = N; }
+    var sctx = sbuf.getContext("2d"), cctx = scomp.getContext("2d");
+    var im = sctx.createImageData(N, N), d = im.data;
+    for (i = 0; i < N * N; i++) {
+      var c = grid[i];
+      var v = c < 4096 ? LOG1P[c] : Math.log1p(c);
+      var idx = ((v / vmax) * 255) | 0;
+      if (idx > 255) idx = 255;
+      var o = 4 * i, l = 3 * idx;
+      d[o] = LUT[l]; d[o + 1] = LUT[l + 1]; d[o + 2] = LUT[l + 2]; d[o + 3] = 255;
+    }
+    sctx.putImageData(im, 0, 0);
+    cctx.globalCompositeOperation = "source-over";
+    if (canGlow) cctx.filter = "none";
+    cctx.globalAlpha = 1;
+    cctx.drawImage(sbuf, 0, 0);
+    if (canGlow) {
+      cctx.globalCompositeOperation = "screen";
+      cctx.filter = "blur(" + (5 * N / BINS).toFixed(2) + "px)";
+      cctx.globalAlpha = 0.55;
+      cctx.drawImage(sbuf, 0, 0);
+      cctx.filter = "none";
+      cctx.globalAlpha = 1;
+      cctx.globalCompositeOperation = "source-over";
+    }
+    if (typeof createImageBitmap === "function") return createImageBitmap(scomp);
+    var keep = document.createElement("canvas"); // older browsers: keep a canvas
+    keep.width = keep.height = N;
+    keep.getContext("2d").drawImage(scomp, 0, 0);
+    return Promise.resolve(keep);
+  }
+
+  function sweepCacheKey() {
+    return [state.family, state.n, state.batch, cmapName].join("|");
+  }
+
+  function releaseSweep() {
+    if (sweepFrames) sweepFrames.forEach(function (f) { if (f.bmp.close) f.bmp.close(); });
+    sweepFrames = null;
+    sweepKey = "";
+  }
+
+  // Resolves true when frames are ready, false if the user cancelled.
+  async function prerenderSweep() {
+    if (sweepFrames && sweepKey === sweepCacheKey()) return true; // same settings
+    releaseSweep();
+
+    var fam = state.family, n = state.n, batch = state.batch, r = axisRadius(n);
+    var ts = [], t;
+    for (t = -1.5; t <= 1.5 + 1e-9; t += SWEEP_DT) ts.push(Math.round(t * 100) / 100);
+
+    capturing = true; captureCancelled = false;
+    gifBtn.disabled = true; playBtn.disabled = true; gifCancel.style.display = "";
+    setGifProgress('<span class="bo-live">preparing sweep&hellip;</span>');
+    await waitDrain();
+
+    var grids = new Array(ts.length), vmaxes = new Float64Array(ts.length);
+    var t0 = performance.now(), f, i;
+    for (f = 0; f < ts.length; f++) {
+      if (captureCancelled) { endPrerender(); return false; }
+      var g = await captureFrame(fam, n, ts[f], batch, r, SWEEP_RES);
+      grids[f] = new Uint16Array(g.length); // halve the peak memory; bins saturate
+      for (i = 0; i < g.length; i++) grids[f][i] = g[i] > 65535 ? 65535 : g[i];
+      vmaxes[f] = computeVmax(g);
+      var per = (performance.now() - t0) / (f + 1);
+      var eta = Math.round(per * (ts.length - 1 - f) / 1000);
+      setGifProgress('<span class="bo-live">rendering sweep</span> &middot; frame ' + (f + 1) +
+        '/' + ts.length + ' &middot; ~' + eta + 's left &middot; ' + fam + ' n=' + n);
+      await new Promise(function (res) { requestAnimationFrame(function () { res(); }); });
+    }
+    if (captureCancelled) { endPrerender(); return false; }
+
+    setGifProgress('<span class="bo-live">building frames&hellip;</span>');
+    var vs = smoothVmax(vmaxes, 4); // steady exposure, so the loop does not flicker
+    var frames = [];
+    for (f = 0; f < ts.length; f++) {
+      frames.push({ t: ts[f], bmp: await frameBitmap(grids[f], vs[f]) });
+      grids[f] = null;
+    }
+    sweepFrames = frames;
+    sweepKey = sweepCacheKey();
+    endPrerender();
+    return true;
+  }
+
+  function endPrerender() {
+    capturing = false;
+    gifBtn.disabled = false; playBtn.disabled = false; gifCancel.style.display = "none";
+    restoreWorkers();
+  }
+
+  function showSweepFrame(now) {
+    var fr = sweepFrames[sweepIdx];
+    ctx.globalCompositeOperation = "source-over";
+    if (canGlow) ctx.filter = "none";
+    ctx.globalAlpha = 1;
+    ctx.drawImage(fr.bmp, 0, 0, canvas.width, canvas.height);
+    state.t = fr.t;
+    tIn.value = fr.t;
+    tOut.textContent = fmtT(fr.t);
+    progressEl.innerHTML =
+      (state.batch * state.n).toLocaleString() + " eigenvalues &middot; " +
+      state.batch.toLocaleString() + " matrices &middot; window &plusmn;" + radius.toFixed(2) +
+      " &middot; frame " + (sweepIdx + 1) + "/" + sweepFrames.length +
+      ' &middot; <span class="bo-live">sweeping</span>';
+    sweepIdx += sweepDir; // bounce at the ends for a seamless loop
+    if (sweepIdx >= sweepFrames.length) { sweepIdx = sweepFrames.length - 2; sweepDir = -1; }
+    else if (sweepIdx < 0) { sweepIdx = 1; sweepDir = 1; }
+    sweepLast = now;
+  }
+
+  function stopSweep() {
+    if (!playing) return;
+    playing = false;
+    playBtn.classList.remove("bo-active");
+    playBtn.innerHTML = "&#9654; sweep t";
+    reset(); // back to the live view, at whichever t the sweep stopped on
   }
 
   // ---- controls ------------------------------------------------------------
@@ -703,16 +841,18 @@
   function fmtT(t) { return (t >= 0 ? "+" : "") + t.toFixed(2); }
 
   document.querySelectorAll('#bo-families input').forEach(function (r) {
-    r.addEventListener("input", function () { if (capturing) return; state.family = r.value; reset(); });
+    r.addEventListener("input", function () { if (capturing) return; stopSweep(); state.family = r.value; reset(); });
   });
   nIn.addEventListener("input", function () {
     if (capturing) { nIn.value = state.n; return; }
+    stopSweep();
     state.n = +nIn.value;
     document.getElementById("bo-n-out").textContent = nIn.value;
     reset();
   });
   batchIn.addEventListener("input", function () {
     if (capturing) { batchIn.value = state.batch; return; }
+    stopSweep();
     state.batch = +batchIn.value;
     document.getElementById("bo-batch-out").textContent = (state.batch / 1000) + "k";
     if (drawn > state.batch) reset(); // growing the target just keeps accumulating
@@ -720,6 +860,7 @@
   });
   tIn.addEventListener("input", function () {
     if (capturing) { tIn.value = state.t; return; }
+    stopSweep();
     state.t = +tIn.value;
     tOut.textContent = fmtT(state.t);
     reset();
@@ -731,12 +872,15 @@
   gifBtn.addEventListener("click", captureSweep);
   gifCancel.addEventListener("click", function () { captureCancelled = true; });
 
-  playBtn.addEventListener("click", function () {
+  playBtn.addEventListener("click", async function () {
     if (capturing) return;
-    playing = !playing;
-    if (playing) lastStep = performance.now(); // full dwell before the first step
-    playBtn.classList.toggle("bo-active", playing);
-    playBtn.innerHTML = playing ? "&#9646;&#9646; sweeping" : "&#9654; sweep t";
+    if (playing) { stopSweep(); return; }
+    var ready = await prerenderSweep(); // render every t first, then play
+    if (!ready) { setGifProgress("sweep cancelled"); reset(); return; }
+    playing = true;
+    sweepIdx = 0; sweepDir = 1; sweepLast = 0;
+    playBtn.classList.add("bo-active");
+    playBtn.innerHTML = "&#9646;&#9646; sweeping";
   });
   document.getElementById("bo-save").addEventListener("click", function () {
     var name = "bohemian-" + state.family + "-n" + state.n +
@@ -756,7 +900,9 @@
   });
   document.getElementById("bo-cmap").addEventListener("input", function (e) {
     if (capturing) return;
-    LUT = LUTS[e.target.value];
+    stopSweep();
+    cmapName = e.target.value;
+    LUT = LUTS[cmapName];
     needPaint = true;
     lastPaint = 0;
   });
