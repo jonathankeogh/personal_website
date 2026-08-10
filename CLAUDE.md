@@ -23,10 +23,22 @@ Python must NOT serve HTTP. It runs via cron or manually and writes results to S
 ## Commands
 
 ### Test the running site
+The site is `https://jonathankeogh.com`, behind the Cloudflare proxy. Nginx drops
+requests that carry no matching `Host` header, so `curl localhost` returns nothing.
+Always send the `Host` header:
 ```bash
-curl localhost          # frontend
-curl localhost/api      # PHP API health check
+curl -H "Host: jonathankeogh.com" http://localhost       # 301 to HTTPS
+curl -k --resolve jonathankeogh.com:443:127.0.0.1 \
+     https://jonathankeogh.com/                          # frontend
+curl -k --resolve jonathankeogh.com:443:127.0.0.1 \
+     https://jonathankeogh.com/api/                      # PHP API health check
 ```
+
+### TLS
+The Cloudflare Origin CA certificate is at `/etc/ssl/cloudflare/jonathankeogh.com.pem`
+with its key at `jonathankeogh.com.key` (mode 600, root). It expires in August 2041.
+Only Cloudflare trusts this certificate, so `-k` is needed for local tests.
+Cloudflare SSL mode must stay **Full (strict)**.
 
 ### Python (single `uv` project at the repo root, Python 3.12)
 One `pyproject.toml` / `uv.lock` / `.venv` at the root cover all Python. Run from the repo root:
