@@ -3,7 +3,7 @@
 @font-face {
     font-family: "elzevier";
     src: local('ET Bembo RomanLF'), local('ETBembo-RomanLF'),
-         url("https://cdn.jsdelivr.net/gh/edwardtufte/tufte-css@master/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff") format("woff");
+         url("/vendor/fonts/et-book-roman-line-figures.woff") format("woff");
     font-weight: normal;
     font-style: normal;
     font-display: block;
@@ -12,7 +12,7 @@
 @font-face {
     font-family: "elzevier";
     src: local('ET Bembo BoldLF'), local('ETBembo-BoldLF'),
-         url("https://cdn.jsdelivr.net/gh/edwardtufte/tufte-css@master/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff") format("woff");
+         url("/vendor/fonts/et-book-bold-line-figures.woff") format("woff");
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -34,7 +34,7 @@ article.post > section:first-of-type > p:first-of-type::first-letter {
 @font-face {
     font-family: "et-bembo";
     src: local('ET Bembo RomanLF'), local('ETBembo-RomanLF'),
-    url("https://cdn.jsdelivr.net/gh/edwardtufte/tufte-css@master/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff") format("woff");
+    url("/vendor/fonts/et-book-roman-line-figures.woff") format("woff");
     font-weight: normal;
     font-style: normal;
     font-display: block;
@@ -43,7 +43,7 @@ article.post > section:first-of-type > p:first-of-type::first-letter {
 @font-face {
     font-family: "et-bembo";
     src: local("ET Bembo DisplayItalic"), local('ETBembo-DisplayItalic'),
-    url("https://cdn.jsdelivr.net/gh/edwardtufte/tufte-css@master/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff") format("woff");
+    url("/vendor/fonts/et-book-display-italic-old-style-figures.woff") format("woff");
     font-weight: normal;
     font-style: italic;
     font-display: swap;
@@ -52,7 +52,7 @@ article.post > section:first-of-type > p:first-of-type::first-letter {
 @font-face {
     font-family: "et-bembo";
     src: local("ET Bembo BoldLF"), local('ETBembo-BoldLF'),
-    url("https://cdn.jsdelivr.net/gh/edwardtufte/tufte-css@master/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff") format("woff");
+    url("/vendor/fonts/et-book-bold-line-figures.woff") format("woff");
     font-weight: bold;
     font-style: normal;
     font-display: swap;
