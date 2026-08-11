@@ -23,22 +23,38 @@ Python must NOT serve HTTP. It runs via cron or manually and writes results to S
 ## Commands
 
 ### Test the running site
-The site is `https://jonathankeogh.com`, behind the Cloudflare proxy. Nginx drops
-requests that carry no matching `Host` header, so `curl localhost` returns nothing.
-Always send the `Host` header:
-```bash
-curl -H "Host: jonathankeogh.com" http://localhost       # 301 to HTTPS
-curl -k --resolve jonathankeogh.com:443:127.0.0.1 \
-     https://jonathankeogh.com/                          # frontend
-curl -k --resolve jonathankeogh.com:443:127.0.0.1 \
-     https://jonathankeogh.com/api/                      # PHP API health check
-```
+The site is `https://jonathankeogh.com`, behind the Cloudflare proxy.
 
-### TLS
-The Cloudflare Origin CA certificate is at `/etc/ssl/cloudflare/jonathankeogh.com.pem`
-with its key at `jonathankeogh.com.key` (mode 600, root). It expires in August 2041.
-Only Cloudflare trusts this certificate, so `-k` is needed for local tests.
-Cloudflare SSL mode must stay **Full (strict)**.
+**Local HTTPS tests are not possible.** Authenticated Origin Pulls is on, so Nginx
+rejects any TLS client that has no Cloudflare certificate. A local
+`curl --resolve ...:127.0.0.1 https://...` returns `400`. That is correct behaviour.
+
+Test through Cloudflare instead:
+```bash
+curl -I https://jonathankeogh.com/           # frontend
+curl    https://jonathankeogh.com/api/       # PHP API health check
+curl -H "Host: jonathankeogh.com" http://localhost   # local check, expect 301
+```
+`curl localhost` alone returns nothing. A catch-all server block answers `444` to
+every request with no matching `Host` header, which hides the site from IP scanners.
+
+### TLS and origin protection
+- Origin certificate: `/etc/ssl/cloudflare/jonathankeogh.com.pem`, key
+  `jonathankeogh.com.key` (mode 600, root). Cloudflare Origin CA, expires August 2041.
+- Authenticated Origin Pulls: `/etc/ssl/cloudflare/origin-pull-ca.pem` with
+  `ssl_verify_client on`. Cloudflare must keep the matching switch ON, under
+  SSL/TLS -> Origin Server. If it is turned off, every visitor gets error 526.
+- Cloudflare SSL mode must stay **Full (strict)**.
+- Real visitor IPs come from `/etc/nginx/conf.d/cloudflare-realip.conf`. Rebuild that
+  file from `https://www.cloudflare.com/ips-v4` and `/ips-v6` if Cloudflare adds ranges.
+- Cloudflare Email Address Obfuscation is ON, so the email address in `index.html`
+  appears as `[email protected]` in the raw HTML. JavaScript restores it.
+
+### Logs
+```bash
+tail -f /var/log/nginx/access.log     # needs the adm group
+tail -f /var/log/nginx/error.log
+```
 
 ### Python (single `uv` project at the repo root, Python 3.12)
 One `pyproject.toml` / `uv.lock` / `.venv` at the root cover all Python. Run from the repo root:
