@@ -2,10 +2,6 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Communication
-
-Always talk in ASD-STE100 Simplified Technical English.
-
 ## Architecture
 
 This is a personal website running on a VPS with Nginx, PHP, and Python. The system has three distinct layers:

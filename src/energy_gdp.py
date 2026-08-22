@@ -357,7 +357,6 @@ PAGE = '''<!DOCTYPE html>
 <ul>
     <li><a href="writing.html">Blog</a></li>
     <li><a href="about.html">About</a></li>
-    <li><a href="projects.html">Projects</a></li>
     <li><a href="links.html">Interesting Links</a></li>
 </ul>        </nav>
 
