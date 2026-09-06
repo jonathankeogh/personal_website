@@ -10,6 +10,7 @@
     <meta name="description" content="Sampling Conway and Shipman's extreme proofs" />
     <script>
       MathJax = {
+        chtml: { fontURL: '/vendor/mathjax/output/chtml/fonts/woff-v2' },
         tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true },
         options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'], ignoreHtmlClass: 'tex2jax_ignore' }
       };
@@ -223,9 +224,9 @@
    large. And, since we used a mean language vector, this suggests
    that language enters as a single vector translation added to an otherwise 
    language-independent
-   content vector:
-   $$\mathbf{x}_i \approx \underbrace{\mathbf{c} + \mathbf{t}_{\tau(i)} + \boldsymbol{\varepsilon}_i}_{\text{content}} + \underbrace{\boldsymbol{\mu}_{\ell(i)}}_{\text{language}}$$
-   Subtracting that language component drops a language probe from 1.000 to 0.013, 
+   content vector:</p>
+<div class="math">$$\mathbf{x}_i \approx \underbrace{\mathbf{c} + \mathbf{t}_{\tau(i)} + \varepsilon_i}_{\text{content}} + \underbrace{\mu_{\ell(i)}}_{\text{language}}$$</div>
+<p>Subtracting that language component drops a language probe from 1.000 to 0.013, 
    below 0.167 being chance, which I cannot account for.
     Technique classification
   stays at 1.000. However, that figure is in-sample, and within-class centring sets 
@@ -438,7 +439,7 @@ the topic, i.e. proof geometry.</p>
   <li><strong>One generator, one encoder.</strong> Everything here is a fact about <code>claude-opus-5</code>&rsquo;s organisation of proof-writing as seen by <code>bge-m3</code>, not a fact about proofs. The replication across three theorems does not replicate across models.</li>
   <li><strong>Proof correctness is unverified</strong> beyond twelve records read by hand. My assumption is that since the model used is saturated on simple 
   proof benchmarks it can be relied upon.</li>
-  <li><strong>Registry coverage.</strong> The $\sqrt{2}$ and Pythagoras registries were built from the literature rather than validated against their corpora, and the code prints a PROVISIONAL banner for them. The scale of the risk if a registry is wrong: the $\sqrt{2}$ registry run against the primes corpus reports 0.85 invoked results where the right one reports 16.63 &mdash; a recall failure that reads exactly like a null result.</li>
+  <li><strong>Registry coverage.</strong> The $\sqrt{2}$ and Pythagoras registries were built from the literature rather than validated against their corpora.</li>
 </ul>
 </section>
 
