@@ -61,6 +61,16 @@ uv sync                                # install from lockfile
 ```
 PHP invokes the API clients directly via `/srv/personal_website/.venv/bin/python src/markets.py`, so keep that root `.venv` in sync.
 
+### SSH and host hardening (as of 2026-09-07)
+Hetzner VPS, hostname `ubuntu1`, public IP `178.104.143.175`. SSH user `jonathan`, **port 22 stays open**.
+
+- Password authentication is **disabled**. Drop-in: `/etc/ssh/sshd_config.d/50-no-passwords.conf` (`PasswordAuthentication no`, `AuthenticationMethods publickey`).
+- Login is Termius + Ed25519 key `hetzner-ubuntu1` in `~/.ssh/authorized_keys`. Do not re-enable passwords without Jonathan asking.
+- Phone Termius still needed that key attached when passwords were turned off.
+- **fail2ban** is on (`sshd` jail). Config: `/etc/fail2ban/jail.local`. Check: `sudo fail2ban-client status sshd`. Unban: `sudo fail2ban-client set sshd unbanip IP`.
+- No Tailscale. Lockout hatch is the Hetzner web console. `sudo` still requires Jonathan’s password.
+- Cloudflare request counts include bots/scanners (one page load is many requests). A ~3k-request day is often a probe, not readers. Nginx `444` on the default server is IP scanners that never went through Cloudflare.
+
 ### Reload Nginx (after config changes)
 ```bash
 sudo nginx -s reload
