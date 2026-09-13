@@ -437,7 +437,7 @@ the topic, i.e. proof geometry.</p>
 <section>
 <h2>Limitations</h2>
 <ul>
-  <li><strong>One generator, one encoder.</strong> Everything here is a fact about <code>claude-opus-5</code>&rsquo;s organisation of proof-writing as seen by <code>bge-m3</code>, not a fact about proofs. The replication across three theorems does not replicate across models.</li>
+  <li><strong>Only one encoder used.</strong> The analysis was checked against only one embedding model and so the artefacts discussed may be model-specific; this could be improved by running the same analysis on separate encoding models.</li>
   <li><strong>Proof correctness is unverified</strong> beyond twelve records read by hand. My assumption is that since the model used is saturated on simple 
   proof benchmarks it can be relied upon.</li>
   <li><strong>Registry coverage.</strong> The $\sqrt{2}$ and Pythagoras registries were built from the literature rather than validated against their corpora.</li>
