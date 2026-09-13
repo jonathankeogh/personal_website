@@ -119,19 +119,20 @@
   <li>Pick $n$, a shape $S$, and a value of $t$.</li>
   <li>Define $P_t = \{-1,\, t,\, 1\}$. At $t = 0$ this is $\{-1,0,1\}$; at
     $t = \pm 1$ it collapses to two elements. 
-    Draw $A$ uniformly at random from $\mathcal{B}_n(P_t) \cap S$:
-    independently assign each free entry a value from $P_t ,$ each with
+    Draw $A$ uniformly at random from $\mathcal{B}_n(P_t) \cap S$.
+    Independently assign free entry (available within the constraint) 
+    a value from $P_t ,$ each with
     probability $1/3$.</li>
-  <li>Compute $\operatorname{Spec}(A)$, giving $n$ points in $\mathbb{C}$ counting multiplicities</li>
-  <li>Repeat $N$ times, with $N$ typically $\ge 10^5$. This gives
+  <li>Compute $\operatorname{Spec}(A)$. This gives $n$ points in $\mathbb{C}$ counting multiplicities</li>
+  <li>Repeat this $N$ times, with $N$ typically $\ge 10^5$. This gives
     $nN$ points.</li>
   <li>Divide the viewing window into a grid of pixels and
     count how many of the $nN$ points fall in each.</li>
-  <li>Colour each cell by $\log(1 + \text{count})$.</li>
+  <li>Colour each cell using $\log(1 + \text{count})$.</li>
 </ol>
 
 <p>Step 6 uses the logarithm because the counts span many orders of
-  magnitude. The $1+$ ensures the value is defined and
+  magnitude. The $1+$ in the argument ensures the value is defined and
   equal to $0$ at empty cells.</p>
 
 <p>The animation window is $|\operatorname{Re}\lambda|, |\operatorname{Im}\lambda|
