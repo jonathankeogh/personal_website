@@ -162,23 +162,6 @@
   structure of Bohemian matrices endows their eigenvalues
   with a more legible visualisation.</p>
 
-  <p>Since $\chi_A(\lambda) = \det(\lambda I - A)$ is monic with
-    coefficients in a discrete set, $\chi_A(0) = (-1)^n \det A$. For
-    $t \in \mathbb{Z}$ that is an integer: either $0$, or of modulus at
-    least $1$. With $\det A = \prod_i \lambda_i$ and
-    $\rho(A) \le \|A\|_\infty \le n\max(1,|t|) =: R$,</p>
-  
-  <div class="math">$$\text{either } 0 \in \operatorname{Spec}(A), \quad \text{or } \min_i |\lambda_i| \ge R^{-(n-1)}.$$</div>
-  
-
-  <p>So the eigenvalues never approach zero. They land at zero or
-    are bounded away from it. The same happens at any algebraic integer $\alpha$ of small
-    height: if $\chi_A(\alpha) \neq 0$ then it is a nonzero algebraic
-    integer, so its norm has modulus at least $1$, which bounds
-    $|\chi_A(\alpha)| = \prod_i |\alpha - \lambda_i|$ below. Note this
-    requires that $t \in \mathbb{Z}$; this is why in the visual you can see
-  the arithmetic structure snap into place.</p>
-
 </section>
 
 <section class="fullwidth">
@@ -188,7 +171,7 @@
 </figure>
 <div id="bohemian-tool">
   <canvas id="bo-canvas" width="1000" height="1000" aria-label="Eigenvalue density in the complex plane"></canvas>
-  <noscript><p>The explorer needs JavaScript; there is a Python version below.</p></noscript>
+  <noscript><p>The explorer needs JavaScript.</p></noscript>
   <div id="bo-controls">
     <div id="bo-families" role="radiogroup" aria-label="matrix family">
       <label><input type="radio" name="family" value="tridiagonal" checked>tridiagonal</label>
@@ -232,10 +215,6 @@
     <div id="bo-status"><span id="bo-progress">&nbsp;</span><span id="bo-cursor"></span></div>
   </div>
 </div>
-</section>
-
-<section>
-<p class="de-emphasize">Prefer a desktop version? <a href="files/bohemian.py">bohemian.py</a> is the same tool in NumPy/Matplotlib, with batched <code>np.linalg.eigvals</code> instead of hand-rolled root finding.</p>
 </section>
             </article>
 
