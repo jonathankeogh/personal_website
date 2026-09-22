@@ -107,7 +107,7 @@
   example $P = \{-1, 0, 1\}$. The <a href="http://www.bohemianmatrices.com/" target="_blank" rel="noopener">Bohemian family</a> of 
   dimension $n$ over $P$ is</p>
 
-<div class="math">$$\mathcal{B}_n(P) = \{A \in \mathbb{C}^{n \times n} : a_{ij} \in P \ \forall i, j\}.$$</div>
+<div class="math">$$\mathcal{B}_n(P) = \{A \in \mathbb{C}^{n \times n} : a_{ij} \in P \ }.$$</div>
 
 <p>Nearly always, a constraint on the set of matrices is added, so the family 
   is limited to $\mathcal{B}_n(P) \cap S$, where $S$ is the set of 
@@ -143,8 +143,19 @@
 
 <h2>What this plot shows</h2>
 
-<p>Formally: let $\mu_{n,t,S}$ be the probability measure on $\mathbb{C}$
-  given by</p>
+
+<p>For a matrix $A$, let:</p>
+
+<div class="math">$$\chi_A(\lambda) = \lambda^n + c_{n-1}\lambda^{n-1} + \dots + c_1\lambda + c_0,$$</div>
+
+<p>and $\mathbf{c}^A = (1, c_{n-1}, \dots, c_1, c_0)$ be the coefficients vector. 
+  Each $c_k$ is a sum of products of entries of $A$, and the entries 
+  are $-1$, $t$, or $1$. Therefore each $c_k$ is a polynomial in $t$ with 
+  integer coefficients, and we can write $\mathbf{c}^A = \mathbf{c}^A(t)$. Similarly for a separate distinct matrix $B$.
+  Since the polynomial $\chi$ determines the eigenvalues, $A$ and $B$ have identical spectra exactly when $\mathbf{c}^A(t) = \mathbf{c}^B(t)$. 
+  Setting the difference to zero gives $n$ polynomial equations in $t$, and their common roots are the $t$ where the two matrices collide
+  in the sweep.</p>
+
 
 <div class="math">$$\mu_{n,t,S} = \frac{1}{n}\,\mathbb{E}\!\left[\sum_{i=1}^{n} \delta_{\lambda_i(A)}\right], \qquad A \sim \operatorname{Unif}\big(\mathcal{B}_n(P_t)\cap S\big),$$</div>
 
@@ -152,31 +163,7 @@
   <em>expected empirical spectral distribution</em> of the random matrix $A$. Step 4 then is a Monte
   Carlo estimation of this distribution.</p>
 
-<p>This measure is not absolutely continuous. It has point masses, 
- because a specific $\lambda$
-  is an eigenvalue for a positive fraction of the finitely many
-  matrices in the family. For instance if $0$ is an eigenvalue of $30\%$
-  of draws, the measure has an atom of weight $0.3/n$ at the origin.
-  Ordinary random matrix ensembles with continuous entry distributions
-  have no point masses and the plots are a blur. The arithmetic
-  structure of Bohemian matrices endows their eigenvalues
-  with a more legible visualisation.</p>
-
-  <p>Since $\chi_A(\lambda) = \det(\lambda I - A)$ is monic with
-    coefficients in a discrete set, $\chi_A(0) = (-1)^n \det A$. For
-    $t \in \mathbb{Z}$ that is an integer: either $0$, or of modulus at
-    least $1$. With $\det A = \prod_i \lambda_i$ and
-    $\rho(A) \le \|A\|_\infty \le n\max(1,|t|) =: R$,</p>
-  
-  <div class="math">$$\text{either } 0 \in \operatorname{Spec}(A), \quad \text{or } \min_i |\lambda_i| \ge R^{-(n-1)}.$$</div>
-  
-
-  <p>So the eigenvalues never approach zero. They land at zero or
-    are bounded away from it. The same happens at any algebraic integer $\alpha$ of small
-    height: if $\chi_A(\alpha) \neq 0$ then it is a nonzero algebraic
-    integer, so its norm has modulus at least $1$, which bounds
-    $|\chi_A(\alpha)| = \prod_i |\alpha - \lambda_i|$ below. Note this
-    requires that $t \in \mathbb{Z}$; this is why in the visual you can see
+<p>this is why in the visual you can see
   the arithmetic structure snap into place.</p>
 
 </section>
