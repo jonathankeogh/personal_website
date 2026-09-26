@@ -2187,3 +2187,9 @@ svg.scatter .cell {
         max-width: 100%;
     }
 }
+
+/* "Archive" link at the foot of each article */
+p.archive-link {
+    margin-top: 3rem;
+    font-style: italic;
+}

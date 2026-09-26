@@ -1,0 +1,23 @@
+#!/bin/sh
+# Point frontend/index.html (the landing page) at the newest article:
+# the first link in the post index of frontend/writing.html.
+set -e
+cd "$(git rev-parse --show-toplevel)/frontend"
+
+latest=$(sed -n '/<section class="post-index">/,/<\/section>/p' writing.html \
+    | grep -o 'href="[^"]*\.html"' | head -n 1 | sed 's/^href="//; s/"$//')
+
+if [ -z "$latest" ]; then
+    echo "pre-commit: no article link found in writing.html" >&2
+    exit 1
+fi
+if [ ! -f "$latest" ]; then
+    echo "pre-commit: writing.html links to $latest, which does not exist" >&2
+    exit 1
+fi
+
+if [ "$(readlink index.html 2>/dev/null)" != "$latest" ]; then
+    ln -sfn "$latest" index.html
+    git add index.html
+    echo "pre-commit: landing page now points at $latest"
+fi

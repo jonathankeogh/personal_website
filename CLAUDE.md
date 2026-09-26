@@ -79,6 +79,13 @@ sudo nginx -s reload
 ### Deploy
 No CI/CD. Workflow: edit → test → commit → reload nginx if needed.
 
+### Landing page
+`frontend/index.html` is a symlink to the newest article, and `/` serves that article.
+`hooks/pre-commit` repoints it at the first link in `frontend/writing.html`'s post index
+on every commit, so a new article only has to go at the top of that list. Enabled with
+`git config core.hooksPath hooks`; a fresh clone must run that once. Do not `sed -i`
+`index.html`: it replaces the symlink with a copy. The About page is `about.html`.
+
 ## PHP API Pattern
 
 Keep PHP endpoints minimal — one endpoint per file or a simple router. Each endpoint: parse input → query SQLite → return JSON.

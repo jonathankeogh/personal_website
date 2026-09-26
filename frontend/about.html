@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-    <title>Jonathan Keogh | Markets</title>
+    <title>Jonathan Keogh | About</title>
     <link rel="stylesheet" href="style.css?v=20260926a" type="text/css" fetchpriority="high" />
     <link rel="stylesheet" href="/vendor/jetbrains-mono.css" type="text/css" />
     <meta name="author" content="Jonathan Keogh" />
@@ -28,59 +28,17 @@
 </ul>    </aside>
     <main>            <article class="post">
                 <header>
-                    <h1>Markets</h1>
+                    <h1>About</h1>
                 </header>
 <section>
-                <div id="table-container"><p class="loading">Loading&hellip;</p></div>
+<p>I build risk and analytics software, currently in front-office risk at a multi-strategy hedge fund in Dublin. Before that I spent five years building portfolio risk systems&mdash;daily data ingestion, analytics, and reporting for several hundred funds.</p>
+<p>My degree is in mathematics (Trinity College Dublin), where my thesis was on projective geometry and the group law on elliptic curves. My interest has shifted toward interpretability and evaluation of language models.</p>
+<p>I write <a href="writing.html">occasional notes</a>, and my code is on <a href="https://github.com/jonathankeogh/">GitHub</a>. The best way to reach me is by <a href="mailto:hellojonathankeogh@gmail.com">email</a>.</p>
 </section>
             </article>
 
         <footer>
 <p class="de-emphasize copyright">&copy;2026 Jonathan Keogh. All rights reserved.</p>        </footer>
     </main>
-    <script>
-      const esc = (s) => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-
-      fetch("/api/markets")
-        .then(r => r.json())
-        .then(data => {
-          const container = document.getElementById("table-container");
-          const entries = Object.entries(data || {});
-
-          if (data && data.error) { container.innerHTML = `<p class="error">${esc(data.error)}</p>`; return; }
-          if (!entries.length)     { container.innerHTML = '<p class="error">No data.</p>'; return; }
-
-          const rows = entries.map(([ticker, d]) => {
-            if (d.error) {
-              return `<tr><td class="ticker">${esc(ticker)}</td><td colspan="4" class="error">${esc(d.error)}</td></tr>`;
-            }
-            const val = isNaN(parseFloat(d.value)) ? esc(d.value) : parseFloat(d.value).toLocaleString();
-            return `<tr>
-              <td class="ticker">${esc(ticker)}</td>
-              <td>${esc(d.title)}</td>
-              <td class="value">${val}</td>
-              <td class="units">${esc(d.units)}</td>
-              <td class="date">${esc(d.date)}</td>
-            </tr>`;
-          }).join("");
-
-          container.innerHTML = `
-            <table>
-              <thead>
-                <tr>
-                  <th>Ticker</th><th>Series</th>
-                  <th style="text-align:right">Value</th>
-                  <th style="text-align:right">Units</th>
-                  <th style="text-align:right">As of</th>
-                </tr>
-              </thead>
-              <tbody>${rows}</tbody>
-            </table>`;
-        })
-        .catch(() => {
-          document.getElementById("table-container").innerHTML =
-            '<p class="error">Failed to load market data.</p>';
-        });
-    </script>
 </body>
 </html>
